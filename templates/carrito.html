@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito - Ferretería Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+<base target="_blank">
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="top-bar-container">
+            <div class="top-bar-info">
+                <span><i class="fas fa-phone"></i> +57 300 123 4567</span>
+                <span><i class="fas fa-envelope"></i> info@ferreteriapro.com</span>
+                <span><i class="fas fa-map-marker-alt"></i> Envíos a todo el país</span>
+            </div>
+            <div class="top-bar-links">
+                <a href="#"><i class="fas fa-question-circle"></i> Ayuda</a>
+                <a href="#"><i class="fas fa-truck"></i> Seguimiento</a>
+                <a href="#"><i class="fas fa-percent"></i> Ofertas</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="logo">
+                <div class="logo-icon"><i class="fas fa-tools"></i></div>
+                <div class="logo-text">
+                    <h1>FERRETERÍA PRO</h1>
+                    <span>TU TIENDA ONLINE PROFESIONAL</span>
+                </div>
+            </a>
+            <div class="nav-actions">
+                <a href="/" class="nav-action">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span>Seguir comprando</span>
+                </a>
+                <a href="{{ url_for('carrito') }}" class="nav-action">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="badge" id="cartCount">0</span>
+                    <span>Carrito</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header-container">
+            <h1><i class="fas fa-shopping-cart"></i> Tu Carrito</h1>
+            <div class="breadcrumb">
+                <a href="/">Inicio</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>Carrito</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Content -->
+    <div class="container" style="padding: 40px 20px;">
+        <div id="cartContainer">
+            <!-- Se llena con JS -->
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Producto agregado al carrito</span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>© 2026 Ferretería Pro. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts: ORDEN IMPORTANTE - Usar url_for para rutas correctas -->
+    <script src="{{ url_for('static', filename='js/data.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/cart-storage.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/cart-page.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preguntas Frecuentes - Ferretería Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --secondary: #ff6f00;
+            --accent: #00c853;
+            --danger: #d50000;
+            --dark: #0d1b2a;
+            --gray: #546e7a;
+            --light: #f5f7fa;
+            --white: #ffffff;
+            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-hover: 0 8px 30px rgba(0,0,0,0.15);
+            --radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* TOP BAR */
+        .top-bar {
+            background: var(--dark);
+            color: var(--white);
+            padding: 8px 0;
+            font-size: 0.85rem;
+        }
+        .top-bar-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .top-bar-info span { margin-right: 20px; opacity: 0.9; }
+        .top-bar-info i { margin-right: 5px; color: var(--secondary); }
+        .top-bar-links a {
+            color: var(--white);
+            text-decoration: none;
+            margin-left: 20px;
+            opacity: 0.9;
+            transition: var(--transition);
+        }
+        .top-bar-links a:hover { color: var(--secondary); opacity: 1; }
+
+        /* NAVBAR */
+        .navbar {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.5rem;
+        }
+        .logo-text { display: flex; flex-direction: column; }
+        .logo-text h1 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1.2;
+        }
+        .logo-text span {
+            font-size: 0.75rem;
+            color: var(--gray);
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+        .nav-search {
+            flex: 1;
+            max-width: 600px;
+            margin: 0 40px;
+            position: relative;
+        }
+        .nav-search input {
+            width: 100%;
+            padding: 14px 50px 14px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 50px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            outline: none;
+        }
+        .nav-search input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(26, 35, 126, 0.1);
+        }
+        .nav-search button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--secondary);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: var(--white);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .nav-search button:hover {
+            background: var(--primary);
+            transform: translateY(-50%) scale(1.1);
+        }
+        .nav-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        .nav-action {
+            position: relative;
+            text-decoration: none;
+            color: var(--dark);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            transition: var(--transition);
+            padding: 8px 12px;
+            border-radius: var(--radius);
+        }
+        .nav-action:hover { background: var(--light); color: var(--primary); }
+        .nav-action i { font-size: 1.3rem; }
+        .nav-action span { font-size: 0.75rem; font-weight: 500; }
+        .nav-action .badge {
+            position: absolute;
+            top: 0;
+            right: 5px;
+            background: var(--danger);
+            color: var(--white);
+            font-size: 0.7rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        /* PAGE HEADER */
+        .page-header {
+            background: linear-gradient(135deg, var(--dark) 0%, #1a237e 100%);
+            padding: 80px 0 60px;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255,111,0,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .page-header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+        .breadcrumb {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+        }
+        .breadcrumb a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        .breadcrumb a:hover { color: var(--secondary); }
+        .breadcrumb i { font-size: 0.7rem; }
+        .page-header h1 {
+            color: var(--white);
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        .page-header p {
+            color: rgba(255,255,255,0.8);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* SECTIONS */
+        .section { padding: 80px 0; }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* SECTION TITLE */
+        .section-title-center {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .section-title-center h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+        .section-title-center span {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+        .section-title-center .line {
+            width: 60px;
+            height: 4px;
+            background: var(--secondary);
+            margin: 20px auto 0;
+            border-radius: 2px;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: var(--dark);
+            color: var(--white);
+            padding: 60px 0 20px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-brand h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+        .footer-brand p {
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        .footer-social a:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+        .footer-links h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+        .footer-links a:hover {
+            color: var(--secondary);
+            padding-left: 5px;
+        }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.5);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            .page-header h1 { font-size: 2rem; }
+            .navbar-container {
+                flex-wrap: wrap;
+                height: auto;
+                padding: 15px 20px;
+            }
+            .nav-search {
+                order: 3;
+                flex-basis: 100%;
+                margin: 15px 0 0 0;
+            }
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
+            .footer-social { justify-content: center; }
+            .footer-bottom {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+        }
+
+
+        /* FAQ */
+        .faq-search {
+            max-width: 600px;
+            margin: 0 auto 50px;
+            position: relative;
+        }
+
+        .faq-search input {
+            width: 100%;
+            padding: 16px 50px 16px 24px;
+            border: 2px solid #e0e0e0;
+            border-radius: 50px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+            outline: none;
+            background: var(--white);
+        }
+
+        .faq-search input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(26, 35, 126, 0.1);
+        }
+
+        .faq-search i {
+            position: absolute;
+            right: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+
+        .faq-categories {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .faq-category-btn {
+            padding: 12px 28px;
+            border: 2px solid #e0e0e0;
+            border-radius: 50px;
+            background: var(--white);
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .faq-category-btn:hover,
+        .faq-category-btn.active {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+
+        .faq-category-btn i {
+            font-size: 1rem;
+        }
+
+        .faq-list {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--white);
+            border-radius: 16px;
+            margin-bottom: 15px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .faq-item:hover {
+            box-shadow: var(--shadow-hover);
+        }
+
+        .faq-question {
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .faq-question h4 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--dark);
+            padding-right: 20px;
+            line-height: 1.5;
+        }
+
+        .faq-toggle {
+            width: 35px;
+            height: 35px;
+            min-width: 35px;
+            border-radius: 50%;
+            background: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .faq-item.active .faq-toggle {
+            background: var(--primary);
+            color: var(--white);
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 0 30px 25px;
+        }
+
+        .faq-answer p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .faq-answer ul {
+            margin-top: 15px;
+            padding-left: 20px;
+            color: var(--gray);
+        }
+
+        .faq-answer ul li {
+            margin-bottom: 8px;
+            line-height: 1.7;
+        }
+
+        .faq-answer a {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .faq-answer a:hover {
+            color: var(--secondary);
+        }
+
+        /* CTA FAQ */
+        .faq-cta {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 50px;
+            text-align: center;
+            max-width: 700px;
+            margin: 60px auto 0;
+            box-shadow: var(--shadow);
+        }
+
+        .faq-cta i {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+
+        .faq-cta h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .faq-cta p {
+            color: var(--gray);
+            margin-bottom: 25px;
+        }
+
+        .btn-faq-contact {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 32px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: var(--transition);
+        }
+
+        .btn-faq-contact:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .faq-question { padding: 20px; }
+            .faq-question h4 { font-size: 0.95rem; }
+            .faq-item.active .faq-answer { padding: 0 20px 20px; }
+            .faq-cta { padding: 30px 20px; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="top-bar-container">
+            <div class="top-bar-info">
+                <span><i class="fas fa-phone"></i> +57 300 123 4567</span>
+                <span><i class="fas fa-envelope"></i> andrescurvelodiaz@gmail.com</span>
+                <span><i class="fas fa-map-marker-alt"></i> Envíos a todo el país</span>
+            </div>
+            <div class="top-bar-links">
+                <a href="#"><i class="fas fa-question-circle"></i> Ayuda</a>
+                <a href="#"><i class="fas fa-truck"></i> Seguimiento</a>
+                <a href="#"><i class="fas fa-percent"></i> Ofertas</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>FERRETERÍA PRO</h1>
+                    <span>TU TIENDA ONLINE PROFESIONAL</span>
+                </div>
+            </a>
+
+            <div class="nav-search">
+                <input type="text" placeholder="Buscar herramientas, pinturas, materiales...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+
+            <div class="nav-actions">
+                <a href="#" class="nav-action">
+                    <i class="far fa-heart"></i>
+                    <span>Favoritos</span>
+                </a>
+                <a href="#" class="nav-action">
+                    <i class="far fa-user"></i>
+                    <span>Mi Cuenta</span>
+                </a>
+                <a href="/carrito" class="nav-action">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="badge">0</span>
+                    <span>Carrito</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header-container">
+            <div class="breadcrumb">
+                <a href="/">Inicio</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>Preguntas Frecuentes</span>
+            </div>
+            <h1>Preguntas Frecuentes</h1>
+            <p>Encuentra respuestas a las dudas más comunes sobre nuestros productos, envíos, pagos y políticas.</p>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section">
+        <div class="container">
+            <!-- Buscador -->
+            <div class="faq-search">
+                <input type="text" placeholder="Busca tu pregunta...">
+                <i class="fas fa-search"></i>
+            </div>
+
+            <!-- Categorías -->
+            <div class="faq-categories">
+                <button class="faq-category-btn active" onclick="filterFaq('all', this)"><i class="fas fa-th-large"></i> Todas</button>
+                <button class="faq-category-btn" onclick="filterFaq('pedidos', this)"><i class="fas fa-shopping-bag"></i> Pedidos</button>
+                <button class="faq-category-btn" onclick="filterFaq('envios', this)"><i class="fas fa-truck"></i> Envíos</button>
+                <button class="faq-category-btn" onclick="filterFaq('pagos', this)"><i class="fas fa-credit-card"></i> Pagos</button>
+                <button class="faq-category-btn" onclick="filterFaq('devoluciones', this)"><i class="fas fa-undo"></i> Devoluciones</button>
+                <button class="faq-category-btn" onclick="filterFaq('productos', this)"><i class="fas fa-box"></i> Productos</button>
+                <button class="faq-category-btn" onclick="filterFaq('cuenta', this)"><i class="fas fa-user"></i> Cuenta</button>
+            </div>
+
+            <!-- Lista FAQ -->
+            <div class="faq-list">
+                
+                <div class="faq-item" data-category="pedidos">
+                    <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                        <h4>¿Cómo realizo un pedido en Ferretería Pro?</h4>
+                        <div class="faq-toggle"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Realizar un pedido es muy sencillo. Navega por nuestro catálogo, selecciona los productos que necesitas, agrégalos al carrito y procede al pago. Puedes pagar con tarjeta de crédito/débito, transferencia bancaria, PSE o contra entrega (en ciudades principales). Una vez confirmado el pago, recibirás un correo con los detalles de tu pedido y número de seguimiento.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="pedidos">
+                    <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                        <h4>¿Puedo modificar o cancelar mi pedido después de realizarlo?</h4>
+                        <div class="faq-toggle"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sí, puedes modificar o cancelar tu pedido siempre que no haya sido despachado. Contáctanos inmediatamente al <a href='tel:+573001234567'>+57 300 123 4567</a> o escríbenos por WhatsApp. Si el pedido ya fue enviado, deberás esperar a recibirlo y solicitar una devolución según nuestra política.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="envios">
+                    <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                        <h4>¿Cuánto tarda el envío y cuál es el costo?</h4>
+                        <div class="faq-toggle"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Los tiempos de entrega varían según tu ubicación:<ul><li><strong>Bogotá:</strong> 24-48 horas hábiles</li><li><strong>Principales ciudades:</strong> 2-4 días hábiles</li><li><strong>Resto del país:</strong> 3-7 días hábiles</li></ul>El costo de envío se calcula automáticamente en el carrito según el peso y destino. Envíos gratuitos en compras superiores a $300.000 COP en Bogotá y $500.000 COP en el resto del país.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="envios">
+                    <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                        <h4>¿Cómo puedo rastrear mi pedido?</h4>
+                        <div class="faq-toggle"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Una vez que tu pedido sea despachado, recibirás un correo electrónico con el número de guía y un enlace para rastrear tu envío en tiempo real. También puedes consultar el estado de tu pedido ingresando a tu cuenta en la sección "Mis Pedidos" o contactándonos directamente.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="pagos">
+                    <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                        <h4>¿Qué métodos de pago aceptan?</h4>
+                        <div class="faq-toggle"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Aceptamos múltiples métodos de pago para tu comodidad:<ul><li>Tarjetas de crédito y débito (Visa, Mastercard, Amex)</li><li>PSE (Pagos en línea desde tu banco)</li><li>Transferencia bancaria</li><li>Efecty / Baloto</li><li>Contra entrega (solo en ciudades principales, máximo $500.000 COP)</li></ul>Todas las transacciones están protegidas con encriptación SSL de 256 bits.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="pagos">
+                    <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                        <h4>¿Los precios incluyen IVA?</h4>
+                        <div class="faq-toggle"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sí, todos los precios mostrados en nuestro sitio web incluyen IVA (19%). No hay cargos ocultos. El costo de envío se calcula por separado y se muestra claramente antes de confirmar tu compra.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="devoluciones">
+                    <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                        <h4>¿Cuál es la política de devoluciones y cambios?</h4>
+                        <div class="faq-toggle"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Tienes <strong>30 días calendario</strong> desde la recepción de tu pedido para solicitar una devolución o cambio. El producto debe estar en su empaque original, sin uso y con todos sus accesorios. Para iniciar el proceso, contáctanos con tu número de pedido. El reembolso se procesa en un plazo de 5-10 días hábiles una vez recibido el producto.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="devoluciones">
+                    <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                        <h4>¿Qué es el derecho de retracto y cómo lo ejerzo?</h4>
+                        <div class="faq-toggle"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>De acuerdo con la legislación colombiana, tienes derecho al retracto en compras no presenciales. Puedes ejercerlo dentro de los <strong>5 días hábiles</strong> posteriores a la entrega del producto. Para productos digitales (cursos, planos), el retracto no aplica una vez descargado o consumido el contenido, conforme a la normativa vigente. Contáctanos para gestionar tu retracto.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="productos">
+                    <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                        <h4>¿Los productos tienen garantía?</h4>
+                        <div class="faq-toggle"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Todos nuestros productos cuentan con garantía legal mínima de <strong>12 meses</strong> según la Ley 1480 de 2011. Además, muchas marcas ofrecen garantías extendidas de fábrica. La garantía cubre defectos de fabricación y fallas funcionales. No cubre daños por uso indebido, accidentes o desgaste natural. Conserva tu factura como comprobante de garantía.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="productos">
+                    <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                        <h4>¿Qué significa que un producto sea de tipo 'Variable'?</h4>
+                        <div class="faq-toggle"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Los productos de tipo 'Variable' son aquellos que vienen en diferentes presentaciones, colores, tamaños o potencias. Por ejemplo, un taladro puede estar disponible en 12V, 18V o 20V. Al seleccionar un producto variable, podrás elegir las opciones que mejor se adapten a tus necesidades antes de agregarlo al carrito.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="productos">
+                    <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                        <h4>¿Los productos digitales (cursos, planos) cómo se entregan?</h4>
+                        <div class="faq-toggle"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Los productos digitales se entregan de forma inmediata después de confirmar el pago. Recibirás un correo con el enlace de descarga y las instrucciones de acceso. Los cursos están disponibles en nuestra plataforma de aprendizaje y los planos se descargan en formatos DWG y PDF. Tienes acceso ilimitado una vez comprados.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="cuenta">
+                    <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                        <h4>¿Necesito crear una cuenta para comprar?</h4>
+                        <div class="faq-toggle"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>No es obligatorio crear una cuenta para realizar una compra. Puedes comprar como invitado proporcionando solo los datos necesarios para el envío. Sin embargo, te recomendamos registrarte para acceder a beneficios como: historial de pedidos, guardar direcciones, lista de favoritos, seguimiento de envíos y ofertas exclusivas para miembros.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="cuenta">
+                    <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                        <h4>¿Cómo protegen mis datos personales?</h4>
+                        <div class="faq-toggle"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>La seguridad de tus datos es nuestra prioridad. Utilizamos encriptación SSL de 256 bits para todas las transacciones. Tus datos personales se almacenan de forma segura y nunca los compartimos con terceros sin tu consentimiento. Puedes consultar nuestra Política de Privacidad para más detalles sobre el tratamiento de tu información.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="envios">
+                    <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                        <h4>¿Hacen envíos a todo Colombia?</h4>
+                        <div class="faq-toggle"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sí, realizamos envíos a los 32 departamentos de Colombia. Trabajamos con transportadoras confiables como Servientrega, Interrapidísimo y Coordinadora. Para zonas rurales o de difícil acceso, el tiempo de entrega puede extenderse ligeramente. Te mantendremos informado en todo momento sobre el estado de tu envío.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="pedidos">
+                    <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                        <h4>¿Puedo hacer pedidos al por mayor o solicitar cotizaciones?</h4>
+                        <div class="faq-toggle"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>¡Por supuesto! Ofrecemos precios especiales para compras al por mayor, constructoras y empresas. Para solicitar una cotización personalizada, contáctanos a <a href='mailto:andrescurvelodiaz@gmail.com'>andrescurvelodiaz@gmail.com</a> o llámanos al <a href='tel:+573001234567'>+57 300 123 4567</a>. Un asesor comercial te atenderá con gusto y te brindará las mejores condiciones para tu proyecto.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- CTA -->
+            <div class="faq-cta">
+                <i class="fas fa-headset"></i>
+                <h3>¿No encontraste tu respuesta?</h3>
+                <p>Nuestro equipo de soporte está listo para ayudarte. Contáctanos y te responderemos en menos de 24 horas.</p>
+                <a href="/contacto" class="btn-faq-contact">
+                    <i class="fas fa-envelope"></i> Contactar Soporte
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function filterFaq(category, btn) {
+            document.querySelectorAll('.faq-category-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.faq-item').forEach(item => {
+                if (category === 'all' || item.dataset.category === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+    </script>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3><i class="fas fa-tools"></i> FERRETERÍA PRO</h3>
+                    <p>Tu tienda online profesional de ferretería y materiales de construcción. Productos de calidad, precios competitivos y envío a domicilio.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Categorías</h4>
+                    <ul>
+                        <li><a href="productos">Herramientas</a></li>
+                        <li><a href="pinturas">Pinturas</a></li>
+                        <li><a href="electricidad">Electricidad</a></li>
+                        <li><a href="construccion">Construcción</a></li>
+                        <li><a href="seguridad">Seguridad</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="sobre-nosotros">Sobre Nosotros</a></li>
+                        <li><a href="contacto">Contacto</a></li>
+                        <li><a href="blog">Blog</a></li>
+                        <li><a href="faq">Preguntas Frecuentes</a></li>
+                        <li><a href="terminos">Términos y Condiciones</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Calle 123 #45-67, Bogotá</a></li>
+                        <li><a href="#"><i class="fas fa-phone"></i> +57 300 123 4567</a></li>
+                        <li><a href="#"><i class="fas fa-envelope"></i> info@ferreteriapro.com</a></li>
+                        <li><a href="#"><i class="fas fa-clock"></i> Lun-Vie: 8am - 6pm</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p> 2026 Ferretería Pro. Todos los derechos reservados.</p>
+                <p>Diseñado con <i class="fas fa-heart" style="color: var(--danger);"></i> para profesionales</p>
+            </div>
+        </div>
+    </footer>
+
+
+</body>
+</html>

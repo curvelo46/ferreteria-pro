@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos - Ferretería Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/productos.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+<base target="_blank">
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="top-bar-container">
+            <div class="top-bar-info">
+                <span><i class="fas fa-phone"></i> +57 300 123 4567</span>
+                <span><i class="fas fa-envelope"></i> info@ferreteriapro.com</span>
+                <span><i class="fas fa-map-marker-alt"></i> Envíos a todo el país</span>
+            </div>
+            <div class="top-bar-links">
+                <a href="#"><i class="fas fa-question-circle"></i> Ayuda</a>
+                <a href="#"><i class="fas fa-truck"></i> Seguimiento</a>
+                <a href="#"><i class="fas fa-percent"></i> Ofertas</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="logo">
+                <div class="logo-icon"><i class="fas fa-tools"></i></div>
+                <div class="logo-text">
+                    <h1>FERRETERÍA PRO</h1>
+                    <span>TU TIENDA ONLINE PROFESIONAL</span>
+                </div>
+            </a>
+            <div class="nav-search">
+                <input type="text" id="searchInput" placeholder="Buscar herramientas, pinturas, materiales...">
+                <button onclick="applyFilters()"><i class="fas fa-search"></i></button>
+            </div>
+            <div class="nav-actions">
+                <a href="#" class="nav-action">
+                    <i class="far fa-heart"></i>
+                    <span>Favoritos</span>
+                </a>
+                <a href="#" class="nav-action">
+                    <i class="far fa-user"></i>
+                    <span>Mi Cuenta</span>
+                </a>
+                <a href="carrito" class="nav-action">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="badge" id="cartCount">0</span>
+                    <span>Carrito</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header-container">
+            <h1><i class="fas fa-th-large"></i> Catálogo de Productos</h1>
+            <div class="breadcrumb">
+                <a href="/">Inicio</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>Productos</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar Filters -->
+        <aside class="sidebar" id="sidebar">
+            <!-- Active Filters -->
+            <div class="filter-section" id="activeFiltersSection" style="display: none;">
+                <div class="filter-header">
+                    <h3><i class="fas fa-filter"></i> Filtros Activos</h3>
+                    <button onclick="clearAllFilters()">Limpiar todo</button>
+                </div>
+                <div class="filter-content">
+                    <div class="active-filters" id="activeFilters"></div>
+                </div>
+            </div>
+
+            <!-- Categories Filter -->
+            <div class="filter-section">
+                <div class="filter-header">
+                    <h3><i class="fas fa-tags"></i> Categorías</h3>
+                </div>
+                <div class="filter-content" id="categoryFilters">
+                    <div class="loading"><div class="spinner"></div></div>
+                </div>
+            </div>
+
+            <!-- Subcategories Filter -->
+            <div class="filter-section" id="subcategorySection" style="display: none;">
+                <div class="filter-header">
+                    <h3><i class="fas fa-sitemap"></i> Subcategorías</h3>
+                </div>
+                <div class="filter-content" id="subcategoryFilters"></div>
+            </div>
+
+            <!-- Type Filter -->
+            <div class="filter-section">
+                <div class="filter-header">
+                    <h3><i class="fas fa-cubes"></i> Tipo de Producto</h3>
+                </div>
+                <div class="filter-content">
+                    <div class="type-options">
+                        <button class="type-badge" data-type="simple" onclick="toggleTypeFilter('simple')">
+                            <i class="fas fa-box"></i> Simple
+                        </button>
+                        <button class="type-badge" data-type="variable" onclick="toggleTypeFilter('variable')">
+                            <i class="fas fa-sliders-h"></i> Variable
+                        </button>
+                        <button class="type-badge" data-type="digital" onclick="toggleTypeFilter('digital')">
+                            <i class="fas fa-download"></i> Digital
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Brand Filter -->
+            <div class="filter-section">
+                <div class="filter-header">
+                    <h3><i class="fas fa-certificate"></i> Marcas</h3>
+                </div>
+                <div class="filter-content" id="brandFilters">
+                    <div class="loading"><div class="spinner"></div></div>
+                </div>
+            </div>
+
+            <!-- Price Filter -->
+            <div class="filter-section">
+                <div class="filter-header">
+                    <h3><i class="fas fa-dollar-sign"></i> Rango de Precio</h3>
+                </div>
+                <div class="filter-content">
+                    <div class="filter-group">
+                        <div class="price-inputs">
+                            <input type="number" id="priceMin" placeholder="Mín" min="0" onchange="applyFilters()">
+                            <input type="number" id="priceMax" placeholder="Máx" min="0" onchange="applyFilters()">
+                        </div>
+                        <input type="range" class="price-slider" id="priceRange" min="0" max="300000" step="5000" value="300000" oninput="updatePriceMax(this.value)">
+                        <div class="price-range-labels">
+                            <span>$0</span>
+                            <span id="priceMaxLabel">$300,000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Products Area -->
+        <main class="products-area">
+            <!-- Toolbar -->
+            <div class="toolbar">
+                <div class="results-info">
+                    Mostrando <strong id="resultsCount">0</strong> productos
+                </div>
+                <div style="display: flex; gap: 15px; align-items: center;">
+                    <select class="sort-select" id="sortSelect" onchange="applyFilters()">
+                        <option value="nombre_asc">Nombre: A-Z</option>
+                        <option value="nombre_desc">Nombre: Z-A</option>
+                        <option value="precio_asc">Precio: Menor a Mayor</option>
+                        <option value="precio_desc">Precio: Mayor a Menor</option>
+                        <option value="nuevos">Más Recientes</option>
+                    </select>
+                    <div class="view-toggle">
+                        <button class="view-btn active" onclick="setView('grid')" title="Vista cuadrícula">
+                            <i class="fas fa-th-large"></i>
+                        </button>
+                        <button class="view-btn" onclick="setView('list')" title="Vista lista">
+                            <i class="fas fa-list"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="products-grid" id="productsGrid">
+                <div class="loading"><div class="spinner"></div></div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Mobile Filter Toggle -->
+    <button class="mobile-filter-toggle" onclick="toggleSidebar()">
+        <i class="fas fa-filter"></i>
+    </button>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Producto agregado al carrito</span>
+    </div>
+
+
+        <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3><i class="fas fa-tools"></i> FERRETERÍA PRO</h3>
+                    <p>Tu tienda online profesional de ferretería y materiales de construcción. Productos de calidad, precios competitivos y envío a domicilio.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Categorías</h4>
+                    <ul>
+                        <li><a href="productos">Herramientas</a></li>
+                        <li><a href="pinturas">Pinturas</a></li>
+                        <li><a href="electricidad">Electricidad</a></li>
+                        <li><a href="construccion">Construcción</a></li>
+                        <li><a href="seguridad">Seguridad</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="sobre-nosotros">Sobre Nosotros</a></li>
+                        <li><a href="contacto">Contacto</a></li>
+                        <li><a href="blog">Blog</a></li>
+                        <li><a href="preguntas-frecuentes">Preguntas Frecuentes</a></li>
+                        <li><a href="terminos">Términos y Condiciones</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Calle 123 #45-67, Bogotá</a></li>
+                        <li><a href="#"><i class="fas fa-phone"></i> +57 300 123 4567</a></li>
+                        <li><a href="#"><i class="fas fa-envelope"></i> info@ferreteriapro.com</a></li>
+                        <li><a href="#"><i class="fas fa-clock"></i> Lun-Vie: 8am - 6pm</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p> 2026 Ferretería Pro. Todos los derechos reservados.</p>
+                <p>Diseñado con <i class="fas fa-heart" style="color: var(--danger);"></i> para profesionales</p>
+            </div>
+        </div>
+    </footer>
+
+
+
+    <!-- Scripts: ORDEN IMPORTANTE -->
+    <script src="static/js/data.js"></script>
+    <script src="static/js/cart-storage.js"></script>
+    <script src="static/js/productos.js"></script>
+</body>
+</html>

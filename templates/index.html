@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferretería Pro - Tienda Online Profesional</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
+<base target="_blank">
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="top-bar-container">
+            <div class="top-bar-info">
+                <span><i class="fas fa-phone"></i> +57 300 123 4567</span>
+                <span><i class="fas fa-envelope"></i> andrescurvelodiaz@gmail.com</span>
+                <span><i class="fas fa-map-marker-alt"></i> Envíos a todo el país</span>
+            </div>
+            <div class="top-bar-links">
+                <a href="#"><i class="fas fa-question-circle"></i> Ayuda</a>
+                <a href="#"><i class="fas fa-truck"></i> Seguimiento</a>
+                <a href="#"><i class="fas fa-percent"></i> Ofertas</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>FERRETERÍA PRO</h1>
+                    <span>TU TIENDA ONLINE PROFESIONAL</span>
+                </div>
+            </a>
+
+            <div class="nav-search">
+                <input type="text" id="searchInput" placeholder="Buscar herramientas, pinturas, materiales...">
+                <button onclick="searchProductsPage()"><i class="fas fa-search"></i></button>
+            </div>
+
+            <div class="nav-actions">
+                <a href="#" class="nav-action">
+                    <i class="far fa-heart"></i>
+                    <span>Favoritos</span>
+                </a>
+                <a href="#" class="nav-action">
+                    <i class="far fa-user"></i>
+                    <span>Mi Cuenta</span>
+                </a>
+                <a href="/carrito" class="nav-action">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="badge" id="cartCount">0</span>
+                    <span>Carrito</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h2>🔨 Ferretería Profesional</h2>
+                <h1>Herramientas de <span>Alta Calidad</span> para Tus Proyectos</h1>
+                <p>Encuentra todo lo que necesitas para construcción, remodelación y bricolaje. Productos físicos y digitales con envío a domicilio.</p>
+                <div class="hero-buttons">
+                    <a href="/productos" class="btn btn-primary">
+                        <i class="fas fa-shopping-bag"></i> Ver Productos
+                    </a>
+                    <a href="#categorias" class="btn btn-outline">
+                        <i class="fas fa-th-large"></i> Categorías
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <h3>50+</h3>
+                        <p>Productos</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>6</h3>
+                        <p>Categorías</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>24h</h3>
+                        <p>Entrega</p>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.sodimac.com/v3/assets/blt2f8082df109cfbfb/blta94af53eb80508b2/67c60a935108fba89335fcc4/LND-GC-1112-PC-herraminetas-manuales.png" alt="Herramientas profesionales">
+            </div>
+        </div>
+    </section>
+
+    <!-- Categorías -->
+    <section class="section" id="categorias">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-title">
+                    <h2>Categorías Principales</h2>
+                    <span>Explora nuestro catálogo por especialidad</span>
+                </div>
+                <a href="productos" class="btn-view-all">Ver todas <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="categories-grid" id="categoriesGrid">
+                <!-- Se llena con JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Productos Destacados -->
+    <section class="section" id="productos" style="background: var(--white);">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-title">
+                    <h2>Productos Destacados</h2>
+                    <span>Los más vendidos de nuestra ferretería</span>
+                </div>
+                <a href="/productos" class="btn-view-all">Ver catálogo completo <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="products-grid" id="productsGrid">
+                <!-- Se llena con JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Marcas -->
+    <section class="brands-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-title">
+                    <h2>Marcas Destacadas</h2>
+                    <span>Trabajamos con las mejores marcas del mercado</span>
+                </div>
+            </div>
+            <div class="brands-grid" id="brandsGrid">
+                <!-- Se llena con JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-title">
+                    <h2>¿Por qué elegirnos?</h2>
+                    <span>La mejor experiencia de compra online</span>
+                </div>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon" style="background: #e3f2fd; color: #1976d2;">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Envío Rápido</h3>
+                        <p>Entrega en 24-48 horas a todo el país. Seguimiento en tiempo real.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon" style="background: #e8f5e9; color: #388e3c;">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Garantía Total</h3>
+                        <p>Todos nuestros productos cuentan con garantía de fábrica.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon" style="background: #fff3e0; color: #f57c00;">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Soporte 24/7</h3>
+                        <p>Atención al cliente las 24 horas, los 7 días de la semana.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon" style="background: #fce4ec; color: #c2185b;">
+                        <i class="fas fa-undo"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Devoluciones Fáciles</h3>
+                        <p>30 días para devolver cualquier producto sin complicaciones.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <div class="container">
+        <section class="newsletter">
+            <div class="newsletter-container">
+                <h2><i class="fas fa-envelope-open-text"></i> Suscríbete a Nuestro Newsletter</h2>
+                <p>Recibe ofertas exclusivas, novedades y tips de bricolaje directamente en tu correo.</p>
+                <form class="newsletter-form" onsubmit="event.preventDefault(); subscribeNewsletter();">
+                    <input type="email" placeholder="Tu correo electrónico" required>
+                    <button type="submit">Suscribirme</button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3><i class="fas fa-tools"></i> FERRETERÍA PRO</h3>
+                    <p>Tu tienda online profesional de ferretería y materiales de construcción. Productos de calidad, precios competitivos y envío a domicilio.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Categorías</h4>
+                    <ul>
+                        <li><a href="productos">Herramientas</a></li>
+                        <li><a href="pinturas">Pinturas</a></li>
+                        <li><a href="electricidad">Electricidad</a></li>
+                        <li><a href="construccion">Construcción</a></li>
+                        <li><a href="seguridad">Seguridad</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="sobre-nosotros">Sobre Nosotros</a></li>
+                        <li><a href="contacto">Contacto</a></li>
+                        <li><a href="blog">Blog</a></li>
+                        <li><a href="preguntas-frecuentes">Preguntas Frecuentes</a></li>
+                        <li><a href="terminos">Términos y Condiciones</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Calle 123 #45-67, Bogotá</a></li>
+                        <li><a href="#"><i class="fas fa-phone"></i> +57 300 123 4567</a></li>
+                        <li><a href="#"><i class="fas fa-envelope"></i> info@ferreteriapro.com</a></li>
+                        <li><a href="#"><i class="fas fa-clock"></i> Lun-Vie: 8am - 6pm</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p> 2026 Ferretería Pro. Todos los derechos reservados.</p>
+                <p>Diseñado con <i class="fas fa-heart" style="color: var(--danger);"></i> para profesionales</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Producto agregado al carrito</span>
+    </div>
+
+    <!-- Scripts: ORDEN IMPORTANTE - al final del body -->
+    <script src="/static/js/data.js"></script>
+    <script src="/static/js/cart-storage.js"></script>
+    <script src="/static/js/index.js"></script>
+</body>
+</html>
