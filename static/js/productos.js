@@ -571,7 +571,7 @@ document.addEventListener('keydown', function(e) {
     function renderBrandFilters() {
         const container = document.getElementById('brandFilters');
         if (!container) return;
-
+        
         const marcasMap = new Map();
         products.forEach(p => {
             if (p.marca_nombre) {
@@ -1082,7 +1082,15 @@ function closeWishlistVariantModal() {
 
 
 
-
+function normalizeSlug(text) {
+    return text
+        .toString()
+        .trim()
+        .replace(/\+/g, '+')       // + → -
+        .replace(/\s+/g, '-')      // espacio → -
+        .replace(/[^a-zA-Z0-9\-]/g, '') // limpiar especiales
+        .toLowerCase();
+}
 
 
 
