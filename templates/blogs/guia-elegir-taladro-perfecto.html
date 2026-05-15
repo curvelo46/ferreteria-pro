@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía del Experto: Cómo Elegir el Taladro Perfecto | ConstrucciónPro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+   <link rel="stylesheet" href="/static/css/taladro_perfecto.css">
+<base target="_self">
+</head>
+<body>
+
+    <!-- ===== TOP BAR ===== -->
+    <div class="top-bar">
+        <div class="top-bar-container">
+            <div class="top-bar-info">
+                <span><i class="fas fa-phone"></i> +57 300 123 4567</span>
+                <span><i class="fas fa-envelope"></i> andrescurvelodiaz@gmail.com</span>
+                <span><i class="fas fa-map-marker-alt"></i> Envíos a todo el país</span>
+            </div>
+            <div class="top-bar-links">
+                <a href="#"><i class="fas fa-question-circle"></i> Ayuda</a>
+                <a href="#"><i class="fas fa-truck"></i> Seguimiento</a>
+                <a href="#"><i class="fas fa-percent"></i> Ofertas</a>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ===== NAVBAR ===== -->
+ <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>FERRETERÍA PRO</h1>
+                    <span>TU TIENDA ONLINE PROFESIONAL</span>
+                </div>
+            </a>
+
+            <div class="nav-search">
+                <input type="text" id="searchInput" placeholder="Buscar herramientas, pinturas, materiales...">
+                <button onclick="searchProductsPage()"><i class="fas fa-search"></i></button>
+            </div>
+
+            <div class="nav-actions">
+                <a href="#" class="nav-action">
+                    <i class="far fa-user"></i>
+                    <span>Mi Cuenta</span>
+                </a>
+                <a href="/carrito" class="nav-action">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cartCount" class="badge">0</span>
+                    <span>Carrito</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h2><i class="fas fa-star"></i> Guía del Experto 2026</h2>
+                <h1>Cómo Elegir el <span>Taladro Perfecto</span></h1>
+                <p>Después de 15 años trabajando en obras de construcción, te comparto mi conocimiento técnico para que elijas la herramienta ideal según tu proyecto, material y frecuencia de uso.</p>
+                <div class="hero-buttons">
+                    <a href="#tipos" class="btn btn-primary">
+                        <i class="fas fa-drill"></i> Ver Tipos de Taladros
+                    </a>
+                    <a href="#guia" class="btn btn-outline">
+                        <i class="fas fa-clipboard-list"></i> Guía de Compra
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <h3>15+</h3>
+                        <p>Años de Experiencia</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>500+</h3>
+                        <p>Obras Completadas</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>50+</h3>
+                        <p>Marcas Evaluadas</p>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <i class="fas fa-screwdriver-wrench drill-icon"></i>
+                <img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?w=600&h=500&fit=crop" alt="Taladro profesional en obra">
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TIPOS DE TALADROS ===== -->
+    <section class="section" id="tipos">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-title">
+                    <h2><i class="fas fa-layer-group" style="color: var(--primary);"></i> Tipos de Taladros</h2>
+                    <span>Conoce cada categoría y su aplicación específica en construcción</span>
+                </div>
+            </div>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <div class="category-icon icon-percutor">
+                        <i class="fas fa-arrows-up-down"></i>
+                    </div>
+                    <h3>Taladro Percutor</h3>
+                    <p>El más versátil para el hogar. Combina rotación con golpes mecánicos para perforar concreto, ladrillo y mampostería. Ideal para colgar estantes, cortinas y muebles.</p>
+                    <div class="category-specs">
+                        <span>Potencia: 500-900W</span>
+                        <span>Golpes: 0-48,000/min</span>
+                        <span>Mandril: 13mm</span>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon icon-rotativo">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3>Taladro Rotativo (SDS)</h3>
+                    <p>La herramienta profesional por excelencia. Sistema SDS-Plus o SDS-Max con martillo neumático integrado. Perfora concreto reforzado, hormigón y piedra sin esfuerzo.</p>
+                    <div class="category-specs">
+                        <span>Potencia: 800-1500W</span>
+                        <span>Energía: 2.5-12J</span>
+                        <span>SDS: Plus/Max</span>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon icon-martillo">
+                        <i class="fas fa-hammer"></i>
+                    </div>
+                    <h3>Martillo Demoledor</h3>
+                    <p>Diseñado exclusivamente para demolición. No rota, solo golpea con fuerza brutal. Perfecto para romper pisos, remover azulejos, demoler muros y zanjas.</p>
+                    <div class="category-specs">
+                        <span>Potencia: 1000-2000W</span>
+                        <span>Energía: 15-45J</span>
+                        <span>Peso: 5-15kg</span>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon icon-atornillador">
+                        <i class="fas fa-screwdriver"></i>
+                    </div>
+                    <h3>Atornillador / Taladro Inalámbrico</h3>
+                    <p>Máxima movilidad con baterías de litio. Ideal para ensamblaje de muebles, drywall, carpintería y trabajos eléctricos donde no hay toma corriente cercana.</p>
+                    <div class="category-specs">
+                        <span>Voltaje: 12V-36V</span>
+                        <span>Batería: 2Ah-6Ah</span>
+                        <span>RPM: 0-2000</span>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon icon-columna">
+                        <i class="fas fa-arrows-to-dot"></i>
+                    </div>
+                    <h3>Taladro de Columna</h3>
+                    <p>Precisión industrial en taller. Mesa fija con broca centrada, ideal para perforaciones exactas en metal, madera y plástico. No apto para concreto.</p>
+                    <div class="category-specs">
+                        <span>Potencia: 350-750W</span>
+                        <span>Profundidad: 50-100mm</span>
+                        <span>Mesa: Ajustable</span>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon icon-angulo">
+                        <i class="fas fa-angle-right"></i>
+                    </div>
+                    <h3>Taladro Angular</h3>
+                    <p>Cabeza a 90° para espacios reducidos. Perfecto para armarios de cocina, rincones, entre vigas y cualquier lugar donde un taladro estándar no cabe.</p>
+                    <div class="category-specs">
+                        <span>Ángulo: 90°</span>
+                        <span>Potencia: 400-700W</span>
+                        <span>Mandril: 10mm</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CARACTERÍSTICAS CLAVE ===== -->
+    <section class="section" style="background: var(--white);">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-title">
+                    <h2><i class="fas fa-sliders-h" style="color: var(--primary);"></i> Características Clave a Evaluar</h2>
+                    <span>Parámetros técnicos que definen el rendimiento de tu herramienta</span>
+                </div>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon icon-potencia">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Potencia del Motor (Watts)</h3>
+                        <p>Determina la capacidad de perforación en materiales duros. Para concreto busca mínimo 800W. Madera y metal se manejan bien con 500-700W. Más watts = menos esfuerzo y mayor velocidad.</p>
+                        <div class="feature-tip">
+                            <i class="fas fa-lightbulb"></i> Concreto: 800W+ | Madera: 500W+ | Metal: 600W+
+                        </div>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon icon-velocidad">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Velocidad Variable y Control</h3>
+                        <p>Un buen taladro debe ofrecer control de velocidad mediante gatillo sensible. Velocidades bajas (0-400 RPM) para atornillar y altas (0-3000 RPM) para perforar. El control electrónico mantiene velocidad constante bajo carga.</p>
+                        <div class="feature-tip">
+                            <i class="fas fa-lightbulb"></i> Busca modelos con 2 o 3 velocidades mecánicas + control electrónico
+                        </div>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon icon-bateria">
+                        <i class="fas fa-battery-full"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Batería y Autonomía (Inalámbricos)</h3>
+                        <p>Las baterías de litio-ion de 18V-20V son el estándar. Capacidad de 4Ah-6Ah para jornadas completas. Verifica compatibilidad con otras herramientas de la misma marca para compartir baterías.</p>
+                        <div class="feature-tip">
+                            <i class="fas fa-lightbulb"></i> 4Ah = ~2-3 horas uso continuo | 6Ah = ~4-5 horas
+                        </div>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon icon-torque">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Torque y Fuerza de Percusión</h3>
+                        <p>El torque (en Nm) indica fuerza de giro para atornillar. Los taladros percutores generan golpes medidos en BPM (golpes por minuto). Para concreto, busca 30,000 BPM o más con energía de impacto superior a 2.5J.</p>
+                        <div class="feature-tip">
+                            <i class="fas fa-lightbulb"></i> Atornillado: 30-60 Nm | Concreto: 30,000+ BPM
+                        </div>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon icon-mandril">
+                        <i class="fas fa-circle-notch"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Tipo y Tamaño de Mandril</h3>
+                        <p>El mandril de 13mm (1/2") es el estándar universal. Los de cierre rápido (keyless) permiten cambiar brocas sin llave. Para trabajo pesado, prefere mandril metálico con llave de apriete para mayor seguridad.</p>
+                        <div class="feature-tip">
+                            <i class="fas fa-lightbulb"></i> Uso profesional: Mandril con llave | Hogar: Keyless
+                        </div>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon icon-ergonomia">
+                        <i class="fas fa-hand-paper"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Ergonomía y Sistema Anti-Vibración</h3>
+                        <p>Un taladro pesado cansa la muñeca y el antebrazo. Busca empuñadura auxiliar ajustable, goma antideslizante y sistemas AVS (Anti-Vibration System) que reducen la transmisión de vibraciones al operario.</p>
+                        <div class="feature-tip">
+                            <i class="fas fa-lightbulb"></i> Peso ideal: 1.5-2.5kg | Empuñadura auxiliar obligatoria
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONSEJO DEL EXPERTO ===== -->
+    <div class="container">
+        <div class="expert-tip">
+            <h3><i class="fas fa-user-tie"></i> Consejo del Experto</h3>
+            <p>"En mis 15 años en obra, el error más común que veo es comprar un taladro percutor barato para hacer agujeros en concreto armado. Resultado: motor quemado en 3 meses. Mi regla de oro: si vas a perforar concreto más de 10 veces al mes, invierte en un rotativo SDS-Plus de marca reconocida. La diferencia de precio se paga en la primera obra grande. Y nunca, nunca uses una broca de madera en concreto: se desgasta, se calienta y puede fracturarse. Usa siempre brocas SDS para concreto, de widia o carburo de tungsteno."</p>
+            <div class="author">— Ing. Carlos Mendoza, Maestro Constructor</div>
+        </div>
+    </div>
+
+    <!-- ===== GUÍA DE COMPRA POR PROYECTO ===== -->
+    <section class="section" id="guia">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-title">
+                    <h2><i class="fas fa-clipboard-check" style="color: var(--primary);"></i> Guía de Compra por Proyecto</h2>
+                    <span>Te ayudo a decidir según el tipo de trabajo que realizarás</span>
+                </div>
+            </div>
+            <div class="guide-section">
+                <div class="guide-grid">
+                    <div class="guide-card">
+                        <h4><i class="fas fa-home"></i> Hogar y Bricolaje</h4>
+                        <ul>
+                            <li>Colgar cuadros, estantes y cortinas</li>
+                            <li>Montar muebles de melamina y MDF</li>
+                            <li>Pequeñas reparaciones eléctricas</li>
+                            <li>Perforar madera, plástico y drywall</li>
+                            <li>Concreto ligero (bloques, ladrillo)</li>
+                        </ul>
+                        <p style="margin-top: 15px; font-weight: 600; color: var(--primary);">Recomendado: Taladro Percutor 650W o Atornillador 18V</p>
+                    </div>
+                    <div class="guide-card">
+                        <h4><i class="fas fa-building"></i> Construcción y Reformas</h4>
+                        <ul>
+                            <li>Perforar concreto armado y hormigón</li>
+                            <li>Instalación de tuberías y cableado</li>
+                            <li>Anclajes químicos y mecánicos</li>
+                            <li>Demolición de muros no estructurales</li>
+                            <li>Perforaciones de gran diámetro</li>
+                        </ul>
+                        <p style="margin-top: 15px; font-weight: 600; color: var(--primary);">Recomendado: Rotativo SDS-Plus 900W+ o SDS-Max</p>
+                    </div>
+                    <div class="guide-card">
+                        <h4><i class="fas fa-hammer"></i> Carpintería y Ebanistería</h4>
+                        <ul>
+                            <li>Taladros precisos en madera dura</li>
+                            <li>Avellanados y bisagras ocultas</li>
+                            <li>Ensamblaje de estructuras de madera</li>
+                            <li>Perforaciones angulares y en bordes</li>
+                            <li>Trabajo en taller con precisión milimétrica</li>
+                        </ul>
+                        <p style="margin-top: 15px; font-weight: 600; color: var(--primary);">Recomendado: Taladro de Columna o Atornillador 18V con clutch</p>
+                    </div>
+                    <div class="guide-card">
+                        <h4><i class="fas fa-industry"></i> Obra Civil e Industrial</h4>
+                        <ul>
+                            <li>Demolición de pisos y cimentaciones</li>
+                            <li>Perforación en roca y concreto masivo</li>
+                            <li>Instalación de anclajes estructurales</li>
+                            <li>Trabajo en exteriores sin electricidad</li>
+                            <li>Uso intensivo 8+ horas diarias</li>
+                        </ul>
+                        <p style="margin-top: 15px; font-weight: 600; color: var(--primary);">Recomendado: Martillo Demoledor + Rotativo SDS-Max</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TABLA COMPARATIVA ===== -->
+    <section class="section" style="background: var(--white);">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-title">
+                    <h2><i class="fas fa-balance-scale" style="color: var(--primary);"></i> Tabla Comparativa Rápida</h2>
+                    <span>Comparación técnica para decidir en minutos</span>
+                </div>
+            </div>
+            <div style="overflow-x: auto;">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Tipo de Taladro</th>
+                            <th>Potencia</th>
+                            <th>Mejor Material</th>
+                            <th>Precio Aprox.</th>
+                            <th>Nivel</th>
+                            <th>Veredicto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Percutor Eléctrico</strong></td>
+                            <td>500-900W</td>
+                            <td>Madera, metal, concreto ligero</td>
+                            <td>$80 - $250 USD</td>
+                            <td><span class="badge badge-hobby">Hogar</span></td>
+                            <td>Perfecto para el dueño de casa</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Rotativo SDS-Plus</strong></td>
+                            <td>800-1500W</td>
+                            <td>Concreto, hormigón, piedra</td>
+                            <td>$200 - $600 USD</td>
+                            <td><span class="badge badge-profesional">Pro</span></td>
+                            <td>La herramienta más versátil del albañil</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Rotativo SDS-Max</strong></td>
+                            <td>1100-2000W</td>
+                            <td>Concreto armado, roca, demolición</td>
+                            <td>$500 - $1500 USD</td>
+                            <td><span class="badge badge-profesional">Pro+</span></td>
+                            <td>Para obra civil y trabajos pesados</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Atornillador 18V-20V</strong></td>
+                            <td>18V-36V Li-Ion</td>
+                            <td>Madera, drywall, ensamblaje</td>
+                            <td>$100 - $400 USD</td>
+                            <td><span class="badge badge-recomendado">Recomendado</span></td>
+                            <td>Máxima movilidad, indispensable</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Martillo Demoledor</strong></td>
+                            <td>1000-2000W</td>
+                            <td>Demolición, pisos, muros</td>
+                            <td>$300 - $1200 USD</td>
+                            <td><span class="badge badge-profesional">Industrial</span></td>
+                            <td>Solo demolición, no perfora</td>
+                        </tr>
+                        <tr>
+                            <td><strong>De Columna</strong></td>
+                            <td>350-750W</td>
+                            <td>Metal, madera, plástico (precisión)</td>
+                            <td>$150 - $500 USD</td>
+                            <td><span class="badge badge-hobby">Taller</span></td>
+                            <td>Para carpintería y metalistería</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== NEWSLETTER ===== -->
+    <section class="newsletter">
+        <div class="newsletter-container">
+            <h2><i class="fas fa-envelope-open-text"></i> Recibe Más Consejos del Experto</h2>
+            <p>Guías técnicas, comparativas de herramientas y ofertas exclusivas para profesionales de la construcción.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Tu correo electrónico">
+                <button type="submit">Suscribirme</button>
+            </form>
+        </div>
+    </section>
+
+      <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3><i class="fas fa-tools"></i> FERRETERÍA PRO</h3>
+                    <p>Tu tienda online profesional de ferretería y materiales de construcción. Productos de calidad, precios competitivos y envío a domicilio.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Categorías</h4>
+                    <ul>
+                       <li><a href="productos">Herramientas</a></li>
+                        <li><a href="productos">Pinturas</a></li>
+                        <li><a href="productos">Electricidad</a></li>
+                        <li><a href="productos">Construcción</a></li>
+                        <li><a href="productos">Seguridad</a></li>
+                    </ul>
+                </div>
+
+
+
+                
+                <div class="footer-links">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="/sobre-nosotros">Sobre Nosotros</a></li>
+                        <li><a href="/contacto">Contacto</a></li>
+                        <li><a href="/blog">Blog</a></li>
+                        <li><a href="/faq">Preguntas Frecuentes</a></li>
+                        <li><a href="/terminos">Términos y Condiciones</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Calle 123 #45-67, Bogotá</a></li>
+                        <li><a href="#"><i class="fas fa-phone"></i> +57 300 123 4567</a></li>
+                        <li><a href="#"><i class="fas fa-envelope"></i> info@ferreteriapro.com</a></li>
+                        <li><a href="#"><i class="fas fa-clock"></i> Lun-Vie: 8am - 6pm</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p> 2026 Ferretería Pro. Todos los derechos reservados.</p>
+                <p>Diseñado con <i class="fas fa-heart" style="color: var(--danger);"></i> para profesionales</p>
+            </div>
+        </div>
+    </footer>
+<script src="/static/js/data.js"></script>
+<script src="/static/js/cart-storage.js"></script>
+</body>
+</html>

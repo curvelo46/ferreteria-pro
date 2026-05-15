@@ -93,9 +93,10 @@ function renderCart() {
                 </div>
 
                 <div class="cart-actions" style="display: flex; flex-direction: column; gap: 10px;">
-                    <button onclick="checkout()" style="width: 100%; padding: 15px; font-size: 1rem; background: #e74c3c; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">
+                    <!-- BOTÓN MODIFICADO: Ahora redirige al checkout -->
+                    <a href="/checkout" style="width: 100%; padding: 15px; font-size: 1rem; background: #e74c3c; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; text-decoration: none; text-align: center; display: block;">
                         <i class="fas fa-credit-card"></i> Ir a pagar
-                    </button>
+                    </a>
                     <button onclick="clearCart()" style="width: 100%; padding: 12px; border: 1px solid #ddd; background: white; border-radius: 8px; cursor: pointer; color: #666;">
                         <i class="fas fa-trash"></i> Vaciar carrito
                     </button>
@@ -134,20 +135,12 @@ function clearCart() {
     renderCart();
 }
 
-function checkout() {
-    const cart = getStoredCart();
-    if (cart.length === 0) {
-        alert('El carrito está vacío');
-        return;
-    }
-    alert('Total a pagar: ' + formatPrice(getCartTotal(cart)) + '\n\nFuncionalidad de pago en desarrollo.');
-}
+// Función checkout eliminada — ahora se maneja en checkout.js
 
-// Exponer funciones al scope global (necesario para los onclick inline)
+// Exponer funciones al scope global
 window.updateCartQuantity = updateCartQuantity;
 window.removeCartItem = removeCartItem;
 window.clearCart = clearCart;
-window.checkout = checkout;
 
 // Inicializar al cargar la página
 document.addEventListener('DOMContentLoaded', function() {

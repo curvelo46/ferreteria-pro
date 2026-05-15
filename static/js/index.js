@@ -2,10 +2,6 @@
 // INDEX.JS - Página de inicio
 // ==========================================
 
-// ==========================================
-// INDEX.JS - Página de inicio
-// ==========================================
-
 document.addEventListener('DOMContentLoaded', function() {
     // Renderizar categorías
     renderCategories('categoriesGrid');

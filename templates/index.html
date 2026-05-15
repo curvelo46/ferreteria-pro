@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/static/css/styles.css">
-<base target="_blank">
+<base target="_self">
 </head>
 <body>
     <!-- Top Bar -->
@@ -20,7 +20,7 @@
             </div>
             <div class="top-bar-links">
                 <a href="#"><i class="fas fa-question-circle"></i> Ayuda</a>
-                <a href="#"><i class="fas fa-truck"></i> Seguimiento</a>
+                <a href="/pedidos"><i class="fas fa-truck"></i> Seguimiento</a>
                 <a href="#"><i class="fas fa-percent"></i> Ofertas</a>
             </div>
         </div>
@@ -46,16 +46,12 @@
 
             <div class="nav-actions">
                 <a href="#" class="nav-action">
-                    <i class="far fa-heart"></i>
-                    <span>Favoritos</span>
-                </a>
-                <a href="#" class="nav-action">
                     <i class="far fa-user"></i>
                     <span>Mi Cuenta</span>
                 </a>
                 <a href="/carrito" class="nav-action">
                     <i class="fas fa-shopping-cart"></i>
-                    <span class="badge" id="cartCount">0</span>
+                    <span id="cartCount" class="badge">0</span>
                     <span>Carrito</span>
                 </a>
             </div>
@@ -209,8 +205,7 @@
         </section>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer">
+       <footer class="footer">
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand">
@@ -226,21 +221,21 @@
                 <div class="footer-links">
                     <h4>Categorías</h4>
                     <ul>
-                        <li><a href="productos">Herramientas</a></li>
-                        <li><a href="pinturas">Pinturas</a></li>
-                        <li><a href="electricidad">Electricidad</a></li>
-                        <li><a href="construccion">Construcción</a></li>
-                        <li><a href="seguridad">Seguridad</a></li>
+                        <li><a href="/productos?categoria=herramientas">Herramientas</a></li>
+                        <li><a href="/productos?categoria=pinturas">Pinturas</a></li>
+                        <li><a href="/productos?categoria=electricidad">Electricidad</a></li>
+                        <li><a href="/productos?categoria=construccion">Construcción</a></li>
+                        <li><a href="/productos?categoria=seguridad">Seguridad</a></li>
                     </ul>
                 </div>
                 <div class="footer-links">
                     <h4>Enlaces Rápidos</h4>
                     <ul>
-                        <li><a href="sobre-nosotros">Sobre Nosotros</a></li>
-                        <li><a href="contacto">Contacto</a></li>
-                        <li><a href="blog">Blog</a></li>
-                        <li><a href="preguntas-frecuentes">Preguntas Frecuentes</a></li>
-                        <li><a href="terminos">Términos y Condiciones</a></li>
+                        <li><a href="/sobre-nosotros">Sobre Nosotros</a></li>
+                        <li><a href="/contacto">Contacto</a></li>
+                        <li><a href="/blog">Blog</a></li>
+                        <li><a href="/faq">Preguntas Frecuentes</a></li>
+                        <li><a href="/terminos">Términos y Condiciones</a></li>
                     </ul>
                 </div>
                 <div class="footer-links">
@@ -254,7 +249,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p> 2026 Ferretería Pro. Todos los derechos reservados.</p>
+                <p>© 2026 Ferretería Pro. Todos los derechos reservados.</p>
                 <p>Diseñado con <i class="fas fa-heart" style="color: var(--danger);"></i> para profesionales</p>
             </div>
         </div>

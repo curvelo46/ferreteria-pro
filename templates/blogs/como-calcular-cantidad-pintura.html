@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cómo Calcular la Cantidad de Pintura - Ferretería Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/blog.css">
+       <link rel="stylesheet" href="/static/css/calcular_pintura.css">
+<base target="_self">
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="top-bar-container">
+            <div class="top-bar-info">
+                <span><i class="fas fa-phone"></i> +57 300 123 4567</span>
+                <span><i class="fas fa-envelope"></i> andrescurvelodiaz@gmail.com</span>
+                <span><i class="fas fa-map-marker-alt"></i> Envíos a todo el país</span>
+            </div>
+            <div class="top-bar-links">
+                <a href="#"><i class="fas fa-question-circle"></i> Ayuda</a>
+                <a href="#"><i class="fas fa-truck"></i> Seguimiento</a>
+                <a href="#"><i class="fas fa-percent"></i> Ofertas</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>FERRETERÍA PRO</h1>
+                    <span>TU TIENDA ONLINE PROFESIONAL</span>
+                </div>
+            </a>
+
+            <div class="nav-search">
+                <input type="text" placeholder="Buscar herramientas, pinturas, materiales...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+
+            <div class="nav-actions">
+                <a href="#" class="nav-action">
+                    <i class="far fa-user"></i>
+                    <span>Mi Cuenta</span>
+                </a>
+                <a href="/carrito" class="nav-action">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cartCount" class="badge">0</span>
+                    <span>Carrito</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Article Hero -->
+    <section class="article-hero">
+        <div class="article-hero-container">
+            <div class="article-breadcrumb">
+                <a href="/">Inicio</a>
+                <i class="fas fa-chevron-right"></i>
+                <a href="/blog">Blog</a>
+                <i class="fas fa-chevron-right"></i>
+                <a href="/blog?categoria=pinturas">Pinturas</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>Cálculo de Pintura</span>
+            </div>
+
+            <span class="article-category-badge">
+                <i class="fas fa-paint-roller"></i> Pinturas
+            </span>
+
+            <h1>Cómo Calcular la Cantidad de Pintura Que Necesitas</h1>
+
+            <div class="article-meta">
+                <span><i class="far fa-calendar"></i> 5 Abril 2026</span>
+                <span><i class="far fa-clock"></i> 4 min de lectura</span>
+                <span><i class="far fa-user"></i> 
+                    Andrés Curvelo</span>
+                <span><i class="far fa-eye"></i> 1,245 vistas</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contenido del Artículo -->
+    <section class="article-section">
+        <div class="article-container">
+            <div class="article-content">
+
+                <p>¿Alguna vez te has quedado a mitad de camino pintando una habitación porque se acabó la pintura? O peor aún, ¿te sobraron <strong>5 galones</strong> que ahora ocupan espacio en tu garaje? Calcular la cantidad exacta de pintura no es solo cuestión de economía, sino de <strong>planificación profesional</strong>. En esta guía te enseñamos las fórmulas exactas que usan los pintores expertos.</p>
+
+                <!-- Imagen Destacada -->
+                <div class="article-image">
+                    <img src="https://homesolution.net/blog/wp-content/uploads/2015/07/hero-paint-a-room-1280x720.jpg" alt="Calculando cantidad de pintura para una habitación">
+                    <div class="image-caption">
+                        <i class="fas fa-info-circle"></i> Una correcta estimación evita desperdicios y asegura acabados uniformes sin diferencias de tono por lotes distintos.
+                    </div>
+                </div>
+
+                <h2><i class="fas fa-calculator"></i> Calculadora de Pintura Interactiva</h2>
+                <p>Usa nuestra calculadora para obtener una estimación precisa en segundos. Solo necesitas las dimensiones de la habitación y el tipo de superficie:</p>
+
+                <!-- Calculadora -->
+                <div class="calculator-card">
+                    <div class="calculator-header">
+                        <i class="fas fa-fill-drip"></i>
+                        <div>
+                            <h3>Calculadora de Pintura</h3>
+                            <p>Ingresa los datos de tu espacio y obtén el resultado instantáneo</p>
+                        </div>
+                    </div>
+
+                    <div class="calculator-grid">
+                        <div class="calc-group">
+                            <label><i class="fas fa-arrows-alt-h"></i> Ancho (metros)</label>
+                            <input type="number" id="ancho" placeholder="Ej: 4.5" step="0.1" min="0.1">
+                            <small>Medida del ancho de la pared o habitación</small>
+                        </div>
+
+                        <div class="calc-group">
+                            <label><i class="fas fa-arrows-alt-v"></i> Alto (metros)</label>
+                            <input type="number" id="alto" placeholder="Ej: 2.8" step="0.1" min="0.1">
+                            <small>Altura desde el piso hasta el techo</small>
+                        </div>
+
+                        <div class="calc-group">
+                            <label><i class="fas fa-layer-group"></i> Número de Manos</label>
+                            <select id="manos">
+                                <option value="1">1 mano (repintado)</option>
+                                <option value="2" selected>2 manos (estándar)</option>
+                                <option value="3">3 manos (cambio de color)</option>
+                                <option value="4">4 manos (superficie nueva)</option>
+                            </select>
+                            <small>Manos de pintura que aplicarás</small>
+                        </div>
+
+                        <div class="calc-group">
+                            <label><i class="fas fa-border-style"></i> Tipo de Superficie</label>
+                            <select id="superficie">
+                                <option value="10">Pared lisa (10 m²/galón)</option>
+                                <option value="8">Pared texturizada (8 m²/galón)</option>
+                                <option value="12">Pared sellada (12 m²/galón)</option>
+                                <option value="6">Superficie nueva/porosa (6 m²/galón)</option>
+                                <option value="14">Repintado del mismo color (14 m²/galón)</option>
+                            </select>
+                            <small>Rendimiento aproximado por galón</small>
+                        </div>
+
+                        <div class="calc-group">
+                            <label><i class="fas fa-door-open"></i> Puertas/Ventanas (m²)</label>
+                            <input type="number" id="huecos" placeholder="Ej: 3.5" step="0.1" min="0" value="0">
+                            <small>Área total de huecos que no pintarás</small>
+                        </div>
+
+                        <div class="calc-group">
+                            <label><i class="fas fa-prescription-bottle"></i> Presentación</label>
+                            <select id="presentacion">
+                                <option value="3.785">Galón (3.785 L)</option>
+                                <option value="18.927">Cubeta (18.927 L)</option>
+                                <option value="0.946">Cuarto (0.946 L)</option>
+                            </select>
+                            <small>Formato de compra preferido</small>
+                        </div>
+                    </div>
+
+                    <button class="btn-calculate" onclick="calcularPintura()">
+                        <i class="fas fa-calculator"></i> Calcular Cantidad
+                    </button>
+
+                    <div class="result-box" id="resultado">
+                        <h4><i class="fas fa-check-circle"></i> Resultado del Cálculo</h4>
+                        <div class="result-value" id="resultValue">0</div>
+                        <div class="result-unit" id="resultUnit">galones</div>
+                        <div class="result-detail" id="resultDetail">
+                            Área total: <strong>0 m²</strong> | Rendimiento: <strong>0 m²/galón</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <h2><i class="fas fa-ruler-combined"></i> La Fórmula Mágica</h2>
+                <p>La fórmula que utilizan los profesionales es sencilla pero precisa. Sigue estos pasos:</p>
+
+                <div class="steps-container">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Mide el perímetro de la habitación</h4>
+                            <p>Suma el largo de todas las paredes. Ejemplo: (4m + 5m) × 2 = <strong>18 metros de perímetro</strong>.</p>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Multiplica por la altura</h4>
+                            <p>18m × 2.7m (altura) = <strong>48.6 m² de área total</strong>. No olvides restar puertas y ventanas.</p>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Divide por el rendimiento de la pintura</h4>
+                            <p>Si el bote indica 10 m²/galón: 48.6 ÷ 10 = <strong>4.86 galones por mano</strong>.</p>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Multiplica por el número de manos</h4>
+                            <p>Para 2 manos: 4.86 × 2 = <strong>9.72 galones totales</strong>. ¡Redondea siempre <strong>hacia arriba</strong>!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h2><i class="fas fa-table"></i> Tabla de Rendimiento por Tipo de Pintura</h2>
+                <p>El rendimiento varía según la calidad y tipo de producto. Consulta siempre la etiqueta del fabricante, pero esta tabla te da una referencia general:</p>
+
+                <table class="rendimiento-table">
+                    <thead>
+                        <tr>
+                            <th><i class="fas fa-paint-roller"></i> Tipo de Pintura</th>
+                            <th><i class="fas fa-expand"></i> Rendimiento (m²/galón)</th>
+                            <th><i class="fas fa-hand-pointer"></i> Ideal para</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Pintura Látex Premium</strong></td>
+                            <td>12 - 14 m²</td>
+                            <td>Paredes interiores lisas, repintado</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pintura Látex Estándar</strong></td>
+                            <td>10 - 12 m²</td>
+                            <td>Uso general en interiores</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pintura para Exterior</strong></td>
+                            <td>8 - 10 m²</td>
+                            <td>Fachadas, muros exteriores</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pintura Texturizada</strong></td>
+                            <td>6 - 8 m²</td>
+                            <td>Acabados rústicos, gotelé</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Impermeabilizante</strong></td>
+                            <td>4 - 6 m²</td>
+                            <td>Techos, terrazas, baños</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Esmalte al Agua</strong></td>
+                            <td>14 - 16 m²</td>
+                            <td>Madera, metal, herrería</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2><i class="fas fa-exclamation-triangle"></i> Factores que Afectan el Consumo</h2>
+                <p>No todas las paredes son iguales. Estos factores pueden aumentar o disminuir la cantidad de pintura que necesitas:</p>
+
+                <ul>
+                    <li><strong>Porosidad de la superficie:</strong> Las paredes nuevas o sin sellar absorben más pintura. Aplica una mano de sellador primero.</li>
+                    <li><strong>Color anterior vs. nuevo:</strong> Si vas de oscuro a claro, necesitarás más manos (3-4). Del mismo tono, con 1-2 basta.</li>
+                    <li><strong>Textura de la pared:</strong> Las paredes con gotelé o textura rugosa consumen hasta un <strong>30% más</strong> de pintura.</li>
+                    <li><strong>Herramienta de aplicación:</strong> Rodillo de felpa gasta más que brocha; pistola de aire es la más eficiente.</li>
+                    <li><strong>Temperatura y humedad:</strong> En climas muy secos la pintura se evapora rápido y no rinde igual. Evita pintar bajo el sol directo.</li>
+                </ul>
+
+                <div class="tip-box">
+                    <i class="fas fa-lightbulb"></i>
+                    <div>
+                        <h4>Consejo Pro de Ferretería Pro</h4>
+                        <p>Compra siempre un <strong>10-15% más</strong> de lo calculado. Te servirá para retoques futuros y evitarás problemas si el color del siguiente lote varía ligeramente. Guarda el sobrante en un recipiente hermético bien etiquetado.</p>
+                    </div>
+                </div>
+
+                <h2><i class="fas fa-clipboard-check"></i> Checklist Antes de Comprar</h2>
+                <p>Antes de ir a la ferretería o hacer tu pedido online, verifica esta lista:</p>
+
+                <ol>
+                    <li>¿Mediste <strong>todas</strong> las paredes, incluyendo cielos rasos si aplica?</li>
+                    <li>¿Restaste el área de puertas, ventanas y huecos grandes?</li>
+                    <li>¿Definiste cuántas <strong>manos</strong> necesitas según el cambio de color?</li>
+                    <li>¿Verificaste el <strong>rendimiento</strong> específico en la etiqueta del producto?</li>
+                    <li>¿Incluiste un <strong>margen de seguridad</strong> del 10-15%?</li>
+                    <li>¿Tienes el <strong>sellador/imprimante</strong> adecuado para la superficie?</li>
+                    <li>¿Necesitas pintura adicional para <strong>rodapiés, marcos o puertas</strong>?</li>
+                </ol>
+
+                <div class="warning-box">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <div>
+                        <h4>¡No cometas este error común!</h4>
+                        <p>Mezclar pintura de <strong>distintos lotes</strong> puede generar diferencias de tono visibles. Si necesitas más de una cubeta, combínalas todas en un recipiente grande (proceso llamado "boxing") antes de aplicar.</p>
+                    </div>
+                </div>
+
+                <h2><i class="fas fa-chart-line"></i> Ejemplo Práctico Completo</h2>
+                <p>Veamos un caso real para que quede todo claro:</p>
+
+                <p><strong>Escenario:</strong> Quieres pintar tu sala de estar de color blanco sobre una pared actualmente azul marino.</p>
+
+                <ul>
+                    <li><strong>Dimensiones:</strong> 5m × 4m × 2.7m de altura</li>
+                    <li><strong>Perímetro:</strong> (5 + 4) × 2 = 18m</li>
+                    <li><strong>Área bruta:</strong> 18m × 2.7m = <strong>48.6 m²</strong></li>
+                    <li><strong>Huecos (puerta + ventana):</strong> 4.2 m²</li>
+                    <li><strong>Área neta:</strong> 48.6 - 4.2 = <strong>44.4 m²</strong></li>
+                    <li><strong>Rendimiento:</strong> 10 m²/galón (látex estándar)</li>
+                    <li><strong>Manos necesarias:</strong> 3 (cambio de color drástico)</li>
+                    <li><strong>Cálculo:</strong> (44.4 ÷ 10) × 3 = <strong>13.32 galones</strong></li>
+                    <li><strong>Con margen 15%:</strong> 13.32 × 1.15 = <strong>15.3 galones → compra 16 galones</strong></li>
+                </ul>
+
+                <!-- Tags -->
+                <div class="article-tags">
+                    <a href="#" class="article-tag"><i class="fas fa-tag"></i> Pintura</a>
+                    <a href="#" class="article-tag"><i class="fas fa-tag"></i> Cálculo</a>
+                    <a href="#" class="article-tag"><i class="fas fa-tag"></i> Bricolaje</a>
+                    <a href="#" class="article-tag"><i class="fas fa-tag"></i> Decoración</a>
+                    <a href="#" class="article-tag"><i class="fas fa-tag"></i> Remodelación</a>
+                    <a href="#" class="article-tag"><i class="fas fa-tag"></i> Tips</a>
+                </div>
+
+                <!-- Autor -->
+                <div class="author-card">
+                    <div class="author-avatar">AC</div>
+                    <div class="author-info">
+                        <h4>Andrés Curvelo</h4>
+                        <span><i class="fas fa-pen-nib"></i> Experto en Ferretería y Acabados</span>
+                        <p>Con más de 10 años de experiencia en el sector de la construcción y ferretería, Andrés comparte consejos prácticos para que tus proyectos de bricolaje y remodelación sean un éxito.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Artículos Relacionados -->
+    <section class="related-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-title">
+                    <h2>Artículos Relacionados</h2>
+                    <span>Continúa aprendiendo con estos temas</span>
+                </div>
+            </div>
+
+            <div class="related-grid">
+                <a href="/10-tips-pintar-como-profesional" class="blog-card">
+                    <div class="blog-image">
+                        <img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&h=400&fit=crop" alt="Tips para pintar como profesional" loading="lazy">
+                        <span class="blog-category-badge">Pinturas</span>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> 25 Abril 2026</span>
+                            <span><i class="far fa-clock"></i> 6 min</span>
+                        </div>
+                        <h3>10 Tips para Pintar como un Profesional en Casa</h3>
+                        <p>Aprende las técnicas que usan los pintores expertos para lograr acabados impecables.</p>
+                        <span class="blog-read-more">Leer más <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+
+                <a href="/blog/como-elegir-brochas-rodillos" class="blog-card">
+                    <div class="blog-image">
+                        <img src="https://i.ytimg.com/vi/9rZnvou6jQc/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDHrNd82qkBPozXEvGFLpcK8J1Atg" alt="Brochas y rodillos" loading="lazy">
+                        <span class="blog-category-badge">Pinturas</span>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> 24 Marzo 2026</span>
+                            <span><i class="far fa-clock"></i> 5 min</span>
+                        </div>
+                        <h3>Cómo Elegir Brochas y Rodillos para Pintar Correctamente</h3>
+                        <p>Conoce qué tipo de brocha o rodillo debes usar según la superficie y tipo de pintura.</p>
+                        <span class="blog-read-more">Leer más <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+
+                <a href="/blog/errores-al-pintar" class="blog-card">
+                    <div class="blog-image">
+                        <img src="https://selecciones.com.mx/wp-content/uploads/2022/06/errores-comunes-cuando-utlizas-pintura-para-tu-casa.jpg" alt="Errores al pintar" loading="lazy">
+                        <span class="blog-category-badge">Pinturas</span>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> 18 Febrero 2026</span>
+                            <span><i class="far fa-clock"></i> 4 min</span>
+                        </div>
+                        <h3>Errores Comunes al Pintar una Habitación</h3>
+                        <p>Evita manchas, burbujas y acabados irregulares con estos consejos usados por profesionales.</p>
+                        <span class="blog-read-more">Leer más <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3><i class="fas fa-tools"></i> FERRETERÍA PRO</h3>
+                    <p>Tu tienda online profesional de ferretería y materiales de construcción. Productos de calidad, precios competitivos y envío a domicilio.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Categorías</h4>
+                    <ul>
+                       <li><a href="productos">Herramientas</a></li>
+                        <li><a href="productos">Pinturas</a></li>
+                        <li><a href="productos">Electricidad</a></li>
+                        <li><a href="productos">Construcción</a></li>
+                        <li><a href="productos">Seguridad</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="/sobre-nosotros">Sobre Nosotros</a></li>
+                        <li><a href="/contacto">Contacto</a></li>
+                        <li><a href="/blog">Blog</a></li>
+                        <li><a href="/faq">Preguntas Frecuentes</a></li>
+                        <li><a href="/terminos">Términos y Condiciones</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Calle 123 #45-67, Bogotá</a></li>
+                        <li><a href="#"><i class="fas fa-phone"></i> +57 300 123 4567</a></li>
+                        <li><a href="#"><i class="fas fa-envelope"></i> info@ferreteriapro.com</a></li>
+                        <li><a href="#"><i class="fas fa-clock"></i> Lun-Vie: 8am - 6pm</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Ferretería Pro. Todos los derechos reservados.</p>
+                <p>Diseñado con <i class="fas fa-heart" style="color: var(--danger);"></i> para profesionales</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function calcularPintura() {
+            const ancho = parseFloat(document.getElementById('ancho').value);
+            const alto = parseFloat(document.getElementById('alto').value);
+            const manos = parseInt(document.getElementById('manos').value);
+            const rendimiento = parseFloat(document.getElementById('superficie').value);
+            const huecos = parseFloat(document.getElementById('huecos').value) || 0;
+            const presentacion = parseFloat(document.getElementById('presentacion').value);
+
+            if (!ancho || !alto || ancho <= 0 || alto <= 0) {
+                alert('Por favor ingresa el ancho y alto válidos de la superficie.');
+                return;
+            }
+
+            // Cálculo
+            const areaTotal = (ancho * alto) - huecos;
+            const pinturaPorMano = areaTotal / rendimiento;
+            const totalPintura = pinturaPorMano * manos;
+            const conMargen = totalPintura * 1.15; // 15% de margen
+
+            // Unidades según presentación
+            let unidades = conMargen / presentacion;
+            unidades = Math.ceil(unidades * 10) / 10; // Redondear a 1 decimal
+            if (unidades % 1 > 0.8) {
+                unidades = Math.ceil(unidades);
+            }
+
+            // Mostrar resultado
+            const resultadoDiv = document.getElementById('resultado');
+            const resultValue = document.getElementById('resultValue');
+            const resultUnit = document.getElementById('resultUnit');
+            const resultDetail = document.getElementById('resultDetail');
+
+            const presentacionText = document.getElementById('presentacion').options[document.getElementById('presentacion').selectedIndex].text.split(' ')[0].toLowerCase();
+            const unidadLabel = unidades <= 1 ? presentacionText : presentacionText + 'es';
+
+            resultValue.textContent = unidades;
+            resultUnit.textContent = unidadLabel;
+            resultDetail.innerHTML = `
+                Área neta: <strong>${areaTotal.toFixed(2)} m²</strong> | 
+                Rendimiento: <strong>${rendimiento} m²/galón</strong> | 
+                Manos: <strong>${manos}</strong> | 
+                Total sin margen: <strong>${totalPintura.toFixed(2)} gal</strong>
+            `;
+
+            resultadoDiv.classList.add('show');
+            resultadoDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    </script>
+<script src="/static/js/data.js"></script>
+<script src="/static/js/cart-storage.js"></script>
+</body>
+</html>

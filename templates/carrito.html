@@ -6,7 +6,11 @@
     <title>Carrito - Ferretería Pro</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- CSS General (estilos compartidos: navbar, footer, variables, etc.) -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <!-- CSS Específico del Carrito -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cart.css') }}">
+    <base target="_self">
 <base target="_blank">
 </head>
 <body>
@@ -20,7 +24,7 @@
             </div>
             <div class="top-bar-links">
                 <a href="#"><i class="fas fa-question-circle"></i> Ayuda</a>
-                <a href="#"><i class="fas fa-truck"></i> Seguimiento</a>
+                <a href="/pedidos"><i class="fas fa-truck"></i> Seguimiento</a>
                 <a href="#"><i class="fas fa-percent"></i> Ofertas</a>
             </div>
         </div>
@@ -37,7 +41,7 @@
                 </div>
             </a>
             <div class="nav-actions">
-                <a href="/" class="nav-action">
+                <a href="/productos" class="nav-action">
                     <i class="fas fa-shopping-bag"></i>
                     <span>Seguir comprando</span>
                 </a>
@@ -63,11 +67,11 @@
     </section>
 
     <!-- Cart Content -->
-    <div class="container" style="padding: 40px 20px;">
+    <main class="cart-container">
         <div id="cartContainer">
-            <!-- Se llena con JS -->
+            <!-- Se llena dinámicamente con JavaScript -->
         </div>
-    </div>
+    </main>
 
     <!-- Toast Notification -->
     <div class="toast" id="toast">
@@ -76,17 +80,60 @@
     </div>
 
     <!-- Footer -->
-    <footer class="footer">
+       <footer class="footer">
         <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3><i class="fas fa-tools"></i> FERRETERÍA PRO</h3>
+                    <p>Tu tienda online profesional de ferretería y materiales de construcción. Productos de calidad, precios competitivos y envío a domicilio.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Categorías</h4>
+                    <ul>
+                        <li><a href="/productos?categoria=herramientas">Herramientas</a></li>
+                        <li><a href="/productos?categoria=pinturas">Pinturas</a></li>
+                        <li><a href="/productos?categoria=electricidad">Electricidad</a></li>
+                        <li><a href="/productos?categoria=construccion">Construcción</a></li>
+                        <li><a href="/productos?categoria=seguridad">Seguridad</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="/sobre-nosotros">Sobre Nosotros</a></li>
+                        <li><a href="/contacto">Contacto</a></li>
+                        <li><a href="/blog">Blog</a></li>
+                        <li><a href="/faq">Preguntas Frecuentes</a></li>
+                        <li><a href="/terminos">Términos y Condiciones</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Calle 123 #45-67, Bogotá</a></li>
+                        <li><a href="#"><i class="fas fa-phone"></i> +57 300 123 4567</a></li>
+                        <li><a href="#"><i class="fas fa-envelope"></i> info@ferreteriapro.com</a></li>
+                        <li><a href="#"><i class="fas fa-clock"></i> Lun-Vie: 8am - 6pm</a></li>
+                    </ul>
+                </div>
+            </div>
             <div class="footer-bottom">
                 <p>© 2026 Ferretería Pro. Todos los derechos reservados.</p>
+                <p>Diseñado con <i class="fas fa-heart" style="color: var(--danger);"></i> para profesionales</p>
             </div>
         </div>
     </footer>
-
-    <!-- Scripts: ORDEN IMPORTANTE - Usar url_for para rutas correctas -->
+    <!-- Scripts: ORDEN IMPORTANTE -->
     <script src="{{ url_for('static', filename='js/data.js') }}"></script>
     <script src="{{ url_for('static', filename='js/cart-storage.js') }}"></script>
     <script src="{{ url_for('static', filename='js/cart-page.js') }}"></script>
+<script src="/static/js/data.js"></script>
+<script src="/static/js/cart-storage.js"></script>
 </body>
 </html>

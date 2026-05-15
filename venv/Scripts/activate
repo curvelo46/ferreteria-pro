@@ -35,7 +35,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\PC\OneDrive\Escritorio\Ferreteria pro\venv"
+VIRTUAL_ENV="C:\Users\PC\OneDrive\Escritorio\Ferreteria pro\Ferreteria pro\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

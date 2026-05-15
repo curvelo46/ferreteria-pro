@@ -1306,6 +1306,9 @@ const brands = [
 // FUNCIONES UTILITARIAS GLOBALES
 // ==========================================
 
+
+cargarProductosConStock();
+
 function formatPrice(price) {
     return '$ ' + price.toLocaleString('es-CO');
 }
@@ -1532,11 +1535,124 @@ function renderBrands(containerId) {
         return `
             <a href="/productos?marca=${marcaSlug}" class="brand-card" data-marca="${marcaSlug}">
                 <div class="brand-logo">
-                    <span class="brand-letter">${marca.charAt(0).toUpperCase()}</span>
+                    <span class="brand-letter">${marca}</span>
                 </div>
                 <h4 class="brand-name">${marca}</h4>
                 <span class="brand-count">${products.filter(p => p.marca_nombre === marca).length} productos</span>
             </a>
         `;
     }).join('');
+
 }
+
+
+
+// ==========================================
+// FUNCIONES DE ACTUALIZACIÓN DE STOCK
+// ==========================================
+
+/**
+ * Actualiza el stock de productos después de una compra
+ * @param {Array} itemsComprados - Array de objetos {id, quantity}
+ * @returns {boolean} - true si se actualizó correctamente
+ */
+function actualizarStockProductos(itemsComprados) {
+    if (!itemsComprados || itemsComprados.length === 0) return false;
+    
+    let actualizado = false;
+    
+
+        
+    if (actualizado) {
+        guardarProductosEnStorage(); // PERSISTIR CAMBIOS
+    }
+
+
+    itemsComprados.forEach(itemComprado => {
+        const producto = products.find(p => p.id === itemComprado.id);
+        
+        if (producto && producto.stock > 0) {
+            // Verificar que hay suficiente stock
+            if (producto.stock >= (itemComprado.quantity || 1)) {
+                producto.stock -= (itemComprado.quantity || 1);
+                actualizado = true;
+                
+                // Si el stock llega a 0, marcar como agotado
+                if (producto.stock === 0) {
+                    console.warn(`Producto ${producto.nombre} (ID: ${producto.id}) agotado`);
+                }
+            } else {
+                console.error(`Stock insuficiente para ${producto.nombre}. Disponible: ${producto.stock}, Solicitado: ${itemComprado.quantity || 1}`);
+            }
+        }
+    });
+    
+    return actualizado;
+}
+
+
+function guardarProductosEnStorage() {
+    try {
+        localStorage.setItem('ferreteria_products', JSON.stringify(products));
+    } catch (e) {
+        console.error('Error guardando productos:', e);
+    }
+}
+
+
+function cargarProductosConStock() {
+    try {
+        const guardados = localStorage.getItem('ferreteria_products');
+        if (guardados) {
+            const productosParseados = JSON.parse(guardados);
+            // Actualizar solo el stock de los productos existentes
+            productosParseados.forEach(pGuardado => {
+                const productoActual = products.find(p => p.id === pGuardado.id);
+                if (productoActual) {
+                    productoActual.stock = pGuardado.stock;
+                }
+            });
+        }
+    } catch (e) {
+        console.error('Error cargando productos guardados:', e);
+    }
+}
+
+
+
+
+
+/**
+ * Verifica si hay stock suficiente para todos los items
+ * @param {Array} items - Array de objetos {id, quantity}
+ * @returns {Object} - {valido: boolean, faltantes: Array}
+ */
+function verificarStockDisponible(items) {
+    const faltantes = [];
+    
+    items.forEach(item => {
+        const producto = products.find(p => p.id === item.id);
+        
+        if (!producto) {
+            faltantes.push({ id: item.id, nombre: 'Desconocido', motivo: 'Producto no encontrado' });
+        } else if (producto.stock < (item.quantity || 1)) {
+            faltantes.push({ 
+                id: item.id, 
+                nombre: producto.nombre, 
+                stockDisponible: producto.stock,
+                stockSolicitado: item.quantity || 1,
+                motivo: 'Stock insuficiente' 
+            });
+        }
+    });
+    
+    return {
+        valido: faltantes.length === 0,
+        faltantes: faltantes
+    };
+}
+
+// Exponer funciones globalmente
+window.actualizarStockProductos = actualizarStockProductos;
+window.verificarStockDisponible = verificarStockDisponible;
+

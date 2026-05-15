@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pago Seguro - Ferretería Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/checkout.css') }}">
+    <base target="_self">
+
+</head>
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="top-bar-container">
+            <div class="top-bar-info">
+                <span><i class="fas fa-phone"></i> +57 300 123 4567</span>
+                <span><i class="fas fa-envelope"></i> info@ferreteriapro.com</span>
+                <span><i class="fas fa-map-marker-alt"></i> Envíos a todo el país</span>
+            </div>
+            <div class="top-bar-links">
+                <a href="#"><i class="fas fa-question-circle"></i> Ayuda</a>
+                <a href="/pedidos"><i class="fas fa-truck"></i> Seguimiento</a>
+                <a href="#"><i class="fas fa-percent"></i> Ofertas</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="logo">
+                <div class="logo-icon"><i class="fas fa-tools"></i></div>
+                <div class="logo-text">
+                    <h1>FERRETERÍA PRO</h1>
+                    <span>TU TIENDA ONLINE PROFESIONAL</span>
+                </div>
+            </a>
+            <div class="nav-actions">
+                <a href="/" class="nav-action">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span>Seguir comprando</span>
+                </a>
+                <a href="{{ url_for('carrito') }}" class="nav-action">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="badge" id="cartCount">0</span>
+                    <span>Carrito</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header-container">
+            <h1><i class="fas fa-lock"></i> Pago Seguro</h1>
+            <div class="breadcrumb">
+                <a href="/">Inicio</a>
+                <i class="fas fa-chevron-right"></i>
+                <a href="{{ url_for('carrito') }}">Carrito</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>Pago</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Checkout Content -->
+    <div class="container" style="padding: 40px 20px;">
+        <div id="checkoutContainer">
+
+            <!-- Indicador de Progreso -->
+            <div class="checkout-progress">
+                <div class="progress-step completed">
+                    <div class="step-icon"><i class="fas fa-shopping-cart"></i></div>
+                    <span class="step-label">Carrito</span>
+                </div>
+                <div class="progress-line completed"></div>
+                <div class="progress-step active">
+                    <div class="step-icon"><i class="fas fa-credit-card"></i></div>
+                    <span class="step-label">Pago</span>
+                </div>
+                <div class="progress-line"></div>
+                <div class="progress-step">
+                    <div class="step-icon"><i class="fas fa-check"></i></div>
+                    <span class="step-label">Confirmación</span>
+                </div>
+            </div>
+
+            <!-- Layout Principal: Formulario + Resumen -->
+            <div class="checkout-layout">
+
+                <!-- Columna Izquierda: Formulario de Pago -->
+                <div class="checkout-form-section">
+
+                    <!-- Sección: Datos del Titular -->
+                    <div class="form-section" id="section-datos-titular">
+                        <div class="section-header">
+                            <div class="section-number">1</div>
+                            <h3><i class="fas fa-user"></i> Datos del Titular</h3>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="nombreTitular">Nombre completo <span class="required">*</span></label>
+                                <div class="input-wrapper">
+                                    <i class="fas fa-user input-icon"></i>
+                                    <input type="text" id="nombreTitular" name="nombreTitular" 
+                                           placeholder="Como aparece en la tarjeta" 
+                                           maxlength="100" required>
+                                </div>
+                                <span class="error-message" id="error-nombreTitular"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-row two-cols">
+                            <div class="form-group">
+                                <label for="tipoDocumento">Tipo de documento <span class="required">*</span></label>
+                                <div class="input-wrapper">
+                                    <i class="fas fa-id-card input-icon"></i>
+                                    <select id="tipoDocumento" name="tipoDocumento" required>
+                                        <option value="" disabled selected>Seleccionar</option>
+                                        <option value="CC">Cédula de Ciudadanía</option>
+                                        <option value="CE">Cédula de Extranjería</option>
+                                        <option value="NIT">NIT</option>
+                                        <option value="PP">Pasaporte</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="numeroDocumento">Número de documento <span class="required">*</span></label>
+                                <div class="input-wrapper">
+                                    <i class="fas fa-hashtag input-icon"></i>
+                                    <input type="text" id="numeroDocumento" name="numeroDocumento" 
+                                           placeholder="Ej: 1234567890" 
+                                           maxlength="20" required>
+                                </div>
+                                <span class="error-message" id="error-numeroDocumento"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-row two-cols">
+                            <div class="form-group">
+                                <label for="emailTitular">Correo electrónico <span class="required">*</span></label>
+                                <div class="input-wrapper">
+                                    <i class="fas fa-envelope input-icon"></i>
+                                    <input type="email" id="emailTitular" name="emailTitular" 
+                                           placeholder="tu@email.com" 
+                                           maxlength="100" required>
+                                </div>
+                                <span class="error-message" id="error-emailTitular"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="telefonoTitular">Teléfono <span class="required">*</span></label>
+                                <div class="input-wrapper">
+                                    <i class="fas fa-phone input-icon"></i>
+                                    <input type="tel" id="telefonoTitular" name="telefonoTitular" 
+                                           placeholder="300 123 4567" 
+                                           maxlength="15" required>
+                                </div>
+                                <span class="error-message" id="error-telefonoTitular"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sección: Datos de la Tarjeta -->
+                    <div class="form-section" id="section-datos-tarjeta">
+                        <div class="section-header">
+                            <div class="section-number">2</div>
+                            <h3><i class="fas fa-credit-card"></i> Información de la Tarjeta</h3>
+                        </div>
+
+                        <!-- Visual de Tarjeta -->
+                        <div class="card-visual">
+                            <div class="credit-card-preview">
+                                <div class="card-front">
+                                    <div class="card-chip">
+                                        <i class="fas fa-microchip"></i>
+                                    </div>
+                                    <div class="card-logo" id="cardLogo">
+                                        <i class="fab fa-cc-visa"></i>
+                                    </div>
+                                    <div class="card-number-display" id="cardNumberDisplay">
+                                        **** **** **** ****
+                                    </div>
+                                    <div class="card-details">
+                                        <div class="card-holder">
+                                            <span class="label">TITULAR</span>
+                                            <span class="value" id="cardHolderDisplay">NOMBRE APELLIDO</span>
+                                        </div>
+                                        <div class="card-expiry">
+                                            <span class="label">VENCE</span>
+                                            <span class="value" id="cardExpiryDisplay">MM/AA</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="numeroTarjeta">Número de tarjeta <span class="required">*</span></label>
+                                <div class="input-wrapper card-input">
+                                    <i class="fas fa-credit-card input-icon"></i>
+                                    <input type="text" id="numeroTarjeta" name="numeroTarjeta" 
+                                           placeholder="0000 0000 0000 0000" 
+                                           maxlength="19" required>
+                                    <div class="card-brands">
+                                        <i class="fab fa-cc-visa" id="iconVisa"></i>
+                                        <i class="fab fa-cc-mastercard" id="iconMastercard"></i>
+                                        <i class="fab fa-cc-amex" id="iconAmex"></i>
+                                    </div>
+                                </div>
+                                <span class="error-message" id="error-numeroTarjeta"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-row two-cols">
+                            <div class="form-group">
+                                <label for="fechaVencimiento">Fecha de vencimiento <span class="required">*</span></label>
+                                <div class="input-wrapper">
+                                    <i class="fas fa-calendar-alt input-icon"></i>
+                                    <input type="text" id="fechaVencimiento" name="fechaVencimiento" 
+                                           placeholder="MM/AA" 
+                                           maxlength="5" required>
+                                </div>
+                                <span class="error-message" id="error-fechaVencimiento"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="cvv">CVV / CVC <span class="required">*</span></label>
+                                <div class="input-wrapper">
+                                    <i class="fas fa-lock input-icon"></i>
+                                    <input type="password" id="cvv" name="cvv" 
+                                           placeholder="123" 
+                                           maxlength="4" required>
+                                    <button type="button" class="cvv-help" id="cvvHelpBtn">
+                                        <i class="fas fa-question-circle"></i>
+                                    </button>
+                                </div>
+                                <span class="error-message" id="error-cvv"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="cuotas">Número de cuotas <span class="required">*</span></label>
+                                <div class="input-wrapper">
+                                    <i class="fas fa-list-ol input-icon"></i>
+                                    <select id="cuotas" name="cuotas" required>
+                                        <option value="1" selected>1 cuota - Pago único</option>
+                                        <option value="2">2 cuotas</option>
+                                        <option value="3">3 cuotas</option>
+                                        <option value="6">6 cuotas</option>
+                                        <option value="12">12 cuotas</option>
+                                        <option value="18">18 cuotas</option>
+                                        <option value="24">24 cuotas</option>
+                                        <option value="36">36 cuotas</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sección: Dirección de Envío -->
+                    <div class="form-section" id="section-direccion">
+                        <div class="section-header">
+                            <div class="section-number">3</div>
+                            <h3><i class="fas fa-truck"></i> Dirección de Envío</h3>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="mismaDireccion" name="mismaDireccion" checked>
+                                    <span class="checkmark"></span>
+                                    <span class="label-text">Usar la misma dirección de facturación</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div id="direccionEnvioFields">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="direccion">Dirección <span class="required">*</span></label>
+                                    <div class="input-wrapper">
+                                        <i class="fas fa-map-marker-alt input-icon"></i>
+                                        <input type="text" id="direccion" name="direccion" 
+                                               placeholder="Calle, carrera, número, apartamento" 
+                                               maxlength="150" required>
+                                    </div>
+                                    <span class="error-message" id="error-direccion"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-row two-cols">
+                                <div class="form-group">
+                                    <label for="ciudad">Ciudad <span class="required">*</span></label>
+                                    <div class="input-wrapper">
+                                        <i class="fas fa-city input-icon"></i>
+                                        <input type="text" id="ciudad" name="ciudad" 
+                                               placeholder="Ej: Bogotá" 
+                                               maxlength="50" required>
+                                    </div>
+                                    <span class="error-message" id="error-ciudad"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="departamento">Departamento <span class="required">*</span></label>
+                                    <div class="input-wrapper">
+                                        <i class="fas fa-map input-icon"></i>
+                                        <select id="departamento" name="departamento" required>
+                                            <option value="" disabled selected>Seleccionar</option>
+                                            <option value="AMA">Amazonas</option>
+                                            <option value="ANT">Antioquia</option>
+                                            <option value="ARA">Arauca</option>
+                                            <option value="ATL">Atlántico</option>
+                                            <option value="BOL">Bolívar</option>
+                                            <option value="BOY">Boyacá</option>
+                                            <option value="CAL">Caldas</option>
+                                            <option value="CAQ">Caquetá</option>
+                                            <option value="CAS">Casanare</option>
+                                            <option value="CAU">Cauca</option>
+                                            <option value="CES">Cesar</option>
+                                            <option value="CHO">Chocó</option>
+                                            <option value="COR">Córdoba</option>
+                                            <option value="CUN">Cundinamarca</option>
+                                            <option value="GUA">Guainía</option>
+                                            <option value="GUV">Guaviare</option>
+                                            <option value="HUI">Huila</option>
+                                            <option value="LAG">La Guajira</option>
+                                            <option value="MAG">Magdalena</option>
+                                            <option value="MET">Meta</option>
+                                            <option value="NAR">Nariño</option>
+                                            <option value="NSA">Norte de Santander</option>
+                                            <option value="PUT">Putumayo</option>
+                                            <option value="QUI">Quindío</option>
+                                            <option value="RIS">Risaralda</option>
+                                            <option value="SAP">San Andrés y Providencia</option>
+                                            <option value="SAN">Santander</option>
+                                            <option value="SUC">Sucre</option>
+                                            <option value="TOL">Tolima</option>
+                                            <option value="VAC">Valle del Cauca</option>
+                                            <option value="VAU">Vaupés</option>
+                                            <option value="VID">Vichada</option>
+                                            <option value="BOG">Bogotá D.C.</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row two-cols">
+                                <div class="form-group">
+                                    <label for="barrio">Barrio / Localidad</label>
+                                    <div class="input-wrapper">
+                                        <i class="fas fa-home input-icon"></i>
+                                        <input type="text" id="barrio" name="barrio" 
+                                               placeholder="Ej: Chapinero" 
+                                               maxlength="50">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="codigoPostal">Código postal</label>
+                                    <div class="input-wrapper">
+                                        <i class="fas fa-mail-bulk input-icon"></i>
+                                        <input type="text" id="codigoPostal" name="codigoPostal" 
+                                               placeholder="Ej: 110111" 
+                                               maxlength="10">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="instrucciones">Instrucciones de entrega</label>
+                                    <div class="input-wrapper textarea-wrapper">
+                                        <i class="fas fa-comment-alt input-icon"></i>
+                                        <textarea id="instrucciones" name="instrucciones" 
+                                                  placeholder="Ej: Casa de dos pisos, portón negro, timbrar..." 
+                                                  maxlength="300" rows="3"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sección: Método de Envío -->
+                    <div class="form-section" id="section-envio">
+                        <div class="section-header">
+                            <div class="section-number">4</div>
+                            <h3><i class="fas fa-shipping-fast"></i> Método de Envío</h3>
+                        </div>
+
+                        <div class="shipping-options">
+                            <label class="shipping-option selected">
+                                <input type="radio" name="metodoEnvio" value="estandar" checked>
+                                <div class="option-content">
+                                    <div class="option-icon">
+                                        <i class="fas fa-truck"></i>
+                                    </div>
+                                    <div class="option-info">
+                                        <span class="option-title">Envío Estándar</span>
+                                        <span class="option-desc">3-5 días hábiles</span>
+                                    </div>
+                                    <div class="option-price" id="precioEnvioEstandar">
+                                        $ 15.000
+                                    </div>
+                                </div>
+                            </label>
+
+                            <label class="shipping-option">
+                                <input type="radio" name="metodoEnvio" value="express">
+                                <div class="option-content">
+                                    <div class="option-icon express">
+                                        <i class="fas fa-shipping-fast"></i>
+                                    </div>
+                                    <div class="option-info">
+                                        <span class="option-title">Envío Express</span>
+                                        <span class="option-desc">1-2 días hábiles</span>
+                                    </div>
+                                    <div class="option-price" id="precioEnvioExpress">
+                                        $ 35.000
+                                    </div>
+                                </div>
+                            </label>
+
+                            <label class="shipping-option">
+                                <input type="radio" name="metodoEnvio" value="recogida">
+                                <div class="option-content">
+                                    <div class="option-icon pickup">
+                                        <i class="fas fa-store"></i>
+                                    </div>
+                                    <div class="option-info">
+                                        <span class="option-title">Recoger en Tienda</span>
+                                        <span class="option-desc">Disponible en 2 horas</span>
+                                    </div>
+                                    <div class="option-price free">
+                                        GRATIS
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Botones de Acción -->
+                    <div class="form-actions">
+                        <a href="{{ url_for('carrito') }}" class="btn-back">
+                            <i class="fas fa-arrow-left"></i> Volver al carrito
+                        </a>
+                        <button type="button" class="btn-pay" id="btnPagar" onclick="procesarPago()">
+                            <i class="fas fa-lock"></i> Pagar ahora
+                            <span class="pay-amount" id="btnPayAmount"></span>
+                        </button>
+                    </div>
+
+                    <!-- Seguridad -->
+                    <div class="security-badges">
+                        <div class="badge-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Pago seguro SSL</span>
+                        </div>
+                        <div class="badge-item">
+                            <i class="fas fa-lock"></i>
+                            <span>Datos encriptados</span>
+                        </div>
+                        <div class="badge-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Verificación 3D Secure</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Columna Derecha: Resumen del Pedido -->
+                <div class="checkout-summary-section">
+                    <div class="summary-card">
+                        <h3><i class="fas fa-receipt"></i> Resumen del Pedido</h3>
+
+                        <!-- Lista de Productos -->
+                        <div class="summary-products" id="summaryProducts">
+                            <!-- Se llena con JS -->
+                        </div>
+
+                        <!-- Totales -->
+                        <div class="summary-totals">
+                            <div class="total-row">
+                                <span>Subtotal productos</span>
+                                <span id="summarySubtotal">$ 0</span>
+                            </div>
+                            <div class="total-row">
+                                <span>Envío</span>
+                                <span id="summaryEnvio">$ 15.000</span>
+                            </div>
+                            <div class="total-row discount" id="rowDescuento" style="display: none;">
+                                <span>Descuento</span>
+                                <span id="summaryDescuento">-$ 0</span>
+                            </div>
+                            <div class="total-row final">
+                                <span>Total a pagar</span>
+                                <span id="summaryTotal">$ 0</span>
+                            </div>
+                        </div>
+
+                        <!-- Código de Descuento -->
+                        <div class="discount-code">
+                            <div class="input-wrapper">
+                                <i class="fas fa-tag input-icon"></i>
+                                <input type="text" id="codigoDescuento" placeholder="Código promocional">
+                                <button type="button" onclick="aplicarDescuento()">Aplicar</button>
+                            </div>
+                            <span class="error-message" id="error-descuento"></span>
+                        </div>
+
+                        <!-- Información Adicional -->
+                        <div class="summary-info">
+                            <p><i class="fas fa-info-circle"></i> Los impuestos están incluidos en el precio.</p>
+                            <p><i class="fas fa-undo"></i> Política de devolución de 30 días.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Procesando Pago -->
+    <div class="modal-overlay" id="modalProcesando">
+        <div class="modal-content processing">
+            <div class="spinner-large"></div>
+            <h3>Procesando tu pago...</h3>
+            <p>Por favor no cierres esta ventana.</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Éxito -->
+    <div class="modal-overlay" id="modalExito">
+        <div class="modal-content success">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h3>¡Pago Exitoso!</h3>
+            <p>Tu orden ha sido confirmada. Recibirás un correo con los detalles.</p>
+            <div class="order-details">
+                <div class="detail-row">
+                    <span>Número de orden:</span>
+                    <strong id="orderNumber">FP-2026-00001</strong>
+                </div>
+                <div class="detail-row">
+                    <span>Total pagado:</span>
+                    <strong id="orderTotal">$ 0</strong>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <a href="/" class="btn-primary">
+                    <i class="fas fa-home"></i> Volver al inicio
+                </a>
+                <a href="/pedidos" class="btn-secondary">
+                    <i class="fas fa-box"></i> Ver mis pedidos
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Error -->
+    <div class="modal-overlay" id="modalError">
+        <div class="modal-content error">
+            <div class="error-icon">
+                <i class="fas fa-times-circle"></i>
+            </div>
+            <h3>Error en el Pago</h3>
+            <p id="errorPagoMensaje">No se pudo procesar la transacción. Verifica los datos de tu tarjeta.</p>
+            <div class="modal-actions">
+                <button onclick="cerrarModalError()" class="btn-primary">
+                    <i class="fas fa-redo"></i> Intentar de nuevo
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Ayuda CVV -->
+    <div class="modal-overlay" id="modalCvv">
+        <div class="modal-content cvv-help-modal">
+            <button class="modal-close" onclick="cerrarModalCvv()">
+                <i class="fas fa-times"></i>
+            </button>
+            <h3><i class="fas fa-question-circle"></i> ¿Dónde encuentro el CVV?</h3>
+            <div class="cvv-examples">
+                <div class="cvv-example">
+                    <div class="example-card visa-card">
+                        <div class="card-front-mini">
+                            <span class="mini-chip"></span>
+                            <span class="mini-number">**** **** **** 1234</span>
+                        </div>
+                    </div>
+                    <p><strong>Visa / Mastercard:</strong> Los 3 dígitos del reverso de la tarjeta, al lado de la banda magnética.</p>
+                </div>
+                <div class="cvv-example">
+                    <div class="example-card amex-card">
+                        <div class="card-front-mini">
+                            <span class="mini-chip"></span>
+                            <span class="mini-number">**** ****** 12345</span>
+                            <span class="mini-cvv-front">1234</span>
+                        </div>
+                    </div>
+                    <p><strong>American Express:</strong> Los 4 dígitos en el frente de la tarjeta, arriba del número.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Operación exitosa</span>
+    </div>
+
+    <!-- Footer -->
+   <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3><i class="fas fa-tools"></i> FERRETERÍA PRO</h3>
+                    <p>Tu tienda online profesional de ferretería y materiales de construcción. Productos de calidad, precios competitivos y envío a domicilio.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Categorías</h4>
+                    <ul>
+                        <li><a href="/productos?categoria=herramientas">Herramientas</a></li>
+                        <li><a href="/productos?categoria=pinturas">Pinturas</a></li>
+                        <li><a href="/productos?categoria=electricidad">Electricidad</a></li>
+                        <li><a href="/productos?categoria=construccion">Construcción</a></li>
+                        <li><a href="/productos?categoria=seguridad">Seguridad</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="/sobre-nosotros">Sobre Nosotros</a></li>
+                        <li><a href="/contacto">Contacto</a></li>
+                        <li><a href="/blog">Blog</a></li>
+                        <li><a href="/faq">Preguntas Frecuentes</a></li>
+                        <li><a href="/terminos">Términos y Condiciones</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Calle 123 #45-67, Bogotá</a></li>
+                        <li><a href="#"><i class="fas fa-phone"></i> +57 300 123 4567</a></li>
+                        <li><a href="#"><i class="fas fa-envelope"></i> info@ferreteriapro.com</a></li>
+                        <li><a href="#"><i class="fas fa-clock"></i> Lun-Vie: 8am - 6pm</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Ferretería Pro. Todos los derechos reservados.</p>
+                <p>Diseñado con <i class="fas fa-heart" style="color: var(--danger);"></i> para profesionales</p>
+            </div>
+        </div>
+    </footer>
+
+    
+
+    
+
+
+    
+
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='js/checkout.js') }}"></script>    
+    <script src="{{ url_for('static', filename='js/data.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/cart-storage.js') }}"></script>
+<script src="/static/js/data.js"></script>
+<script src="/static/js/cart-storage.js"></script>
+</body>
+</html>

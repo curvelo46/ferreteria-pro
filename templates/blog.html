@@ -6,631 +6,10 @@
     <title>Blog - Ferretería Pro</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
+    <link rel="stylesheet" href="/static/css/blog.css">
 
-        :root {
-            --primary: #1a237e;
-            --primary-light: #3949ab;
-            --secondary: #ff6f00;
-            --accent: #00c853;
-            --danger: #d50000;
-            --dark: #0d1b2a;
-            --gray: #546e7a;
-            --light: #f5f7fa;
-            --white: #ffffff;
-            --shadow: 0 4px 20px rgba(0,0,0,0.08);
-            --shadow-hover: 0 8px 30px rgba(0,0,0,0.15);
-            --radius: 12px;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: var(--light);
-            color: var(--dark);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* TOP BAR */
-        .top-bar {
-            background: var(--dark);
-            color: var(--white);
-            padding: 8px 0;
-            font-size: 0.85rem;
-        }
-        .top-bar-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .top-bar-info span { margin-right: 20px; opacity: 0.9; }
-        .top-bar-info i { margin-right: 5px; color: var(--secondary); }
-        .top-bar-links a {
-            color: var(--white);
-            text-decoration: none;
-            margin-left: 20px;
-            opacity: 0.9;
-            transition: var(--transition);
-        }
-        .top-bar-links a:hover { color: var(--secondary); opacity: 1; }
-
-        /* NAVBAR */
-        .navbar {
-            background: var(--white);
-            box-shadow: var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        .navbar-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 80px;
-        }
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-        }
-        .logo-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            border-radius: var(--radius);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            font-size: 1.5rem;
-        }
-        .logo-text { display: flex; flex-direction: column; }
-        .logo-text h1 {
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: var(--primary);
-            line-height: 1.2;
-        }
-        .logo-text span {
-            font-size: 0.75rem;
-            color: var(--gray);
-            font-weight: 500;
-            letter-spacing: 1px;
-        }
-        .nav-search {
-            flex: 1;
-            max-width: 600px;
-            margin: 0 40px;
-            position: relative;
-        }
-        .nav-search input {
-            width: 100%;
-            padding: 14px 50px 14px 20px;
-            border: 2px solid #e0e0e0;
-            border-radius: 50px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.95rem;
-            transition: var(--transition);
-            outline: none;
-        }
-        .nav-search input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(26, 35, 126, 0.1);
-        }
-        .nav-search button {
-            position: absolute;
-            right: 5px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: var(--secondary);
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            color: var(--white);
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        .nav-search button:hover {
-            background: var(--primary);
-            transform: translateY(-50%) scale(1.1);
-        }
-        .nav-actions {
-            display: flex;
-            gap: 20px;
-            align-items: center;
-        }
-        .nav-action {
-            position: relative;
-            text-decoration: none;
-            color: var(--dark);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            transition: var(--transition);
-            padding: 8px 12px;
-            border-radius: var(--radius);
-        }
-        .nav-action:hover { background: var(--light); color: var(--primary); }
-        .nav-action i { font-size: 1.3rem; }
-        .nav-action span { font-size: 0.75rem; font-weight: 500; }
-        .nav-action .badge {
-            position: absolute;
-            top: 0;
-            right: 5px;
-            background: var(--danger);
-            color: var(--white);
-            font-size: 0.7rem;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-        }
-
-        /* PAGE HEADER */
-        .page-header {
-            background: linear-gradient(135deg, var(--dark) 0%, #1a237e 100%);
-            padding: 80px 0 60px;
-            position: relative;
-            overflow: hidden;
-        }
-        .page-header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -10%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(255,111,0,0.15) 0%, transparent 70%);
-            border-radius: 50%;
-        }
-        .page-header-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
-            position: relative;
-            z-index: 1;
-            text-align: center;
-        }
-        .breadcrumb {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 20px;
-            font-size: 0.9rem;
-            color: rgba(255,255,255,0.7);
-        }
-        .breadcrumb a {
-            color: rgba(255,255,255,0.7);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-        .breadcrumb a:hover { color: var(--secondary); }
-        .breadcrumb i { font-size: 0.7rem; }
-        .page-header h1 {
-            color: var(--white);
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 15px;
-        }
-        .page-header p {
-            color: rgba(255,255,255,0.8);
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* SECTIONS */
-        .section { padding: 80px 0; }
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* SECTION TITLE */
-        .section-title-center {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-        .section-title-center h2 {
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: var(--dark);
-            margin-bottom: 15px;
-        }
-        .section-title-center span {
-            color: var(--gray);
-            font-size: 1rem;
-        }
-        .section-title-center .line {
-            width: 60px;
-            height: 4px;
-            background: var(--secondary);
-            margin: 20px auto 0;
-            border-radius: 2px;
-        }
-
-        /* FOOTER */
-        .footer {
-            background: var(--dark);
-            color: var(--white);
-            padding: 60px 0 20px;
-        }
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-        .footer-brand h3 {
-            font-size: 1.5rem;
-            font-weight: 800;
-            margin-bottom: 15px;
-            color: var(--secondary);
-        }
-        .footer-brand p {
-            color: rgba(255,255,255,0.7);
-            margin-bottom: 20px;
-            font-size: 0.95rem;
-        }
-        .footer-social {
-            display: flex;
-            gap: 15px;
-        }
-        .footer-social a {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-        .footer-social a:hover {
-            background: var(--secondary);
-            transform: translateY(-3px);
-        }
-        .footer-links h4 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: var(--white);
-        }
-        .footer-links ul { list-style: none; }
-        .footer-links li { margin-bottom: 12px; }
-        .footer-links a {
-            color: rgba(255,255,255,0.7);
-            text-decoration: none;
-            transition: var(--transition);
-            font-size: 0.95rem;
-        }
-        .footer-links a:hover {
-            color: var(--secondary);
-            padding-left: 5px;
-        }
-        .footer-bottom {
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.85rem;
-            color: rgba(255,255,255,0.5);
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 1024px) {
-            .footer-grid { grid-template-columns: 1fr 1fr; }
-        }
-        @media (max-width: 768px) {
-            .page-header h1 { font-size: 2rem; }
-            .navbar-container {
-                flex-wrap: wrap;
-                height: auto;
-                padding: 15px 20px;
-            }
-            .nav-search {
-                order: 3;
-                flex-basis: 100%;
-                margin: 15px 0 0 0;
-            }
-            .footer-grid { grid-template-columns: 1fr; text-align: center; }
-            .footer-social { justify-content: center; }
-            .footer-bottom {
-                flex-direction: column;
-                gap: 10px;
-                text-align: center;
-            }
-        }
-
-
-        /* BLOG */
-        .blog-filters {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .blog-filter-btn {
-            padding: 10px 24px;
-            border: 2px solid #e0e0e0;
-            border-radius: 50px;
-            background: var(--white);
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--gray);
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .blog-filter-btn:hover,
-        .blog-filter-btn.active {
-            background: var(--primary);
-            color: var(--white);
-            border-color: var(--primary);
-        }
-
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-        }
-
-        .blog-card {
-            background: var(--white);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            text-decoration: none;
-            color: var(--dark);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .blog-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .blog-image {
-            width: 100%;
-            height: 220px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .blog-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: var(--transition);
-        }
-
-        .blog-card:hover .blog-image img {
-            transform: scale(1.1);
-        }
-
-        .blog-category-badge {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            padding: 6px 16px;
-            background: var(--secondary);
-            color: var(--white);
-            border-radius: 50px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-
-        .blog-content {
-            padding: 25px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .blog-meta {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 15px;
-            font-size: 0.85rem;
-            color: var(--gray);
-        }
-
-        .blog-meta span {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .blog-content h3 {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: var(--dark);
-            margin-bottom: 12px;
-            line-height: 1.4;
-            transition: var(--transition);
-        }
-
-        .blog-card:hover .blog-content h3 {
-            color: var(--primary);
-        }
-
-        .blog-content p {
-            color: var(--gray);
-            font-size: 0.95rem;
-            line-height: 1.7;
-            margin-bottom: 20px;
-            flex: 1;
-        }
-
-        .blog-read-more {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--primary);
-            font-weight: 700;
-            font-size: 0.9rem;
-            transition: var(--transition);
-        }
-
-        .blog-card:hover .blog-read-more {
-            color: var(--secondary);
-            gap: 12px;
-        }
-
-        /* BLOG DESTACADO */
-        .featured-post {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0;
-            background: var(--white);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: var(--shadow-hover);
-            margin-bottom: 50px;
-        }
-
-        .featured-post-image {
-            height: 100%;
-            min-height: 400px;
-        }
-
-        .featured-post-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .featured-post-content {
-            padding: 50px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .featured-post-content .blog-category-badge {
-            position: static;
-            display: inline-block;
-            width: fit-content;
-            margin-bottom: 20px;
-        }
-
-        .featured-post-content h2 {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--dark);
-            margin-bottom: 15px;
-            line-height: 1.3;
-        }
-
-        .featured-post-content p {
-            color: var(--gray);
-            font-size: 1rem;
-            line-height: 1.8;
-            margin-bottom: 25px;
-        }
-
-        .featured-post-content .blog-meta {
-            margin-bottom: 25px;
-        }
-
-        .btn-read-featured {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 32px;
-            background: var(--primary);
-            color: var(--white);
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.95rem;
-            transition: var(--transition);
-            width: fit-content;
-        }
-
-        .btn-read-featured:hover {
-            background: var(--secondary);
-            transform: translateY(-2px);
-        }
-
-        /* PAGINACIÓN */
-        .pagination {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            margin-top: 50px;
-        }
-
-        .pagination a,
-        .pagination span {
-            width: 45px;
-            height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 0.95rem;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .pagination a {
-            background: var(--white);
-            color: var(--dark);
-            border: 2px solid #e0e0e0;
-        }
-
-        .pagination a:hover {
-            background: var(--primary);
-            color: var(--white);
-            border-color: var(--primary);
-        }
-
-        .pagination span {
-            background: var(--primary);
-            color: var(--white);
-        }
-
-        @media (max-width: 1024px) {
-            .blog-grid { grid-template-columns: repeat(2, 1fr); }
-            .featured-post { grid-template-columns: 1fr; }
-            .featured-post-image { min-height: 250px; }
-        }
-
-        @media (max-width: 768px) {
-            .blog-grid { grid-template-columns: 1fr; }
-        }
-    </style>
-<base target="_blank">
+    
+<base target="_self">
 </head>
 <body>
     <!-- Top Bar -->
@@ -643,7 +22,7 @@
             </div>
             <div class="top-bar-links">
                 <a href="#"><i class="fas fa-question-circle"></i> Ayuda</a>
-                <a href="#"><i class="fas fa-truck"></i> Seguimiento</a>
+                <a href="/pedidos"><i class="fas fa-truck"></i> Seguimiento</a>
                 <a href="#"><i class="fas fa-percent"></i> Ofertas</a>
             </div>
         </div>
@@ -653,34 +32,16 @@
     <nav class="navbar">
         <div class="navbar-container">
             <a href="/" class="logo">
-                <div class="logo-icon">
-                    <i class="fas fa-tools"></i>
-                </div>
-                <div class="logo-text">
-                    <h1>FERRETERÍA PRO</h1>
-                    <span>TU TIENDA ONLINE PROFESIONAL</span>
-                </div>
+                <div class="logo-icon"><i class="fas fa-tools"></i></div>
+                <div class="logo-text"><h1>FERRETERÍA PRO</h1><span>TU TIENDA ONLINE PROFESIONAL</span></div>
             </a>
-
             <div class="nav-search">
                 <input type="text" placeholder="Buscar herramientas, pinturas, materiales...">
                 <button><i class="fas fa-search"></i></button>
             </div>
-
             <div class="nav-actions">
-                <a href="#" class="nav-action">
-                    <i class="far fa-heart"></i>
-                    <span>Favoritos</span>
-                </a>
-                <a href="#" class="nav-action">
-                    <i class="far fa-user"></i>
-                    <span>Mi Cuenta</span>
-                </a>
-                <a href="/carrito" class="nav-action">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span class="badge">0</span>
-                    <span>Carrito</span>
-                </a>
+                <a href="#" class="nav-action"><i class="far fa-user"></i><span>Mi Cuenta</span></a>
+                <a href="/carrito" class="nav-action"><i class="fas fa-shopping-cart"></i><span id="cartCount" class="badge">0</span><span>Carrito</span></a>
             </div>
         </div>
     </nav>
@@ -689,9 +50,7 @@
     <section class="page-header">
         <div class="page-header-container">
             <div class="breadcrumb">
-                <a href="/">Inicio</a>
-                <i class="fas fa-chevron-right"></i>
-                <span>Blog</span>
+                <a href="/">Inicio</a><i class="fas fa-chevron-right"></i><span>Blog</span>
             </div>
             <h1>Blog de Ferretería Pro</h1>
             <p>Consejos, guías y tendencias del mundo de la construcción, bricolaje y ferretería profesional.</p>
@@ -715,29 +74,28 @@
                         <span><i class="far fa-user"></i> Andrés Curvelo</span>
                     </div>
                     <p>Explora las últimas tendencias en construcción verde. Desde cementos de bajo carbono hasta pinturas sin VOC, descubre cómo construir de forma responsable sin sacrificar calidad ni durabilidad.</p>
-                    <a href="/blog/construccion-sostenible-2026" class="btn-read-featured">
-                        <i class="fas fa-book-open"></i> Leer Artículo Completo
-                    </a>
+                    <a href="/blog/construccion-sostenible-2026" class="btn-read-featured"><i class="fas fa-book-open"></i> Leer Artículo Completo</a>
                 </div>
             </div>
 
             <!-- Filtros -->
             <div class="blog-filters">
-                <button class="blog-filter-btn active">Todos</button>
-                <button class="blog-filter-btn">Herramientas</button>
-                <button class="blog-filter-btn">Pinturas</button>
-                <button class="blog-filter-btn">Electricidad</button>
-                <button class="blog-filter-btn">Construcción</button>
-                <button class="blog-filter-btn">Seguridad</button>
-                <button class="blog-filter-btn">Bricolaje</button>
+                <button class="blog-filter-btn active" data-filter="todos">Todos</button>
+                <button class="blog-filter-btn" data-filter="herramientas">Herramientas</button>
+                <button class="blog-filter-btn" data-filter="pinturas">Pinturas</button>
+                <button class="blog-filter-btn" data-filter="electricidad">Electricidad</button>
+                <button class="blog-filter-btn" data-filter="construccion">Construcción</button>
+                <button class="blog-filter-btn" data-filter="seguridad">Seguridad</button>
+                <button class="blog-filter-btn" data-filter="bricolaje">Bricolaje</button>
+                <button class="blog-filter-btn" data-filter="acabados">Acabados</button>
             </div>
 
             <!-- Grid de Posts -->
-            <div class="blog-grid">
-                
-                <a href="/blog/guia-elegir-taladro-perfecto" class="blog-card">
+            <div class="blog-grid" id="blogGrid">
+
+                <a href="/guia-elegir-taladro-perfecto" class="blog-card" data-category="herramientas">
                     <div class="blog-image">
-                        <img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?w=600&h=400&fit=crop" alt="Guía Completa: Cómo Elegir el Taladro Perfecto para Tu Proyecto" loading="lazy">
+                        <img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?w=600&h=400&fit=crop" alt="Taladro" loading="lazy">
                         <span class="blog-category-badge">Herramientas</span>
                     </div>
                     <div class="blog-content">
@@ -746,14 +104,14 @@
                             <span><i class="far fa-clock"></i> 8 min</span>
                         </div>
                         <h3>Guía Completa: Cómo Elegir el Taladro Perfecto para Tu Proyecto</h3>
-                        <p>Descubre los factores clave para seleccionar el taladro ideal según el tipo de trabajo, material y frecuencia de uso. Desde taladros inalámbricos hasta percutores profesionales.</p>
+                        <p>Descubre los factores clave para seleccionar el taladro ideal según el tipo de trabajo, material y frecuencia de uso.</p>
                         <span class="blog-read-more">Leer más <i class="fas fa-arrow-right"></i></span>
                     </div>
                 </a>
 
-                <a href="/blog/10-tips-pintar-como-profesional" class="blog-card">
+                <a href="/10-tips-pintar-como-profesional" class="blog-card" data-category="pinturas">
                     <div class="blog-image">
-                        <img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&h=400&fit=crop" alt="10 Tips para Pintar como un Profesional en Casa" loading="lazy">
+                        <img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&h=400&fit=crop" alt="Pintar" loading="lazy">
                         <span class="blog-category-badge">Pinturas</span>
                     </div>
                     <div class="blog-content">
@@ -762,14 +120,14 @@
                             <span><i class="far fa-clock"></i> 6 min</span>
                         </div>
                         <h3>10 Tips para Pintar como un Profesional en Casa</h3>
-                        <p>Aprende las técnicas que usan los pintores expertos para lograr acabados impecables. Desde la preparación de superficies hasta la elección del rodillo correcto.</p>
+                        <p>Aprende las técnicas que usan los pintores expertos para lograr acabados impecables.</p>
                         <span class="blog-read-more">Leer más <i class="fas fa-arrow-right"></i></span>
                     </div>
                 </a>
 
-                <a href="/blog/instalaciones-electricas-residenciales" class="blog-card">
+                <a href="/Instalciones_electricas" class="blog-card" data-category="electricidad">
                     <div class="blog-image">
-                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&h=400&fit=crop" alt="Instalaciones Eléctricas Residenciales: Lo Que Necesitas Saber" loading="lazy">
+                        <img src="https://hogar.orienteseguros.com/wp-content/uploads/2016/09/instalaciones-electricas.jpg" alt="Eléctricas" loading="lazy">
                         <span class="blog-category-badge">Electricidad</span>
                     </div>
                     <div class="blog-content">
@@ -778,14 +136,14 @@
                             <span><i class="far fa-clock"></i> 10 min</span>
                         </div>
                         <h3>Instalaciones Eléctricas Residenciales: Lo Que Necesitas Saber</h3>
-                        <p>Todo sobre cableado, breakers, tomacorrientes y seguridad eléctrica en el hogar. Guía paso a paso para instalaciones seguras y normativas.</p>
+                        <p>Todo sobre cableado, breakers, tomacorrientes y seguridad eléctrica en el hogar.</p>
                         <span class="blog-read-more">Leer más <i class="fas fa-arrow-right"></i></span>
                     </div>
                 </a>
 
-                <a href="/blog/cemento-portland-vs-blanco" class="blog-card">
+                <a href="/blog/cemento-portland-vs-blanco" class="blog-card" data-category="construccion">
                     <div class="blog-image">
-                        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&h=400&fit=crop" alt="Cemento Portland vs. Cemento Blanco: ¿Cuál Usar?" loading="lazy">
+                        <img src="https://constructodo.mx/wp-content/uploads/2025/06/contrasting-outdoor-texture-design-1024x681.jpg" alt="Cemento" loading="lazy">
                         <span class="blog-category-badge">Construcción</span>
                     </div>
                     <div class="blog-content">
@@ -794,14 +152,14 @@
                             <span><i class="far fa-clock"></i> 5 min</span>
                         </div>
                         <h3>Cemento Portland vs. Cemento Blanco: ¿Cuál Usar?</h3>
-                        <p>Comparativa detallada entre los tipos de cemento más comunes. Conoce sus diferencias, usos recomendados y cuándo elegir uno sobre el otro.</p>
+                        <p>Comparativa detallada entre los tipos de cemento más comunes.</p>
                         <span class="blog-read-more">Leer más <i class="fas fa-arrow-right"></i></span>
                     </div>
                 </a>
 
-                <a href="/blog/epp-construccion-equipos-obligatorios" class="blog-card">
+                <a href="/blog/epp-construccion-equipos-obligatorios" class="blog-card" data-category="seguridad">
                     <div class="blog-image">
-                        <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=600&h=400&fit=crop" alt="EPP en Construcción: Equipos Obligatorios Que Salvan Vidas" loading="lazy">
+                        <img src="https://www.ludusglobal.com/hubfs/Equipos-de-protecci%C3%B3n-personal-para-trabajos-de-construcci%C3%B3n.jpg" alt="EPP" loading="lazy">
                         <span class="blog-category-badge">Seguridad</span>
                     </div>
                     <div class="blog-content">
@@ -810,14 +168,14 @@
                             <span><i class="far fa-clock"></i> 7 min</span>
                         </div>
                         <h3>EPP en Construcción: Equipos Obligatorios Que Salvan Vidas</h3>
-                        <p>Conoce los equipos de protección personal obligatorios en obras de construcción. Casco, guantes, botas, arnés y más. Seguridad ante todo.</p>
+                        <p>Conoce los equipos de protección personal obligatorios en obras.</p>
                         <span class="blog-read-more">Leer más <i class="fas fa-arrow-right"></i></span>
                     </div>
                 </a>
 
-                <a href="/blog/drywall-vs-mamposteria" class="blog-card">
+                <a href="/blog/drywall-vs-mamposteria" class="blog-card" data-category="construccion">
                     <div class="blog-image">
-                        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&h=400&fit=crop" alt="Drywall vs. Mampostería Tradicional: Ventajas y Desventajas" loading="lazy">
+                        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&h=400&fit=crop" alt="Drywall" loading="lazy">
                         <span class="blog-category-badge">Construcción</span>
                     </div>
                     <div class="blog-content">
@@ -826,14 +184,14 @@
                             <span><i class="far fa-clock"></i> 9 min</span>
                         </div>
                         <h3>Drywall vs. Mampostería Tradicional: Ventajas y Desventajas</h3>
-                        <p>Análisis comparativo entre construcción en seco y mampostería tradicional. Tiempo, costo, aislamiento y acabados. Todo lo que debes considerar.</p>
+                        <p>Análisis comparativo entre construcción en seco y mampostería tradicional.</p>
                         <span class="blog-read-more">Leer más <i class="fas fa-arrow-right"></i></span>
                     </div>
                 </a>
 
-                <a href="/blog/calcular-cantidad-pintura" class="blog-card">
+                <a href="/blog/calcular-cantidad-pintura" class="blog-card" data-category="pinturas">
                     <div class="blog-image">
-                        <img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&h=400&fit=crop" alt="Cómo Calcular la Cantidad de Pintura Que Necesitas" loading="lazy">
+                        <img src="https://homesolution.net/blog/wp-content/uploads/2015/07/hero-paint-a-room-1280x720.jpg" alt="Pintura" loading="lazy">
                         <span class="blog-category-badge">Pinturas</span>
                     </div>
                     <div class="blog-content">
@@ -842,14 +200,14 @@
                             <span><i class="far fa-clock"></i> 4 min</span>
                         </div>
                         <h3>Cómo Calcular la Cantidad de Pintura Que Necesitas</h3>
-                        <p>Fórmulas prácticas y herramientas para estimar la pintura necesaria según el área, tipo de superficie y número de manos. Evita desperdicios y compras de más.</p>
+                        <p>Fórmulas prácticas para estimar la pintura necesaria según el área.</p>
                         <span class="blog-read-more">Leer más <i class="fas fa-arrow-right"></i></span>
                     </div>
                 </a>
 
-                <a href="/blog/mantenimiento-herramientas-electricas" class="blog-card">
+                <a href="/blog/mantenimiento-herramientas-electricas" class="blog-card" data-category="herramientas">
                     <div class="blog-image">
-                        <img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?w=600&h=400&fit=crop" alt="Mantenimiento de Herramientas Eléctricas: Alarga Su Vida Útil" loading="lazy">
+                        <img src="https://suteva.com/wp-content/uploads/2024/03/ramiet-1.jpg" alt="Mantenimiento" loading="lazy">
                         <span class="blog-category-badge">Herramientas</span>
                     </div>
                     <div class="blog-content">
@@ -858,14 +216,14 @@
                             <span><i class="far fa-clock"></i> 6 min</span>
                         </div>
                         <h3>Mantenimiento de Herramientas Eléctricas: Alarga Su Vida Útil</h3>
-                        <p>Consejos prácticos para limpiar, lubricar y almacenar tus herramientas eléctricas. Mantén tus equipos en óptimas condiciones y ahorra dinero a largo plazo.</p>
+                        <p>Consejos prácticos para limpiar, lubricar y almacenar tus herramientas.</p>
                         <span class="blog-read-more">Leer más <i class="fas fa-arrow-right"></i></span>
                     </div>
                 </a>
 
-                <a href="/blog/iluminacion-led-ahorro-energetico" class="blog-card">
+                <a href="/blog/iluminacion-led-ahorro-energetico" class="blog-card" data-category="electricidad">
                     <div class="blog-image">
-                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&h=400&fit=crop" alt="Iluminación LED: Ahorro Energético para Tu Hogar y Obra" loading="lazy">
+                        <img src="https://megalamparas.com.gt/wp-content/uploads/2021/01/que-son-las-luces-led.jpg" alt="LED" loading="lazy">
                         <span class="blog-category-badge">Electricidad</span>
                     </div>
                     <div class="blog-content">
@@ -874,21 +232,310 @@
                             <span><i class="far fa-clock"></i> 5 min</span>
                         </div>
                         <h3>Iluminación LED: Ahorro Energético para Tu Hogar y Obra</h3>
-                        <p>Descubre por qué el LED es la mejor opción de iluminación. Comparativas de consumo, durabilidad y retorno de inversión frente a tecnologías tradicionales.</p>
+                        <p>Descubre por qué el LED es la mejor opción de iluminación.</p>
                         <span class="blog-read-more">Leer más <i class="fas fa-arrow-right"></i></span>
                     </div>
                 </a>
 
+                <a href="/blog/como-elegir-brochas-rodillos" class="blog-card" data-category="pinturas">
+                    <div class="blog-image">
+                        <img src="https://i.ytimg.com/vi/9rZnvou6jQc/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDHrNd82qkBPozXEvGFLpcK8J1Atg" alt="Brochas" loading="lazy">
+                        <span class="blog-category-badge">Pinturas</span>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> 24 Marzo 2026</span>
+                            <span><i class="far fa-clock"></i> 5 min</span>
+                        </div>
+                        <h3>Cómo Elegir Brochas y Rodillos para Pintar Correctamente</h3>
+                        <p>Conoce qué tipo de brocha o rodillo debes usar según la superficie.</p>
+                        <span class="blog-read-more">Leer más <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+
+                <a href="/blog/humedad-paredes-soluciones" class="blog-card" data-category="construccion">
+                    <div class="blog-image">
+                        <img src="https://images.unsplash.com/photo-1523413651479-597eb2da0ad6?w=600&h=400&fit=crop" alt="Humedad" loading="lazy">
+                        <span class="blog-category-badge">Construcción</span>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> 20 Marzo 2026</span>
+                            <span><i class="far fa-clock"></i> 7 min</span>
+                        </div>
+                        <h3>Cómo Solucionar Problemas de Humedad en Paredes</h3>
+                        <p>Aprende a identificar filtraciones, humedad por capilaridad y condensación.</p>
+                        <span class="blog-read-more">Leer más <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+
+                <a href="/blog/tipos-lijas-usos" class="blog-card" data-category="herramientas">
+                    <div class="blog-image">
+                        <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=600&h=400&fit=crop" alt="Lijas" loading="lazy">
+                        <span class="blog-category-badge">Herramientas</span>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> 18 Marzo 2026</span>
+                            <span><i class="far fa-clock"></i> 4 min</span>
+                        </div>
+                        <h3>Tipos de Lijas y Sus Usos en Carpintería y Pintura</h3>
+                        <p>Descubre las diferencias entre lijas de agua, madera y metal.</p>
+                        <span class="blog-read-more">Leer más <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+
+                <a href="/blog/errores-comunes-construccion" class="blog-card" data-category="construccion">
+                    <div class="blog-image">
+                        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&h=400&fit=crop" alt="Errores" loading="lazy">
+                        <span class="blog-category-badge">Construcción</span>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> 15 Marzo 2026</span>
+                            <span><i class="far fa-clock"></i> 8 min</span>
+                        </div>
+                        <h3>Errores Comunes en Construcción y Cómo Evitarlos</h3>
+                        <p>Evita fallas frecuentes en mezclas, niveles, instalaciones y acabados.</p>
+                        <span class="blog-read-more">Leer más <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+
+                <a href="/blog/como-instalar-tomacorriente" class="blog-card" data-category="electricidad">
+                    <div class="blog-image">
+                        <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=600&h=400&fit=crop" alt="Tomacorriente" loading="lazy">
+                        <span class="blog-category-badge">Electricidad</span>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> 12 Marzo 2026</span>
+                            <span><i class="far fa-clock"></i> 6 min</span>
+                        </div>
+                        <h3>Cómo Instalar un Tomacorriente de Forma Segura</h3>
+                        <p>Guía básica para instalar enchufes eléctricos residenciales.</p>
+                        <span class="blog-read-more">Leer más <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+
+                <a href="/blog/herramientas-basicas-hogar" class="blog-card" data-category="herramientas">
+                    <div class="blog-image">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuNAwqeDqM_qPx6NFBgjcdMzE91ut_hjmBWQ&s" alt="Herramientas" loading="lazy">
+                        <span class="blog-category-badge">Herramientas</span>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> 10 Marzo 2026</span>
+                            <span><i class="far fa-clock"></i> 5 min</span>
+                        </div>
+                        <h3>Herramientas Básicas Que Todo Hogar Debe Tener</h3>
+                        <p>Martillo, destornilladores, cinta métrica y más. El kit esencial.</p>
+                        <span class="blog-read-more">Leer más <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+
+                <a href="/blog/impermeabilizantes-techos" class="blog-card" data-category="construccion">
+                    <div class="blog-image">
+                        <img src="https://homesolution.net/blog/wp-content/uploads/2020/08/impermeabilizaci%C3%B3n-para-techos-5.jpg" alt="Impermeabilizantes" loading="lazy">
+                        <span class="blog-category-badge">Construcción</span>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> 6 Marzo 2026</span>
+                            <span><i class="far fa-clock"></i> 6 min</span>
+                        </div>
+                        <h3>Impermeabilizantes para Techos: Tipos y Beneficios</h3>
+                        <p>Protege tu vivienda contra filtraciones y lluvias.</p>
+                        <span class="blog-read-more">Leer más <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+
+                <a href="/blog/pisos-ceramica-vs-porcelanato" class="blog-card" data-category="acabados">
+                    <div class="blog-image">
+                        <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?w=600&h=400&fit=crop" alt="Cerámica" loading="lazy">
+                        <span class="blog-category-badge">Acabados</span>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> 1 Marzo 2026</span>
+                            <span><i class="far fa-clock"></i> 7 min</span>
+                        </div>
+                        <h3>Cerámica vs. Porcelanato: ¿Cuál Conviene Más?</h3>
+                        <p>Comparativa completa entre dos de los pisos más usados.</p>
+                        <span class="blog-read-more">Leer más <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+
+                <a href="/blog/seguridad-escaleras-obra" class="blog-card" data-category="seguridad">
+                    <div class="blog-image">
+                        <img src="https://aceroscrea.com/wp-content/uploads/2023/10/diseno-y-medidas-optimas-para-construir-una-escalera-de-concreto-aceros-crea.jpg" alt="Escaleras" loading="lazy">
+                        <span class="blog-category-badge">Seguridad</span>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> 26 Febrero 2026</span>
+                            <span><i class="far fa-clock"></i> 4 min</span>
+                        </div>
+                        <h3>Seguridad al Usar Escaleras en Obras y Hogares</h3>
+                        <p>Consejos esenciales para prevenir accidentes en altura.</p>
+                        <span class="blog-read-more">Leer más <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+
+                <a href="/blog/como-usar-nivel-laser" class="blog-card" data-category="herramientas">
+                    <div class="blog-image">
+                        <img src="https://maquitecdecolombia.com/wp-content/uploads/2020/10/Nivel-Laser-GLL-2-12-Bosch-003.jpg" alt="Nivel láser" loading="lazy">
+                        <span class="blog-category-badge">Herramientas</span>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> 22 Febrero 2026</span>
+                            <span><i class="far fa-clock"></i> 6 min</span>
+                        </div>
+                        <h3>Cómo Usar un Nivel Láser para Trabajos Precisos</h3>
+                        <p>Aprende a nivelar pisos, paredes y estructuras con precisión.</p>
+                        <span class="blog-read-more">Leer más <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+
+                <a href="/blog/tipos-de-brocas" class="blog-card" data-category="herramientas">
+                    <div class="blog-image">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTW6vb7jstYZ1hplTkXqdDSHGkX_L-ZufojQQ&s" alt="Brocas" loading="lazy">
+                        <span class="blog-category-badge">Herramientas</span>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> 20 Febrero 2026</span>
+                            <span><i class="far fa-clock"></i> 5 min</span>
+                        </div>
+                        <h3>Tipos de Brocas y Cuándo Utilizarlas</h3>
+                        <p>Conoce las brocas ideales para concreto, madera, metal y cerámica.</p>
+                        <span class="blog-read-more">Leer más <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+
+                <a href="/blog/errores-al-pintar" class="blog-card" data-category="pinturas">
+                    <div class="blog-image">
+                        <img src="https://selecciones.com.mx/wp-content/uploads/2022/06/errores-comunes-cuando-utlizas-pintura-para-tu-casa.jpg" alt="Errores pintar" loading="lazy">
+                        <span class="blog-category-badge">Pinturas</span>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> 18 Febrero 2026</span>
+                            <span><i class="far fa-clock"></i> 4 min</span>
+                        </div>
+                        <h3>Errores Comunes al Pintar una Habitación</h3>
+                        <p>Evita manchas, burbujas y acabados irregulares.</p>
+                        <span class="blog-read-more">Leer más <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+
+                <a href="/blog/mezcla-concreto-perfecta" class="blog-card" data-category="construccion">
+                    <div class="blog-image">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDV4yOyHuhTMvnmrcjWRC6_jtulBBkLoDkYw&s" alt="Concreto" loading="lazy">
+                        <span class="blog-category-badge">Construcción</span>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> 15 Febrero 2026</span>
+                            <span><i class="far fa-clock"></i> 7 min</span>
+                        </div>
+                        <h3>Cómo Preparar una Mezcla de Concreto Perfecta</h3>
+                        <p>Aprende las proporciones correctas de cemento, arena y grava.</p>
+                        <span class="blog-read-more">Leer más <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+
+                <a href="/blog/cables-electricos-colores" class="blog-card" data-category="electricidad">
+                    <div class="blog-image">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIOKzI9JGwvkTh4tYfSJqdm23_9jCimYI-Tw&s" alt="Cables" loading="lazy">
+                        <span class="blog-category-badge">Electricidad</span>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> 12 Febrero 2026</span>
+                            <span><i class="far fa-clock"></i> 5 min</span>
+                        </div>
+                        <h3>Qué Significan los Colores de los Cables Eléctricos</h3>
+                        <p>Descubre cómo identificar fase, neutro y tierra.</p>
+                        <span class="blog-read-more">Leer más <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+
+                <a href="/blog/uso-correcto-esmeril" class="blog-card" data-category="seguridad">
+                    <div class="blog-image">
+                        <img src="https://herramientastotal.cl/cdn/shop/products/total-tools-esmeriladoras-esmeril-angular-4-1-2-115mm-750w-total-33900528238762_1245x700.jpg?v=1666115527" alt="Esmeril" loading="lazy">
+                        <span class="blog-category-badge">Seguridad</span>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> 10 Febrero 2026</span>
+                            <span><i class="far fa-clock"></i> 6 min</span>
+                        </div>
+                        <h3>Uso Seguro del Esmeril Angular</h3>
+                        <p>Consejos esenciales para cortar y pulir materiales evitando accidentes.</p>
+                        <span class="blog-read-more">Leer más <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+
+                <a href="/blog/como-instalar-ceramica" class="blog-card" data-category="acabados">
+                    <div class="blog-image">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTm_AMqH9LQx4H7-drKvOkzv7AU-75f181pPg&s" alt="Cerámica" loading="lazy">
+                        <span class="blog-category-badge">Acabados</span>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> 7 Febrero 2026</span>
+                            <span><i class="far fa-clock"></i> 8 min</span>
+                        </div>
+                        <h3>Cómo Instalar Pisos de Cerámica Paso a Paso</h3>
+                        <p>Aprende técnicas para nivelar, pegar y sellar cerámica.</p>
+                        <span class="blog-read-more">Leer más <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+
+                <a href="/blog/mantenimiento-techos" class="blog-card" data-category="construccion">
+                    <div class="blog-image">
+                        <img src="https://bioestructuras.com/wp-content/uploads/2024/04/reparacion-de-techos1-1024x461.jpg" alt="Techos" loading="lazy">
+                        <span class="blog-category-badge">Construcción</span>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> 5 Febrero 2026</span>
+                            <span><i class="far fa-clock"></i> 5 min</span>
+                        </div>
+                        <h3>Mantenimiento Preventivo de Techos</h3>
+                        <p>Evita filtraciones y daños estructurales con inspecciones periódicas.</p>
+                        <span class="blog-read-more">Leer más <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+
+                <a href="/blog/cambiar-breaker-casa" class="blog-card" data-category="electricidad">
+                    <div class="blog-image">
+                        <img src="https://mmelectricalpr.com/wp-content/uploads/2023/10/reparacion-de-disyuntor-electrico.webp" alt="Breaker" loading="lazy">
+                        <span class="blog-category-badge">Electricidad</span>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> 6 Enero 2026</span>
+                            <span><i class="far fa-clock"></i> 7 min</span>
+                        </div>
+                        <h3>Cómo Cambiar un Breaker en Casa</h3>
+                        <p>Guía básica para reemplazar interruptores eléctricos de forma segura.</p>
+                        <span class="blog-read-more">Leer más <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+
+
+                <!-- Mensaje cuando no hay resultados -->
+                <div class="no-results" id="noResults" style="display: none;">
+                    <i class="fas fa-search"></i>
+                    <h3>No se encontraron artículos</h3>
+                    <p>Prueba seleccionando otra categoría o vuelve a "Todos".</p>
+                </div>
             </div>
 
             <!-- Paginación -->
-            <div class="pagination">
-                <a href="#"><i class="fas fa-chevron-left"></i></a>
-                <span>1</span>
-                <a href="#">2</a>
-                <a href="#">3</a>
-                <a href="#"><i class="fas fa-chevron-right"></i></a>
-            </div>
+            <div class="pagination" id="pagination"></div>
         </div>
     </section>
 
@@ -909,21 +556,21 @@
                 <div class="footer-links">
                     <h4>Categorías</h4>
                     <ul>
-                        <li><a href="productos">Herramientas</a></li>
-                        <li><a href="pinturas">Pinturas</a></li>
-                        <li><a href="electricidad">Electricidad</a></li>
-                        <li><a href="construccion">Construcción</a></li>
-                        <li><a href="seguridad">Seguridad</a></li>
+                        <li><a href="/productos?categoria=herramientas">Herramientas</a></li>
+                        <li><a href="/productos?categoria=pinturas">Pinturas</a></li>
+                        <li><a href="/productos?categoria=electricidad">Electricidad</a></li>
+                        <li><a href="/productos?categoria=construccion">Construcción</a></li>
+                        <li><a href="/productos?categoria=seguridad">Seguridad</a></li>
                     </ul>
                 </div>
                 <div class="footer-links">
                     <h4>Enlaces Rápidos</h4>
                     <ul>
-                        <li><a href="sobre-nosotros">Sobre Nosotros</a></li>
-                        <li><a href="contacto">Contacto</a></li>
-                        <li><a href="blog">Blog</a></li>
-                        <li><a href="faq">Preguntas Frecuentes</a></li>
-                        <li><a href="terminos">Términos y Condiciones</a></li>
+                        <li><a href="/sobre-nosotros">Sobre Nosotros</a></li>
+                        <li><a href="/contacto">Contacto</a></li>
+                        <li><a href="/blog">Blog</a></li>
+                        <li><a href="/faq">Preguntas Frecuentes</a></li>
+                        <li><a href="/terminos">Términos y Condiciones</a></li>
                     </ul>
                 </div>
                 <div class="footer-links">
@@ -937,12 +584,161 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p> 2026 Ferretería Pro. Todos los derechos reservados.</p>
+                <p>© 2026 Ferretería Pro. Todos los derechos reservados.</p>
                 <p>Diseñado con <i class="fas fa-heart" style="color: var(--danger);"></i> para profesionales</p>
             </div>
         </div>
     </footer>
 
+    
+<script>
+// CONFIGURACIÓN
+const POSTS_POR_PAGINA = 9;
+let paginaActual = 1;
+let categoriaActual = 'todos';
 
+// OBTENER TODAS LAS TARJETAS
+function obtenerTarjetas() {
+    return Array.from(document.querySelectorAll('.blog-card[data-category]'));
+}
+
+// FILTRAR TARJETAS POR CATEGORÍA
+function filtrarTarjetas() {
+    const tarjetas = obtenerTarjetas();
+    const noResults = document.getElementById('noResults');
+    let visibles = 0;
+
+    tarjetas.forEach(tarjeta => {
+        const categoria = tarjeta.getAttribute('data-category');
+        if (categoriaActual === 'todos' || categoria === categoriaActual) {
+            tarjeta.classList.remove('hidden');
+            visibles++;
+        } else {
+            tarjeta.classList.add('hidden');
+        }
+    });
+
+    // Mostrar/ocultar mensaje de sin resultados
+    if (visibles === 0) {
+        noResults.style.display = 'block';
+    } else {
+        noResults.style.display = 'none';
+    }
+
+    return visibles;
+}
+
+// OBTENER TARJETAS VISIBLES (filtradas)
+function obtenerTarjetasVisibles() {
+    return obtenerTarjetas().filter(t => !t.classList.contains('hidden'));
+}
+
+// PAGINAR TARJETAS
+function paginar() {
+    const tarjetasVisibles = obtenerTarjetasVisibles();
+    const totalPaginas = Math.ceil(tarjetasVisibles.length / POSTS_POR_PAGINA);
+
+    // Ajustar página actual si es necesario
+    if (paginaActual > totalPaginas) {
+        paginaActual = totalPaginas || 1;
+    }
+
+    // Mostrar solo las tarjetas de la página actual
+    tarjetasVisibles.forEach((tarjeta, index) => {
+        const inicio = (paginaActual - 1) * POSTS_POR_PAGINA;
+        const fin = inicio + POSTS_POR_PAGINA;
+
+        if (index >= inicio && index < fin) {
+            tarjeta.style.display = 'block';
+        } else {
+            tarjeta.style.display = 'none';
+        }
+    });
+
+    generarBotonesPaginacion(totalPaginas);
+}
+
+// GENERAR BOTONES DE PAGINACIÓN
+function generarBotonesPaginacion(totalPaginas) {
+    const contenedor = document.getElementById('pagination');
+    contenedor.innerHTML = '';
+
+    if (totalPaginas <= 1) return;
+
+    // Botón Anterior
+    const btnAnterior = document.createElement('button');
+    btnAnterior.className = 'page-btn';
+    btnAnterior.innerHTML = '<i class="fas fa-chevron-left"></i>';
+    btnAnterior.disabled = paginaActual === 1;
+    btnAnterior.onclick = () => {
+        if (paginaActual > 1) {
+            paginaActual--;
+            paginar();
+            window.scrollTo({ top: document.querySelector('.blog-filters').offsetTop - 100, behavior: 'smooth' });
+        }
+    };
+    contenedor.appendChild(btnAnterior);
+
+    // Botones de número
+    for (let i = 1; i <= totalPaginas; i++) {
+        const btn = document.createElement('button');
+        btn.className = 'page-btn' + (i === paginaActual ? ' active' : '');
+        btn.textContent = i;
+        btn.onclick = () => {
+            paginaActual = i;
+            paginar();
+            window.scrollTo({ top: document.querySelector('.blog-filters').offsetTop - 100, behavior: 'smooth' });
+        };
+        contenedor.appendChild(btn);
+    }
+
+    // Botón Siguiente
+    const btnSiguiente = document.createElement('button');
+    btnSiguiente.className = 'page-btn';
+    btnSiguiente.innerHTML = '<i class="fas fa-chevron-right"></i>';
+    btnSiguiente.disabled = paginaActual === totalPaginas;
+    btnSiguiente.onclick = () => {
+        if (paginaActual < totalPaginas) {
+            paginaActual++;
+            paginar();
+            window.scrollTo({ top: document.querySelector('.blog-filters').offsetTop - 100, behavior: 'smooth' });
+        }
+    };
+    contenedor.appendChild(btnSiguiente);
+}
+
+// MANEJAR CLICK EN FILTROS
+function inicializarFiltros() {
+    const botones = document.querySelectorAll('.blog-filter-btn');
+
+    botones.forEach(boton => {
+        boton.addEventListener('click', function() {
+            // Quitar clase active de todos
+            botones.forEach(b => b.classList.remove('active'));
+            // Agregar active al clickeado
+            this.classList.add('active');
+
+            // Actualizar categoría
+            categoriaActual = this.getAttribute('data-filter');
+            paginaActual = 1;
+
+            // Aplicar filtro y paginar
+            filtrarTarjetas();
+            paginar();
+        });
+    });
+}
+
+// INICIALIZAR AL CARGAR
+document.addEventListener('DOMContentLoaded', function() {
+    inicializarFiltros();
+    filtrarTarjetas();
+    paginar();
+});
+</script>
+
+    <script src="static/js/cart-storage.js"></script>
+<script src="/static/js/data.js"></script>
+<script src="/static/js/cart-storage.js"></script>
 </body>
 </html>

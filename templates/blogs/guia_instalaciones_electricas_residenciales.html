@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía del Experto: Instalaciones Eléctricas Residenciales | Ferretería Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/instalaciones_electrica.css">
+    <base target="_self">
+</head>
+<body>
+
+    <!-- ===== TOP BAR ===== -->
+    <div class="top-bar">
+        <div class="top-bar-container">
+            <div class="top-bar-info">
+                <span><i class="fas fa-phone"></i> +57 300 123 4567</span>
+                <span><i class="fas fa-envelope"></i> andrescurvelodiaz@gmail.com</span>
+                <span><i class="fas fa-map-marker-alt"></i> Envíos a todo el país</span>
+            </div>
+            <div class="top-bar-links">
+                <a href="#"><i class="fas fa-question-circle"></i> Ayuda</a>
+                <a href="#"><i class="fas fa-truck"></i> Seguimiento</a>
+                <a href="#"><i class="fas fa-percent"></i> Ofertas</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>FERRETERÍA PRO</h1>
+                    <span>TU TIENDA ONLINE PROFESIONAL</span>
+                </div>
+            </a>
+            <div class="nav-search">
+                <input type="text" placeholder="Buscar herramientas, pinturas, materiales...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            <div class="nav-actions">
+                <a href="#" class="nav-action">
+                    <i class="far fa-user"></i>
+                    <span>Mi Cuenta</span>
+                </a>
+                <a href="/carrito" class="nav-action">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cartCount" class="badge">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h2><i class="fas fa-bolt"></i> Guía del Experto 2026</h2>
+                <h1>Instalaciones Eléctricas <span>Residenciales</span>: Lo Que Necesitas Saber</h1>
+                <p>Con 18 años como electricista certificado, te explico desde cero cómo funciona la electricidad en tu hogar, qué normas cumplir y cómo realizar instalaciones seguras que protejan a tu familia.</p>
+                <div class="hero-buttons">
+                    <a href="#conceptos" class="btn btn-primary">
+                        <i class="fas fa-book-open"></i> Conceptos Clave
+                    </a>
+                    <a href="#componentes" class="btn btn-outline">
+                        <i class="fas fa-toolbox"></i> Componentes
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <h3>18+</h3>
+                        <p>Años de Experiencia</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>1200+</h3>
+                        <p>Instalaciones Seguras</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>100%</h3>
+                        <p>Cumplimiento RETIE</p>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <i class="fas fa-bolt elec-icon"></i>
+                <img src="https://hogar.orienteseguros.com/wp-content/uploads/2016/09/instalaciones-electricas.jpg" alt="Instalación eléctrica profesional">
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONCEPTOS CLAVE ===== -->
+    <section class="section" id="conceptos">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-title">
+                    <h2><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Conceptos Fundamentales</h2>
+                    <span>Lo que todo propietario debe entender antes de tocar un cable</span>
+                </div>
+            </div>
+            <div class="concepts-grid">
+                <div class="concept-card">
+                    <div class="concept-icon"><i class="fas fa-plug"></i></div>
+                    <h3>Voltaje, Amperaje y Wattaje</h3>
+                    <p>El voltaje (V) es la "presión" de la electricidad. En Colombia, el residencial es 110V-120V monofásico. El amperaje (A) es la cantidad de corriente que fluye. El wattaje (W) es el consumo real: W = V × A. Un tomacorriente de 15A soporta máximo 1,650W antes de sobrecalentarse.</p>
+                    <div class="pro-tip"><i class="fas fa-star"></i> Pro Tip: Nunca cargues un circuito al 100%. Mantén margen del 20% para picos de arranque.</div>
+                </div>
+                <div class="concept-card">
+                    <div class="concept-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Fase, Neutro y Tierra</h3>
+                    <p>La fase (cable negro/rojo) lleva la corriente viva. El neutro (blanco/azul) completa el circuito. La tierra (verde/amarillo) es protección: no lleva corriente normalmente, solo actúa si hay fuga. Nunca uses tierra como neutro: es ilegal y mortal.</p>
+                    <div class="pro-tip"><i class="fas fa-star"></i> Pro Tip: Con un probador de fase, el cable activo debe dar lectura; neutro y tierra deben dar cero.</div>
+                </div>
+                <div class="concept-card">
+                    <div class="concept-icon"><i class="fas fa-network-wired"></i></div>
+                    <h3>Circuitos y Breakers</h3>
+                    <p>Un circuito es un camino cerrado desde el breaker hasta los consumidores y de vuelta. Cada breaker protege su circuito. Si se sobrecarga o hay cortocircuito, el breaker "salta" cortando la corriente. En Colombia, el RETIE exige breaker diferencial (GFCI) en baños, cocinas y exteriores.</p>
+                    <div class="pro-tip"><i class="fas fa-star"></i> Pro Tip: Un breaker que salta repetidamente indica sobrecarga, no un breaker "defectuoso". No lo cambies por uno de mayor amperaje.</div>
+                </div>
+                <div class="concept-card">
+                    <div class="concept-icon"><i class="fas fa-calculator"></i></div>
+                    <h3>Cálculo de Carga Eléctrica</h3>
+                    <p>Para diseñar una instalación segura, suma los watts de todos los equipos del circuito. Divide entre el voltaje (110V) para obtener amperaje. El resultado debe ser menor al 80% de la capacidad del breaker. Ejemplo: nevera 350W + microondas 1,200W = 1,550W ÷ 110V = 14.1A → requiere breaker de 20A.</p>
+                    <div class="pro-tip"><i class="fas fa-star"></i> Pro Tip: Los equipos con motor (neveras, aires) consumen 3-5x su wattaje nominal al arrancar. Considera esto en el cálculo.</div>
+                </div>
+                <div class="concept-card">
+                    <div class="concept-icon"><i class="fas fa-ruler-horizontal"></i></div>
+                    <h3>Calibre de Cables (AWG)</h3>
+                    <p>El calibre determina cuánta corriente puede transportar sin calentarse. En Colombia se usa AWG: 14 AWG para iluminación (15A máx), 12 AWG para tomacorrientes generales (20A), 10 AWG para equipos grandes como aires acondicionados (30A). Cable más delgado = más calor = riesgo de incendio.</p>
+                    <div class="pro-tip"><i class="fas fa-star"></i> Pro Tip: Nunca uses cable 16 AWG (paralelo) para instalaciones fijas. Es solo para extensiones temporales.</div>
+                </div>
+                <div class="concept-card">
+                    <div class="concept-icon"><i class="fas fa-file-alt"></i></div>
+                    <h3>Normativa RETIE en Colombia</h3>
+                    <p>El Reglamento Técnico de Instalaciones Eléctricas (RETIE) es obligatorio. Exige: aterrizaje en todas las instalaciones, breakers diferenciales de 30mA en áreas húmedas, canalización protegida (PVC o metal), tableros con espacio para expansión, y certificación por electricista matriculado para nuevas instalaciones.</p>
+                    <div class="pro-tip"><i class="fas fa-star"></i> Pro Tip: Una instalación sin certificado RETIE puede invalidar el seguro de tu vivienda en caso de incendio eléctrico.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== COLORES DE CABLES ===== -->
+    <section class="section" style="background: var(--white);">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-title">
+                    <h2><i class="fas fa-palette" style="color: var(--primary);"></i> Código de Colores de Cables</h2>
+                    <span>Identifica cada conductor correctamente según la norma NTC 2050</span>
+                </div>
+            </div>
+            <div class="cable-colors-grid">
+                <div class="cable-card">
+                    <div class="cable-header" style="background: linear-gradient(135deg, #d50000, #ff5252);">
+                        <h3><i class="fas fa-bolt"></i> Fase Activa</h3>
+                        <span>110V - 120V</span>
+                    </div>
+                    <div class="cable-body">
+                        <ul>
+                            <li><i class="fas fa-check" style="color: var(--accent);"></i> Negro (uso general)</li>
+                            <li><i class="fas fa-check" style="color: var(--accent);"></i> Rojo (segunda fase en 220V)</li>
+                            <li><i class="fas fa-check" style="color: var(--accent);"></i> Azul (en algunas instalaciones antiguas)</li>
+                            <li><i class="fas fa-exclamation-triangle" style="color: var(--danger);"></i> NUNCA tocar sin verificar con probador</li>
+                            <li><i class="fas fa-exclamation-triangle" style="color: var(--danger);"></i> Siempre va al tornillo dorado/bronce del tomacorriente</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="cable-card">
+                    <div class="cable-header" style="background: linear-gradient(135deg, #1976d2, #42a5f5);">
+                        <h3><i class="fas fa-minus"></i> Neutro</h3>
+                        <span>Retorno de Corriente</span>
+                    </div>
+                    <div class="cable-body">
+                        <ul>
+                            <li><i class="fas fa-check" style="color: var(--accent);"></i> Blanco (estándar internacional)</li>
+                            <li><i class="fas fa-check" style="color: var(--accent);"></i> Azul claro (norma europea/RETIE)</li>
+                            <li><i class="fas fa-check" style="color: var(--accent);"></i> Gris (en circuitos de 220V)</li>
+                            <li><i class="fas fa-exclamation-triangle" style="color: var(--danger);"></i> Puede llevar tensión si hay desbalance</li>
+                            <li><i class="fas fa-exclamation-triangle" style="color: var(--danger);"></i> Va al tornillo plateado del tomacorriente</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="cable-card">
+                    <div class="cable-header" style="background: linear-gradient(135deg, #00c853, #69f0ae);">
+                        <h3><i class="fas fa-globe"></i> Tierra (Ground)</h3>
+                        <span>Protección de Seguridad</span>
+                    </div>
+                    <div class="cable-body">
+                        <ul>
+                            <li><i class="fas fa-check" style="color: var(--accent);"></i> Verde (estándar)</li>
+                            <li><i class="fas fa-check" style="color: var(--accent);"></i> Verde-Amarillo (norma internacional)</li>
+                            <li><i class="fas fa-check" style="color: var(--accent);"></i> Desnudo en canalizaciones metálicas</li>
+                            <li><i class="fas fa-exclamation-triangle" style="color: var(--danger);"></i> NUNCA interrumpir: debe ser continuo</li>
+                            <li><i class="fas fa-exclamation-triangle" style="color: var(--danger);"></i> Va al tornillo verde del tomacorriente</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== COMPONENTES ===== -->
+    <section class="section" id="componentes">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-title">
+                    <h2><i class="fas fa-cogs" style="color: var(--primary);"></i> Componentes de una Instalación Residencial</h2>
+                    <span>Conoce cada elemento del sistema eléctrico de tu hogar</span>
+                </div>
+            </div>
+            <div class="components-grid">
+                <div class="component-card">
+                    <div class="component-icon" style="background: linear-gradient(135deg, #1a237e, #3949ab);">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3>Tablero de Distribución</h3>
+                    <p>Caja metálica donde se instalan breakers, busbars y el breaker principal. Debe estar en área ventilada, seca y con fácil acceso. Capacidad mínima: 24 espacios para vivienda estándar.</p>
+                </div>
+                <div class="component-card">
+                    <div class="component-icon" style="background: linear-gradient(135deg, #ff6f00, #ff9800);">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Breakers Termomagnéticos</h3>
+                    <p>Protegen contra sobrecarga (calentamiento progresivo) y cortocircuito (falla brusca). Capacidades: 15A, 20A, 30A, 40A, 50A. Nunca cambiar un 15A por 20A sin cambiar el cable también.</p>
+                </div>
+                <div class="component-card">
+                    <div class="component-icon" style="background: linear-gradient(135deg, #00c853, #69f0ae);">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h3>Breaker Diferencial (GFCI)</h3>
+                    <p>Detecta fugas de corriente hacia tierra (ej: persona tocando cable dañado). Salta en 0.03 segundos si detecta diferencia de 30mA. Obligatorio en baños, cocinas, exteriores y áreas húmedas.</p>
+                </div>
+                <div class="component-card">
+                    <div class="component-icon" style="background: linear-gradient(135deg, #d50000, #ff5252);">
+                        <i class="fas fa-plug"></i>
+                    </div>
+                    <h3>Tomacorrientes (Receptáculos)</h3>
+                    <p>15A para uso general, 20A para cocina/lavandería. Tipo polarizado (una ranura más grande) para seguridad. Los de 20A tienen ranura en T. Siempre conectar tierra al tornillo verde.</p>
+                </div>
+                <div class="component-card">
+                    <div class="component-icon" style="background: linear-gradient(135deg, #7b1fa2, #ba68c8);">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Interruptores y Dimmers</h3>
+                    <p>Simple: enciende/apaga un punto. Doble: controla dos puntos. De tres vías: controla un punto desde dos ubicaciones (escaleras). Dimmer: regula intensidad de luz, solo para bombillas compatibles.</p>
+                </div>
+                <div class="component-card">
+                    <div class="component-icon" style="background: linear-gradient(135deg, #546e7a, #90a4ae);">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h3>Canalización y Conduit</h3>
+                    <p>Tubo PVC liviano para interiores seco. PVC pesado para exteriores y empotrado. Conduit metálico (EMT) para áreas con riesgo mecánico. Relleno máximo 40% del área transversal del tubo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TABLA DE BREAKERS ===== -->
+    <section class="section" style="background: var(--white);">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-title">
+                    <h2><i class="fas fa-table" style="color: var(--primary);"></i> Guía de Breakers por Circuito</h2>
+                    <span>Configuración estándar para una vivienda residencial según RETIE</span>
+                </div>
+            </div>
+            <div style="overflow-x: auto;">
+                <table class="breakers-table">
+                    <thead>
+                        <tr>
+                            <th>Circuito</th>
+                            <th>Breaker</th>
+                            <th>Cable AWG</th>
+                            <th>Cantidad</th>
+                            <th>Uso Típico</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Iluminación General</strong></td>
+                            <td><span class="badge badge-iluminacion">15A</span></td>
+                            <td>14 AWG THW</td>
+                            <td>2-3 circuitos</td>
+                            <td>Lámparas, ventiladores, extractores</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tomacorrientes Sala/Comedor</strong></td>
+                            <td><span class="badge badge-tomacorrientes">20A</span></td>
+                            <td>12 AWG THW</td>
+                            <td>2 circuitos</td>
+                            <td>TV, computadoras, cargadores, lámparas</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tomacorrientes Cocina</strong></td>
+                            <td><span class="badge badge-cocina">20A GFCI</span></td>
+                            <td>12 AWG THW</td>
+                            <td>2 circuitos</td>
+                            <td>Nevera, microondas, licuadora, cafetera</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Baños</strong></td>
+                            <td><span class="badge badge-cocina">20A GFCI</span></td>
+                            <td>12 AWG THW</td>
+                            <td>1 circuito por baño</td>
+                            <td>Secador, plancha, extractor, toallas eléctricas</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Lavandería</strong></td>
+                            <td><span class="badge badge-cocina">20A GFCI</span></td>
+                            <td>12 AWG THW</td>
+                            <td>1-2 circuitos</td>
+                            <td>Lavadora, secadora (gas), plancha</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Aire Acondicionado</strong></td>
+                            <td><span class="badge badge-especiales">30A</span></td>
+                            <td>10 AWG THW</td>
+                            <td>1 por unidad</td>
+                            <td>Mini-split 12,000-24,000 BTU</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Calentador de Agua</strong></td>
+                            <td><span class="badge badge-especiales">30A - 50A</span></td>
+                            <td>10-8 AWG THW</td>
+                            <td>1 circuito dedicado</td>
+                            <td>Shower eléctrico, calentador de paso</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Secadora Eléctrica</strong></td>
+                            <td><span class="badge badge-especiales">30A 220V</span></td>
+                            <td>10 AWG THW</td>
+                            <td>1 circuito dedicado</td>
+                            <td>Secadora con resistencia eléctrica</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Exteriores / Jardín</strong></td>
+                            <td><span class="badge badge-cocina">20A GFCI</span></td>
+                            <td>12 AWG THW</td>
+                            <td>1-2 circuitos</td>
+                            <td>Bombas, iluminación exterior, enchufes jardín</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="text-align: center; margin-top: 20px; color: var(--gray); font-size: 0.9rem;">
+                <i class="fas fa-info-circle"></i> GFCI = Ground Fault Circuit Interrupter (Breaker diferencial). Obligatorio en áreas húmedas según RETIE.
+            </p>
+        </div>
+    </section>
+
+    <!-- ===== ERRORES PELIGROSOS ===== -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-title">
+                    <h2><i class="fas fa-skull-crossbones" style="color: var(--danger);"></i> Errores Eléctricos que pueden Matar</h2>
+                    <span>Prácticas que he visto causar incendios y electrocuciones</span>
+                </div>
+            </div>
+            <div class="danger-grid">
+                <div class="danger-card">
+                    <div class="danger-icon"><i class="fas fa-times"></i></div>
+                    <div class="danger-content">
+                        <h3>Puentear (bypassear) el breaker con aluminio</h3>
+                        <p>He visto "técnicos" poner un pedazo de cable de aluminio entre los tornillos del breaker para que "no salte más". Esto elimina toda protección y convierte tu casa en una trampa de fuego. Si el breaker salta, hay una razón. Búscala.</p>
+                    </div>
+                </div>
+                <div class="danger-card">
+                    <div class="danger-icon"><i class="fas fa-times"></i></div>
+                    <div class="danger-content">
+                        <h3>Usar cable 16 AWG o paralelo para instalación fija</h3>
+                        <p>El cable paralelo (tipo lamparita) está diseñado para extensiones temporales. Su aislamiento no resiste calor, rozamiento ni envejecimiento en paredes. Se quema, se rompe y causa cortocircuitos. Usa siempre THW o THHN en conduit.</p>
+                    </div>
+                </div>
+                <div class="danger-card">
+                    <div class="danger-icon"><i class="fas fa-times"></i></div>
+                    <div class="danger-content">
+                        <h3>Conectar tierra al tubo de agua o gas</h3>
+                        <p>Antes se hacía, hoy es ilegal y mortal. Si hay una falla, toda la tubería metálica de la casa queda electrificada. La puesta a tierra debe ir a una jabalina de cobre enterrada 2.5m en suelo húmedo, conectada al tablero principal.</p>
+                    </div>
+                </div>
+                <div class="danger-card">
+                    <div class="danger-icon"><i class="fas fa-times"></i></div>
+                    <div class="danger-content">
+                        <h3>Empalmar cables sin caja de registro</h3>
+                        <p>Todo empalme debe hacerse dentro de una caja de registro (octogonal o cuadrada) accesible. Empalmes empotrados en pared sin caja son ilegales, inseguros e imposibles de mantener. El calor del empalme deteriora la cinta aislante con el tiempo.</p>
+                    </div>
+                </div>
+                <div class="danger-card">
+                    <div class="danger-icon"><i class="fas fa-times"></i></div>
+                    <div class="danger-content">
+                        <h3>Sobrecargar tomacorrientes con multiplug sin protección</h3>
+                        <p>Un tomacorriente de 15A con multiplug puede alimentar 6 equipos que suman 2,500W. El cable se calienta, el aislamiento se funde y el incendio comienza dentro de la pared donde no lo ves. Usa tomacorrientes suficientes, no multiplugs como solución permanente.</p>
+                    </div>
+                </div>
+                <div class="danger-card">
+                    <div class="danger-icon"><i class="fas fa-times"></i></div>
+                    <div class="danger-content">
+                        <h3>Trabajar con electricidad sin verificar con probador</h3>
+                        <p>"Está apagado, no hay problema" — últimas palabras de muchos. Siempre verifica con probador de tensión (no-contacto y contacto) antes de tocar. El breaker puede estar mal etiquetado, hay alimentación cruzada, o alguien puede reconectar mientras trabajas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONSEJO DEL EXPERTO ===== -->
+    <div class="container">
+        <div class="expert-tip">
+            <h3><i class="fas fa-user-tie"></i> Consejo del Experto</h3>
+            <p>"En 18 años de electricidad residencial, he inspeccionado cientos de instalaciones "hechas por el cuñado" o "el albañil que entiende de todo". El 70% tenían fallas graves: tierras falsas, breakers sobredimensionados, cables quemados dentro de paredes, y empalmes empotrados sin caja. Mi regla de oro: la electricidad no perdona. No hay "casi seguro" ni "funciona así que está bien". Una instalación eléctrica es segura o no lo es. Si no estás 100% seguro de lo que haces, llama a un electricista matriculado. En Colombia, el RETIE exige certificación para nuevas instalaciones y eso existe por una razón: salvar vidas. Nunca, nunca trabajes con electricidad sin desconectar el breaker principal y verificar con probador. Y si alguien te dice "yo lo hago más barato", pregúntale si garantiza con su vida que no habrá incendio."</p>
+            <div class="author">— Ing. Roberto Vargas, Electricista Matriculado RETIE</div>
+        </div>
+    </div>
+
+    <!-- ===== NEWSLETTER ===== -->
+    <section class="newsletter">
+        <div class="newsletter-container">
+            <h2><i class="fas fa-envelope-open-text"></i> Recibe Más Consejos del Experto</h2>
+            <p>Guías técnicas, normativas RETIE, ofertas en materiales eléctricos y consejos de seguridad directamente en tu correo.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Tu correo electrónico">
+                <button type="submit">Suscribirme</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3><i class="fas fa-tools"></i> FERRETERÍA PRO</h3>
+                    <p>Tu tienda online profesional de ferretería y materiales de construcción. Productos de calidad, precios competitivos y envío a domicilio.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Categorías</h4>
+                    <ul>
+                        <li><a href="productos">Herramientas</a></li>
+                        <li><a href="productos">Pinturas</a></li>
+                        <li><a href="productos">Electricidad</a></li>
+                        <li><a href="productos">Construcción</a></li>
+                        <li><a href="productos">Seguridad</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="/sobre-nosotros">Sobre Nosotros</a></li>
+                        <li><a href="/contacto">Contacto</a></li>
+                        <li><a href="/blog">Blog</a></li>
+                        <li><a href="/faq">Preguntas Frecuentes</a></li>
+                        <li><a href="/terminos">Términos y Condiciones</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Calle 123 #45-67, Bogotá</a></li>
+                        <li><a href="#"><i class="fas fa-phone"></i> +57 300 123 4567</a></li>
+                        <li><a href="#"><i class="fas fa-envelope"></i> info@ferreteriapro.com</a></li>
+                        <li><a href="#"><i class="fas fa-clock"></i> Lun-Vie: 8am - 6pm</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Ferretería Pro. Todos los derechos reservados.</p>
+                <p>Diseñado con <i class="fas fa-heart" style="color: var(--danger);"></i> para profesionales</p>
+            </div>
+        </div>
+    </footer>
+<script src="/static/js/data.js"></script>
+<script src="/static/js/cart-storage.js"></script>
+</body>
+</html>

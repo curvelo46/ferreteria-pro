@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Pedidos - Ferretería Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/checkout.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cart.css') }}">
+    <base target="_self">
+
+    <style>
+        /* Estilos específicos para página de pedidos */
+        .pedidos-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .pedido-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--checkout-border);
+            transition: var(--checkout-transition);
+        }
+
+        .pedido-card:hover {
+            box-shadow: var(--checkout-shadow-hover);
+            transform: translateY(-3px);
+        }
+
+        .pedido-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--light);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .pedido-info h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .pedido-info .pedido-fecha {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        .pedido-estado {
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .estado-pagado { background: #e8f5e9; color: #2e7d32; }
+        .estado-enviado { background: #e3f2fd; color: #1565c0; }
+        .estado-entregado { background: #f3e5f5; color: #6a1b9a; }
+        .estado-pendiente { background: #fff3e0; color: #ef6c00; }
+        .estado-cancelado { background: #ffebee; color: #c62828; }
+
+        .pedido-productos {
+            margin-bottom: 20px;
+        }
+
+        .pedido-producto {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .pedido-producto:last-child {
+            border-bottom: none;
+        }
+
+        .pedido-producto img {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 1px solid #eee;
+        }
+
+        .pedido-producto-info {
+            flex: 1;
+        }
+
+        .pedido-producto-info .nombre {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .pedido-producto-info .cantidad {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        .pedido-producto-precio {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 0.95rem;
+        }
+
+        .pedido-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 2px solid var(--light);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .pedido-total {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .pedido-total span {
+            color: var(--primary);
+            font-size: 1.3rem;
+        }
+
+        .btn-ver-detalle {
+            padding: 10px 20px;
+            border-radius: 50px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--checkout-transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-ver-detalle:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+        }
+
+        /* Estado vacío */
+        .pedidos-empty {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .pedidos-empty i {
+            font-size: 4rem;
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+
+        .pedidos-empty h3 {
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .pedidos-empty p {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        /* Buscador de pedidos */
+        .pedidos-search {
+            max-width: 500px;
+            margin: 0 auto 30px;
+        }
+
+        .pedidos-search .input-wrapper {
+            position: relative;
+        }
+
+        .pedidos-search input {
+            width: 100%;
+            padding: 14px 20px 14px 50px;
+            border: 2px solid var(--checkout-border);
+            border-radius: 50px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            outline: none;
+            transition: var(--checkout-transition);
+        }
+
+        .pedidos-search input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(26, 35, 126, 0.1);
+        }
+
+        .pedidos-search .search-icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+        }
+
+        @media (max-width: 768px) {
+            .pedido-header {
+                flex-direction: column;
+            }
+
+            .pedido-footer {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .btn-ver-detalle {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+
+</head>
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="top-bar-container">
+            <div class="top-bar-info">
+                <span><i class="fas fa-phone"></i> +57 300 123 4567</span>
+                <span><i class="fas fa-envelope"></i> info@ferreteriapro.com</span>
+                <span><i class="fas fa-map-marker-alt"></i> Envíos a todo el país</span>
+            </div>
+            <div class="top-bar-links">
+                <a href="#"><i class="fas fa-question-circle"></i> Ayuda</a>
+                <a href="/pedidos"><i class="fas fa-truck"></i> Seguimiento</a>
+                <a href="#"><i class="fas fa-percent"></i> Ofertas</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="logo">
+                <div class="logo-icon"><i class="fas fa-tools"></i></div>
+                <div class="logo-text">
+                    <h1>FERRETERÍA PRO</h1>
+                    <span>TU TIENDA ONLINE PROFESIONAL</span>
+                </div>
+            </a>
+            <div class="nav-actions">
+                <a href="/" class="nav-action">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span>Seguir comprando</span>
+                </a>
+                <a href="/carrito" class="nav-action">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cartCount" class="badge">0</span>
+                    <span>Carrito</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header-container">
+            <h1><i class="fas fa-box"></i> Mis Pedidos</h1>
+            <div class="breadcrumb">
+                <a href="/">Inicio</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>Mis Pedidos</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pedidos Content -->
+    <div class="container" style="padding: 40px 20px;">
+        <div class="pedidos-container">
+
+            <!-- Buscador -->
+            <div class="pedidos-search">
+                <div class="input-wrapper">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="email" id="emailBusqueda" placeholder="Ingresa tu email para ver tus pedidos...">
+                </div>
+            </div>
+
+            <!-- Lista de Pedidos -->
+            <div id="pedidosList">
+                <!-- Estado vacío inicial -->
+                <div class="pedidos-empty">
+                    <i class="fas fa-box-open"></i>
+                    <h3>No hay pedidos para mostrar</h3>
+                    <p>Ingresa tu email arriba para ver tu historial de compras.</p>
+                    <a href="/productos" class="btn btn-primary" style="display: inline-block; padding: 12px 24px; background: var(--primary); color: white; text-decoration: none; border-radius: 50px; font-weight: 600;">
+                        <i class="fas fa-shopping-bag"></i> Ir a comprar
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Mensaje</span>
+    </div>
+
+    <!-- Footer -->
+      <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3><i class="fas fa-tools"></i> FERRETERÍA PRO</h3>
+                    <p>Tu tienda online profesional de ferretería y materiales de construcción. Productos de calidad, precios competitivos y envío a domicilio.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Categorías</h4>
+                    <ul>
+                        <li><a href="/productos?categoria=herramientas">Herramientas</a></li>
+                        <li><a href="/productos?categoria=pinturas">Pinturas</a></li>
+                        <li><a href="/productos?categoria=electricidad">Electricidad</a></li>
+                        <li><a href="/productos?categoria=construccion">Construcción</a></li>
+                        <li><a href="/productos?categoria=seguridad">Seguridad</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="/sobre-nosotros">Sobre Nosotros</a></li>
+                        <li><a href="/contacto">Contacto</a></li>
+                        <li><a href="/blog">Blog</a></li>
+                        <li><a href="/faq">Preguntas Frecuentes</a></li>
+                        <li><a href="/terminos">Términos y Condiciones</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Calle 123 #45-67, Bogotá</a></li>
+                        <li><a href="#"><i class="fas fa-phone"></i> +57 300 123 4567</a></li>
+                        <li><a href="#"><i class="fas fa-envelope"></i> info@ferreteriapro.com</a></li>
+                        <li><a href="#"><i class="fas fa-clock"></i> Lun-Vie: 8am - 6pm</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Ferretería Pro. Todos los derechos reservados.</p>
+                <p>Diseñado con <i class="fas fa-heart" style="color: var(--danger);"></i> para profesionales</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/cart-storage.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/pedidos.js') }}"></script>
+<script src="/static/js/data.js"></script>
+<script src="/static/js/cart-storage.js"></script>
+</body>
+</html>
