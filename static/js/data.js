@@ -24,48 +24,7 @@ const products = [
         imagen: 'https://images.unsplash.com/photo-1586864387789-628af9feed72?w=400&h=300&fit=crop',
         tags: ['construccion', 'golpe', 'herramientas']
     },
-    {
-        id: 2,
-        nombre: 'Taladro Inalámbrico 18V',
-        slug: 'taladro-inalambrico',
-        descripcion: 'Taladro percutor con 2 baterías de litio',
-        precio: 199900,
-        precio_oferta: 179900,
-        stock: 25,
-        tipo: 'variable',
-        categoria_id: 1,
-        categoria_nombre: 'Herramientas',
-        categoria_slug: 'herramientas',
-        categoria_icono: '🔧',
-        categoria_color: '#FF6B35',
-        subcategoria_nombre: 'Eléctricas',
-        subcategoria_slug: 'electricas',
-        marca_nombre: 'Bosch',
-        imagen: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?w=400&h=300&fit=crop',
-        tags: ['taladro', 'bricolaje', 'herramientas'],
-        atributos: { voltaje: ['12V', '18V', '20V'], color: ['Amarillo', 'Azul', 'Rojo'] }
-    },
-    {
-        id: 3,
-        nombre: 'Pintura Vinilo 1 Galón',
-        slug: 'pintura-vinilo',
-        descripcion: 'Pintura vinilo acrílico alta calidad',
-        precio: 36900,
-        precio_oferta: null,
-        stock: 30,
-        tipo: 'variable',
-        categoria_id: 2,
-        categoria_nombre: 'Pinturas',
-        categoria_slug: 'pinturas',
-        categoria_icono: '🎨',
-        categoria_color: '#4ECDC4',
-        subcategoria_nombre: 'Vinilo',
-        subcategoria_slug: 'vinilo',
-        marca_nombre: 'Pintuco',
-        imagen: 'https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=400&h=300&fit=crop',
-        tags: ['pintura', 'hogar', 'decoracion'],
-        atributos: { color: ['Blanco', 'Negro', 'Gris', 'Azul'], acabado: ['Brillante', 'Mate'] }
-    },
+
     {
         id: 4,
         nombre: 'Bombillo LED 12W',
@@ -284,6 +243,48 @@ const products = [
         imagen: "https://cdn1.totalcommerce.cloud/metropolis/product-zoom/es/cinta-metrica-5mt-global-plus-stanley-1.webp",
         precio_oferta: null,
         tags: ["medicion", "obra", "herramientas"],
+    },
+     {
+        id: 2,
+        nombre: 'Taladro Inalámbrico 18V',
+        slug: 'taladro-inalambrico',
+        descripcion: 'Taladro percutor con 2 baterías de litio',
+        precio: 199900,
+        precio_oferta: 179900,
+        stock: 25,
+        tipo: 'variable',
+        categoria_id: 1,
+        categoria_nombre: 'Herramientas',
+        categoria_slug: 'herramientas',
+        categoria_icono: '🔧',
+        categoria_color: '#FF6B35',
+        subcategoria_nombre: 'Eléctricas',
+        subcategoria_slug: 'electricas',
+        marca_nombre: 'Bosch',
+        imagen: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?w=400&h=300&fit=crop',
+        tags: ['taladro', 'bricolaje', 'herramientas'],
+        atributos: { voltaje: ['12V', '18V', '20V'], color: ['Amarillo', 'Azul', 'Rojo'] }
+    },
+    {
+        id: 3,
+        nombre: 'Pintura Vinilo 1 Galón',
+        slug: 'pintura-vinilo',
+        descripcion: 'Pintura vinilo acrílico alta calidad',
+        precio: 36900,
+        precio_oferta: null,
+        stock: 30,
+        tipo: 'variable',
+        categoria_id: 2,
+        categoria_nombre: 'Pinturas',
+        categoria_slug: 'pinturas',
+        categoria_icono: '🎨',
+        categoria_color: '#4ECDC4',
+        subcategoria_nombre: 'Vinilo',
+        subcategoria_slug: 'vinilo',
+        marca_nombre: 'Pintuco',
+        imagen: 'https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=400&h=300&fit=crop',
+        tags: ['pintura', 'hogar', 'decoracion'],
+        atributos: { color: ['Blanco', 'Negro', 'Gris', 'Azul'], acabado: ['Brillante', 'Mate'] }
     },
     {
         id: 15,
@@ -1430,12 +1431,7 @@ function renderProductCard(product) {
                 <img src="${product.imagen}" alt="${product.nombre}" loading="lazy"
                      onerror="this.src='https://via.placeholder.com/400x300?text=${encodeURIComponent(product.nombre)}'">
                 <div class="product-actions">
-                    <button class="action-btn" onclick="addToWishlist(${product.id})" title="Agregar a favoritos">
-                        <i class="far fa-heart"></i>
-                    </button>
-                    <button class="action-btn" onclick="quickView(${product.id})" title="Vista rápida">
-                        <i class="fas fa-eye"></i>
-                    </button>
+                   
                 </div>
             </div>
             <div class="product-info">
