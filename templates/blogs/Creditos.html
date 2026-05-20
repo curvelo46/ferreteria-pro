@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulador de Compra - Ferretería Pro</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f5f5f5;
+    padding:40px;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:1fr 420px;
+    gap:30px;
+}
+
+.checkout,
+.resumen{
+    background:#fff;
+    border-radius:15px;
+    padding:30px;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+
+h1{
+    margin-bottom:20px;
+    color:#d32f2f;
+}
+
+h2{
+    margin-bottom:15px;
+    color:#333;
+}
+
+.form-group{
+    margin-bottom:18px;
+}
+
+label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:bold;
+}
+
+input,
+select{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:10px;
+    font-size:15px;
+}
+
+input:focus,
+select:focus{
+    border-color:#d32f2f;
+    outline:none;
+}
+
+.row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.metodos-pago{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.metodo{
+    border:2px solid #ddd;
+    border-radius:12px;
+    padding:15px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.metodo.active{
+    border-color:#d32f2f;
+    background:#fff5f5;
+}
+
+.metodo h3{
+    font-size:16px;
+    margin-bottom:10px;
+}
+
+.entidades{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.entidad{
+    border:2px solid #ddd;
+    border-radius:10px;
+    padding:12px;
+    cursor:pointer;
+    transition:.3s;
+    text-align:center;
+    font-weight:bold;
+    background:#fafafa;
+}
+
+.entidad.active{
+    border-color:#2e7d32;
+    background:#e8f5e9;
+}
+
+.card-preview{
+    background:linear-gradient(135deg,#b71c1c,#ef5350);
+    color:white;
+    border-radius:18px;
+    padding:25px;
+    margin-bottom:20px;
+}
+
+.card-number{
+    font-size:22px;
+    letter-spacing:2px;
+    margin:20px 0;
+}
+
+.card-bottom{
+    display:flex;
+    justify-content:space-between;
+}
+
+.btn{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:12px;
+    background:#d32f2f;
+    color:white;
+    font-size:17px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.btn:hover{
+    background:#b71c1c;
+}
+
+.resumen-item{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:12px;
+}
+
+.total{
+    font-size:22px;
+    font-weight:bold;
+    border-top:1px solid #ddd;
+    padding-top:15px;
+    margin-top:15px;
+}
+
+.aprobado{
+    background:#e8f5e9;
+    color:#2e7d32;
+    padding:18px;
+    border-radius:12px;
+    margin-top:20px;
+    display:none;
+    font-weight:bold;
+}
+
+.error{
+    background:#ffebee;
+    color:#c62828;
+    padding:18px;
+    border-radius:12px;
+    margin-top:20px;
+    display:none;
+    font-weight:bold;
+}
+
+.badge{
+    background:#d32f2f;
+    color:white;
+    padding:4px 10px;
+    border-radius:30px;
+    font-size:13px;
+}
+
+small{
+    color:#777;
+}
+
+@media(max-width:900px){
+
+    .container{
+        grid-template-columns:1fr;
+    }
+
+    .metodos-pago{
+        grid-template-columns:1fr;
+    }
+
+    .entidades{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- CHECKOUT -->
+    <div class="checkout">
+
+        <h1><i class="fa-solid fa-screwdriver-wrench"></i> Ferretería Pro</h1>
+
+        <h2>Selecciona tu método de pago</h2>
+
+        <div class="metodos-pago">
+
+            <div class="metodo active" onclick="seleccionarMetodo('tarjeta', this)">
+                <h3><i class="fa-solid fa-credit-card"></i> Tarjeta</h3>
+                <small>Visa, Mastercard y Amex</small>
+            </div>
+
+            <div class="metodo" onclick="seleccionarMetodo('credito', this)">
+                <h3><i class="fa-solid fa-building-columns"></i> Crédito</h3>
+                <small>Financia tu compra</small>
+            </div>
+
+        </div>
+
+        <!-- TARJETA -->
+        <div id="pagoTarjeta">
+
+            <div class="card-preview">
+                <div>
+                    <i class="fa-solid fa-credit-card"></i>
+                </div>
+
+                <div class="card-number" id="previewNumero">
+                    **** **** **** ****
+                </div>
+
+                <div class="card-bottom">
+                    <div>
+                        <small>Titular</small>
+                        <div id="previewNombre">NOMBRE TITULAR</div>
+                    </div>
+
+                    <div>
+                        <small>Vence</small>
+                        <div id="previewFecha">MM/AA</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Nombre del titular</label>
+                <input type="text" id="nombre">
+            </div>
+
+            <div class="form-group">
+                <label>Número de tarjeta</label>
+                <input type="text" id="numeroTarjeta" maxlength="19">
+            </div>
+
+            <div class="row">
+
+                <div class="form-group">
+                    <label>Fecha vencimiento</label>
+                    <input type="text" id="fecha" placeholder="MM/AA">
+                </div>
+
+                <div class="form-group">
+                    <label>CVV</label>
+                    <input type="password" id="cvv" maxlength="4">
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- CRÉDITO -->
+        <div id="creditoBox" style="display:none;">
+
+            <h2>Selecciona una entidad financiera</h2>
+
+            <div class="entidades">
+
+                <div class="entidad active" onclick="seleccionarEntidad(this, 'Banco de Bogotá', 1.9)">
+                    Banco de Bogotá
+                </div>
+
+                <div class="entidad" onclick="seleccionarEntidad(this, 'PayJoy', 2.4)">
+                    PayJoy
+                </div>
+
+                <div class="entidad" onclick="seleccionarEntidad(this, 'Brilla', 1.5)">
+                    Brilla
+                </div>
+
+                <div class="entidad" onclick="seleccionarEntidad(this, 'Bancolombia', 2.1)">
+                    Bancolombia
+                </div>
+
+                <div class="entidad" onclick="seleccionarEntidad(this, 'Davivienda', 2.0)">
+                    Davivienda
+                </div>
+
+            </div>
+
+            <br>
+
+            <div class="form-group">
+                <label>Cuotas</label>
+
+                <select id="cuotas" onchange="calcularCredito()">
+                    <option value="6">6 cuotas</option>
+                    <option value="12">12 cuotas</option>
+                    <option value="18">18 cuotas</option>
+                    <option value="24">24 cuotas</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Ingresos mensuales</label>
+                <input type="number" id="ingresos" placeholder="Ej: 3000000">
+            </div>
+
+            <div class="form-group">
+                <label>Documento</label>
+                <input type="text" id="documento">
+            </div>
+
+        </div>
+
+        <button class="btn" onclick="procesarCompra()">
+            Finalizar Compra
+        </button>
+
+        <div class="aprobado" id="mensajeAprobado"></div>
+        <div class="error" id="mensajeError"></div>
+
+    </div>
+
+    <!-- RESUMEN -->
+    <div class="resumen">
+
+        <h2>Resumen del Pedido</h2>
+
+        <div class="resumen-item">
+            <span>Pintura Impermeabilizante</span>
+            <span>$120.000</span>
+        </div>
+
+        <div class="resumen-item">
+            <span>Taladro Industrial</span>
+            <span>$350.000</span>
+        </div>
+
+        <div class="resumen-item">
+            <span>Envío</span>
+            <span>$15.000</span>
+        </div>
+
+        <div class="resumen-item total">
+            <span>Total</span>
+            <span id="totalCompra">$485.000</span>
+        </div>
+
+        <br>
+
+        <span class="badge">Compra Segura</span>
+
+    </div>
+
+</div>
+
+<script>
+
+let metodoPago = "tarjeta";
+
+let entidadSeleccionada = {
+    nombre: "Banco de Bogotá",
+    interes: 1.9
+};
+
+const totalCompra = 485000;
+
+// ================================
+// CAMBIO DE MÉTODO
+// ================================
+
+function seleccionarMetodo(tipo, elemento){
+
+    metodoPago = tipo;
+
+    document.querySelectorAll('.metodo').forEach(m=>{
+        m.classList.remove('active');
+    });
+
+    elemento.classList.add('active');
+
+    if(tipo === 'tarjeta'){
+        document.getElementById('pagoTarjeta').style.display = 'block';
+        document.getElementById('creditoBox').style.display = 'none';
+    }else{
+        document.getElementById('pagoTarjeta').style.display = 'none';
+        document.getElementById('creditoBox').style.display = 'block';
+    }
+
+}
+
+// ================================
+// PREVIEW TARJETA
+// ================================
+
+const inputNumero = document.getElementById('numeroTarjeta');
+const inputNombre = document.getElementById('nombre');
+const inputFecha = document.getElementById('fecha');
+
+inputNumero.addEventListener('input', ()=>{
+
+    let valor = inputNumero.value
+        .replace(/\D/g,'')
+        .replace(/(.{4})/g,'$1 ')
+        .trim();
+
+    inputNumero.value = valor;
+
+    document.getElementById('previewNumero').innerText =
+        valor || '**** **** **** ****';
+
+});
+
+inputNombre.addEventListener('input', ()=>{
+
+    document.getElementById('previewNombre').innerText =
+        inputNombre.value.toUpperCase() || 'NOMBRE TITULAR';
+
+});
+
+inputFecha.addEventListener('input', ()=>{
+
+    let valor = inputFecha.value
+        .replace(/\D/g,'');
+
+    if(valor.length >= 2){
+        valor = valor.substring(0,2) + '/' + valor.substring(2,4);
+    }
+
+    inputFecha.value = valor;
+
+    document.getElementById('previewFecha').innerText =
+        valor || 'MM/AA';
+
+});
+
+// ================================
+// ENTIDADES
+// ================================
+
+function seleccionarEntidad(elemento, nombre, interes){
+
+    document.querySelectorAll('.entidad').forEach(e=>{
+        e.classList.remove('active');
+    });
+
+    elemento.classList.add('active');
+
+    entidadSeleccionada = {
+        nombre,
+        interes
+    };
+
+    calcularCredito();
+
+}
+
+// ================================
+// CALCULAR CRÉDITO
+// ================================
+
+function calcularCredito(){
+
+    let cuotas = parseInt(document.getElementById('cuotas').value);
+
+    let interes = entidadSeleccionada.interes;
+
+    let totalConInteres =
+        totalCompra + (totalCompra * interes / 100 * cuotas);
+
+    let cuotaMensual = totalConInteres / cuotas;
+
+    document.getElementById('totalCompra').innerText =
+        '$' + totalConInteres.toLocaleString('es-CO');
+
+}
+
+// ================================
+// VALIDACIONES
+// ================================
+
+function validarTarjeta(){
+
+    let nombre = document.getElementById('nombre').value.trim();
+    let numero = document.getElementById('numeroTarjeta').value.trim();
+    let fecha = document.getElementById('fecha').value.trim();
+    let cvv = document.getElementById('cvv').value.trim();
+
+    if(nombre.length < 3){
+        mostrarError('Nombre inválido');
+        return false;
+    }
+
+    if(numero.length < 19){
+        mostrarError('Número de tarjeta incompleto');
+        return false;
+    }
+
+    if(fecha.length < 5){
+        mostrarError('Fecha inválida');
+        return false;
+    }
+
+    if(cvv.length < 3){
+        mostrarError('CVV inválido');
+        return false;
+    }
+
+    return true;
+
+}
+
+function validarCredito(){
+
+    let ingresos = parseInt(document.getElementById('ingresos').value);
+    let documento = document.getElementById('documento').value.trim();
+
+    if(!ingresos || ingresos < 1000000){
+        mostrarError('Debes tener ingresos mínimos de $1.000.000');
+        return false;
+    }
+
+    if(documento.length < 6){
+        mostrarError('Documento inválido');
+        return false;
+    }
+
+    return true;
+
+}
+
+// ================================
+// PROCESAR COMPRA
+// ================================
+
+function procesarCompra(){
+
+    ocultarMensajes();
+
+    // =========================
+    // PAGO CON TARJETA
+    // =========================
+    if(metodoPago === 'tarjeta'){
+
+        if(!validarTarjeta()) return;
+
+        mostrarAnalisis(
+            'Validando tarjeta...',
+            [
+                'Verificando entidad bancaria...',
+                'Comprobando fondos disponibles...',
+                'Aplicando protocolo antifraude...',
+                'Autorizando transacción segura...'
+            ],
+            function(){
+
+                let aprobado = Math.random() > 0.15;
+
+                if(aprobado){
+
+                    mostrarAprobado(`
+                        <strong>Pago aprobado</strong><br><br>
+                        Tu compra en Ferretería Pro fue procesada correctamente.<br>
+                        Recibirás un correo con los detalles del pedido.
+                    `);
+
+                }else{
+
+                    mostrarError(`
+                        <strong>Transacción rechazada</strong><br><br>
+                        El banco emisor no autorizó el pago.<br>
+                        Intenta nuevamente con otra tarjeta.
+                    `);
+
+                }
+
+            }
+        );
+
+    }
+
+    // =========================
+    // CRÉDITO / PRÉSTAMO
+    // =========================
+    else{
+
+        if(!validarCredito()) return;
+
+        const ingresos =
+            parseInt(document.getElementById('ingresos').value);
+
+        const cuotas =
+            parseInt(document.getElementById('cuotas').value);
+
+        mostrarAnalisis(
+            `Analizando crédito con ${entidadSeleccionada.nombre}...`,
+            [
+                'Consultando centrales de riesgo...',
+                'Validando historial financiero...',
+                'Comprobando capacidad de endeudamiento...',
+                'Analizando ingresos mensuales...',
+                'Calculando nivel de riesgo...',
+                'Generando respuesta bancaria...'
+            ],
+            function(){
+
+                // =========================
+                // LÓGICA ALEATORIA
+                // =========================
+
+                let probabilidad = Math.random();
+
+                // Entre más ingresos, más posibilidades
+                let aprobado =
+                    (ingresos >= 3000000 && probabilidad > 0.25) ||
+                    (ingresos >= 2000000 && probabilidad > 0.45) ||
+                    (ingresos < 2000000 && probabilidad > 0.70);
+
+                if(aprobado){
+
+                    let cuotaMensual =
+                        calcularCuotaMensual();
+
+                    mostrarAprobado(`
+                        <strong>¡Crédito aprobado!</strong><br><br>
+
+                        ${entidadSeleccionada.nombre} aprobó tu solicitud.<br><br>
+
+                        <strong>Total financiado:</strong>
+                        ${document.getElementById('totalCompra').innerText}
+                        <br>
+
+                        <strong>Cuotas:</strong> ${cuotas}
+                        <br>
+
+                        <strong>Cuota mensual estimada:</strong>
+                        $${cuotaMensual.toLocaleString('es-CO')}
+                        <br><br>
+
+                        Ya puedes finalizar tu compra en Ferretería Pro.
+                    `);
+
+                }else{
+
+                    const razones = [
+                        'Tu nivel de endeudamiento es superior al permitido.',
+                        'La entidad detectó un perfil financiero de alto riesgo.',
+                        'No cumples actualmente con la capacidad mínima de pago.',
+                        'La entidad financiera rechazó automáticamente la solicitud.',
+                        'El análisis crediticio no alcanzó el puntaje requerido.'
+                    ];
+
+                    let razon =
+                        razones[Math.floor(Math.random() * razones.length)];
+
+                    mostrarError(`
+                        <strong>Solicitud no aprobada</strong><br><br>
+
+                        ${entidadSeleccionada.nombre} no aprobó el crédito.<br><br>
+
+                        <strong>Motivo:</strong><br>
+                        ${razon}
+                        <br><br>
+
+                        Puedes intentar nuevamente con otra entidad o seleccionar otro método de pago.
+                    `);
+
+                }
+
+            }
+        );
+
+    }
+
+}
+
+// ================================
+// SIMULADOR DE ANÁLISIS
+// ================================
+
+function mostrarAnalisis(titulo, pasos, callback){
+
+    ocultarMensajes();
+
+    const aprobado =
+        document.getElementById('mensajeAprobado');
+
+    aprobado.style.display = 'block';
+
+    let index = 0;
+
+    aprobado.innerHTML = `
+        <div style="text-align:center;">
+            <i class="fa-solid fa-spinner fa-spin"
+               style="font-size:40px;color:#1565c0;margin-bottom:15px;">
+            </i>
+
+            <h3 style="margin-bottom:15px;">
+                ${titulo}
+            </h3>
+
+            <div id="textoAnalisis">
+                Iniciando validación...
+            </div>
+        </div>
+    `;
+
+    const texto =
+        document.getElementById('textoAnalisis');
+
+    const intervalo = setInterval(()=>{
+
+        texto.innerHTML = pasos[index];
+
+        index++;
+
+        if(index >= pasos.length){
+
+            clearInterval(intervalo);
+
+            setTimeout(()=>{
+
+                aprobado.style.display = 'none';
+
+                callback();
+
+            },1200);
+
+        }
+
+    },1200);
+
+}
+
+// ================================
+// CALCULAR CUOTA
+// ================================
+
+function calcularCuotaMensual(){
+
+    let cuotas =
+        parseInt(document.getElementById('cuotas').value);
+
+    let interes =
+        entidadSeleccionada.interes;
+
+    let totalConInteres =
+        totalCompra + (totalCompra * interes / 100 * cuotas);
+
+    return Math.round(totalConInteres / cuotas);
+
+}
+
+// ================================
+// MENSAJES
+// ================================
+
+function mostrarAprobado(texto){
+
+    const box =
+        document.getElementById('mensajeAprobado');
+
+    box.style.display = 'block';
+
+    box.innerHTML = `
+        <div style="line-height:1.7;">
+            <i class="fa-solid fa-circle-check"
+               style="font-size:45px;margin-bottom:15px;color:#2e7d32;">
+            </i>
+
+            <div>${texto}</div>
+        </div>
+    `;
+
+}
+
+function mostrarError(texto){
+
+    const box =
+        document.getElementById('mensajeError');
+
+    box.style.display = 'block';
+
+    box.innerHTML = `
+        <div style="line-height:1.7;">
+            <i class="fa-solid fa-circle-xmark"
+               style="font-size:45px;margin-bottom:15px;color:#c62828;">
+            </i>
+
+            <div>${texto}</div>
+        </div>
+    `;
+
+}
+
+function ocultarMensajes(){
+
+    document.getElementById('mensajeAprobado').style.display = 'none';
+    document.getElementById('mensajeError').style.display = 'none';
+
+}
+
+</script>
+
+</body>
+</html>
