@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Simulador de Compra - Ferretería Pro</title>
- <link rel="stylesheet" href="/static/css/checkout.css">
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 
 <style>
@@ -230,7 +230,28 @@ small{
 <div class="container">
 
     <!-- CHECKOUT -->
+    <div class="checkout">
 
+        <h1><i class="fa-solid fa-screwdriver-wrench"></i> Ferretería Pro</h1>
+
+        <h2>Selecciona tu método de pago</h2>
+
+        <div class="metodos-pago">
+
+            <div class="metodo active" onclick="seleccionarMetodo('tarjeta', this)">
+                <h3><i class="fa-solid fa-credit-card"></i> Tarjeta</h3>
+                <small>Visa, Mastercard y Amex</small>
+            </div>
+
+            <div class="metodo" onclick="seleccionarMetodo('credito', this)">
+                <h3><i class="fa-solid fa-building-columns"></i> Crédito</h3>
+                <small>Financia tu compra</small>
+            </div>
+
+        </div>
+
+        <!-- TARJETA -->
+      
 
         <!-- CRÉDITO -->
         <div id="creditoBox" style="display:none;">
