@@ -592,7 +592,7 @@ def contruccion_sostenible_2026():
 @app.route('/creditos')
 def creditos():
     """Página de "Construcción Sostenible en 2026"""
-    return render_template('blogs/creditos.html')
+    return render_template('blogs/Creditos.html')
 
 
 
