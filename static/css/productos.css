@@ -788,6 +788,7 @@
             .toolbar { flex-direction: column; gap: 15px; align-items: stretch; }
             .products-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
             .products-grid.list-view .product-card { grid-template-columns: 1fr; }
+            .page-header {margin-top: 31%;}
         }
     
 
