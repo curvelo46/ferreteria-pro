@@ -295,6 +295,56 @@ small{
 </head>
 <body>
 
+<div class="top-bar">
+        <div class="top-bar-container">
+            <div class="top-bar-info">
+                <span><i class="fas fa-phone"></i> +57 300 123 4567</span>
+                <span><i class="fas fa-envelope"></i> andrescurvelodiaz@gmail.com</span>
+                <span><i class="fas fa-map-marker-alt"></i> Envíos a todo el país</span>
+            </div>
+            <div class="top-bar-links">
+                <a href="#"><i class="fas fa-question-circle"></i> Ayuda</a>
+                <a href="/pedidos"><i class="fas fa-truck"></i> Seguimiento</a>
+                <a href="#"><i class="fas fa-percent"></i> Ofertas</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>FERRETERÍA PRO</h1>
+                    <span>TU TIENDA ONLINE PROFESIONAL</span>
+                </div>
+            </a>
+
+            <div class="nav-search">
+                <input type="text" id="searchInput" placeholder="Buscar herramientas, pinturas, materiales...">
+                <button onclick="searchProductsPage()"><i class="fas fa-search"></i></button>
+            </div>
+
+            <div class="nav-actions">
+                <a href="#" class="nav-action">
+                    <i class="far fa-user"></i>
+                    <span>Mi Cuenta</span>
+                </a>
+                <a href="/carrito" class="nav-action">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cartCount" class="badge">0</span>
+                    <span>Carrito</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+
+
+   
 <div class="container">
 
     <!-- CHECKOUT -->
@@ -923,6 +973,60 @@ document.addEventListener('DOMContentLoaded', function(){
     document.getElementById('boton').style.display = 'block';
 });
 
+
+
+       <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3><i class="fas fa-tools"></i> FERRETERÍA PRO</h3>
+                    <p>Tu tienda online profesional de ferretería y materiales de construcción. Productos de calidad, precios competitivos y envío a domicilio.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Categorías</h4>
+                    <ul>
+                        <li><a href="/productos?categoria=herramientas">Herramientas</a></li>
+                        <li><a href="/productos?categoria=pinturas">Pinturas</a></li>
+                        <li><a href="/productos?categoria=electricidad">Electricidad</a></li>
+                        <li><a href="/productos?categoria=construccion">Construcción</a></li>
+                        <li><a href="/productos?categoria=seguridad">Seguridad</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="/sobre-nosotros">Sobre Nosotros</a></li>
+                        <li><a href="/contacto">Contacto</a></li>
+                        <li><a href="/blog">Blog</a></li>
+                        <li><a href="/faq">Preguntas Frecuentes</a></li>
+                        <li><a href="/terminos">Términos y Condiciones</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Calle 123 #45-67, Bogotá</a></li>
+                        <li><a href="#"><i class="fas fa-phone"></i> +57 300 123 4567</a></li>
+                        <li><a href="#"><i class="fas fa-envelope"></i> info@ferreteriapro.com</a></li>
+                        <li><a href="#"><i class="fas fa-clock"></i> Lun-Vie: 8am - 6pm</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Ferretería Pro. Todos los derechos reservados.</p>
+                <p>Diseñado con <i class="fas fa-heart" style="color: var(--danger);"></i> para profesionales</p>
+            </div>
+        </div>
+    </footer>
+
+
+   
 </script>
 
 </body>
