@@ -243,7 +243,10 @@ small{
 
              
              <a  id="pagoTarjeta" href="/">
-               <img src="https://mmelectricalpr.com/wp-content/uploads/2023/10/reparacion-de-disyuntor-electrico.webp" alt="Mantenimiento de techos" class="article-hero-image">
+                 <div class="metodo active" onclick="seleccionarMetodo('tarjeta', this)">
+                <h3><i class="fa-solid fa-credit-card"></i> Tarjeta</h3>
+                <small>Visa, Mastercard y Amex</small>
+            </div>
              </a>
              
             
@@ -313,7 +316,7 @@ small{
 
         </div>
 
-        <button class="btn" onclick="procesarCompra()">
+        <button id="boton" class="btn" onclick="procesarCompra()">
             Finalizar Compra
         </button>
 
@@ -383,8 +386,11 @@ function seleccionarMetodo(tipo, elemento){
     if(tipo === 'tarjeta'){
         document.getElementById('pagoTarjeta').style.display = 'block';
         document.getElementById('creditoBox').style.display = 'none';
+        document.getElementById('boton').style.display = 'block';
     }else{
         document.getElementById('creditoBox').style.display = 'block';
+        document.getElementById('boton').style.display = 'none';
+       
         
     }
    
