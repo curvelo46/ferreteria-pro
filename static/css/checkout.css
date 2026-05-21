@@ -663,8 +663,9 @@
     box-shadow: 0 4px 15px rgba(26, 35, 126, 0.3);
     position: relative;
     overflow: hidden;
-       margin-left: 32%;
+    margin-left: 32%;
     margin-top: 8%;
+    margin-bottom: 9%;
 }
 
 .btn-pay::before {
