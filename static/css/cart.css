@@ -10,9 +10,8 @@
     padding: 40px 0;
     position: relative;
     overflow: hidden;
-    /* Asegurar que no se superponga con el menú */
-    margin-top: 0;
-    z-index: 1;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .page-header::before {
@@ -48,6 +47,7 @@
     color: var(--secondary);
 }
 
+/* ===== BREADCRUMB ===== */
 .breadcrumb {
     display: flex;
     align-items: center;
@@ -77,9 +77,8 @@
     max-width: 1400px;
     margin: 0 auto;
     padding: 40px 20px;
-    /* Asegurar espacio para el menú superior */
-    position: relative;
-    z-index: 1;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 /* ===== CART EMPTY STATE ===== */
@@ -148,6 +147,7 @@
     grid-template-columns: 1fr 380px;
     gap: 30px;
     align-items: start;
+    width: 100%;
 }
 
 /* ===== CART ITEMS SECTION ===== */
@@ -156,6 +156,7 @@
     border-radius: var(--radius);
     box-shadow: var(--shadow);
     overflow: hidden;
+    width: 100%;
 }
 
 .cart-header {
@@ -257,6 +258,7 @@
     font-size: 1rem;
     font-weight: 700;
     color: var(--dark);
+    white-space: nowrap;
 }
 
 .cart-item-price .price-old {
@@ -334,6 +336,7 @@
     font-size: 1.1rem;
     font-weight: 800;
     color: var(--primary);
+    white-space: nowrap;
 }
 
 /* Remove Button */
@@ -369,6 +372,7 @@
     border-radius: var(--radius);
     box-shadow: var(--shadow);
     overflow: hidden;
+    width: 100%;
 }
 
 .cart-summary-header {
@@ -414,6 +418,7 @@
 .cart-total-value {
     font-weight: 600;
     color: var(--dark);
+    white-space: nowrap;
 }
 
 .cart-total-row.discount .cart-total-value {
@@ -445,6 +450,7 @@
     font-weight: 800;
     color: var(--primary);
     font-size: 1.4rem;
+    white-space: nowrap;
 }
 
 /* Savings Badge */
@@ -767,6 +773,7 @@
     min-height: 80px;
     outline: none;
     transition: var(--transition);
+    box-sizing: border-box;
 }
 
 .cart-note-textarea:focus {
@@ -802,6 +809,7 @@
 /* ===== CART RECOMMENDATIONS ===== */
 .cart-recommendations {
     margin-top: 40px;
+    width: 100%;
 }
 
 .cart-recommendation-title {
@@ -822,6 +830,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 20px;
+    width: 100%;
 }
 
 .cart-recommendation-card {
@@ -978,7 +987,7 @@
 }
 
 /* ==========================================
-   RESPONSIVE DESIGN - MEJORADO PARA MÓVILES
+   RESPONSIVE DESIGN - CORREGIDO PARA MÓVILES
    ========================================== */
 
 /* Tablet y menores (1024px) */
@@ -991,6 +1000,7 @@
         position: static;
         order: -1;
         margin-bottom: 20px;
+        width: 100%;
     }
 
     .cart-header {
@@ -1001,6 +1011,9 @@
         grid-template-columns: 80px 1fr;
         gap: 15px;
         padding: 20px;
+        position: relative;
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .cart-item-image {
@@ -1031,10 +1044,6 @@
         top: 20px;
         right: 20px;
     }
-
-    .cart-item {
-        position: relative;
-    }
 }
 
 /* Móvil grande (768px) */
@@ -1042,7 +1051,7 @@
     /* Ajustar header para no entrar en conflicto con menú */
     .page-header {
         padding: 25px 0;
-        margin-top: 0;
+        width: 100%;
     }
 
     .page-header h1 {
@@ -1062,6 +1071,12 @@
 
     .cart-container {
         padding: 20px 12px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .cart-items {
+        width: 100%;
     }
 
     .cart-item {
@@ -1077,7 +1092,8 @@
 
     .cart-item-title {
         font-size: 0.9rem;
-        padding-right: 40px; /* espacio para el botón eliminar */
+        padding-right: 40px;
+        word-break: break-word;
     }
 
     .cart-item-meta {
@@ -1094,6 +1110,19 @@
         transform-origin: left center;
     }
 
+    .cart-summary {
+        width: 100%;
+        order: -1;
+    }
+
+    .cart-summary-card {
+        width: 100%;
+    }
+
+    .cart-summary-header {
+        padding: 20px;
+    }
+
     .cart-summary-header h3 {
         font-size: 1.1rem;
     }
@@ -1107,8 +1136,19 @@
         padding: 10px 0;
     }
 
+    /* CORRECCIÓN: Precios en una sola línea */
+    .cart-total-value {
+        display: inline-flex;
+        align-items: baseline;
+        gap: 2px;
+    }
+
     .cart-total-final {
         font-size: 1.1rem;
+    }
+
+    .cart-total-final .cart-total-label {
+        font-size: 1rem;
     }
 
     .cart-total-final .cart-total-value {
@@ -1159,9 +1199,14 @@
         font-size: 0.75rem;
     }
 
+    .cart-recommendations {
+        width: 100%;
+    }
+
     .cart-recommendation-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 12px;
+        width: 100%;
     }
 
     .cart-recommendation-title {
@@ -1229,12 +1274,25 @@
 
     .cart-container {
         padding: 15px 8px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .cart-grid {
+        width: 100%;
+    }
+
+    .cart-items {
+        width: 100%;
+        border-radius: 12px;
     }
 
     .cart-item {
         grid-template-columns: 50px 1fr;
         padding: 12px;
         gap: 8px;
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .cart-item-image {
@@ -1247,6 +1305,7 @@
         font-size: 0.85rem;
         padding-right: 35px;
         line-height: 1.3;
+        word-break: break-word;
     }
 
     .cart-item-meta {
@@ -1270,6 +1329,16 @@
         font-size: 0.85rem;
         top: 12px;
         right: 12px;
+    }
+
+    .cart-summary {
+        width: 100%;
+        order: -1;
+    }
+
+    .cart-summary-card {
+        width: 100%;
+        border-radius: 12px;
     }
 
     .cart-summary-header {
@@ -1389,9 +1458,14 @@
         font-size: 0.9rem;
     }
 
+    .cart-recommendations {
+        width: 100%;
+    }
+
     .cart-recommendation-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
+        width: 100%;
     }
 
     .cart-recommendation-title {
@@ -1476,9 +1550,14 @@
 
 /* Móvil muy pequeño (360px) */
 @media (max-width: 360px) {
+    .cart-container {
+        padding: 10px 6px;
+    }
+
     .cart-item {
         grid-template-columns: 45px 1fr;
         padding: 10px;
+        gap: 6px;
     }
 
     .cart-item-image {
