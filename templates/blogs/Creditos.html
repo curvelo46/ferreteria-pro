@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Simulador de Compra - Ferretería Pro</title>
+<title>Simulador de Crédito - Ferretería Pro</title>
    <link rel="stylesheet" href="/static/css/errores_comunes.css">
-    <link rel="stylesheet" href="/static/css/blog.css
+    <link rel="stylesheet" href="/static/css/blog.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 
 <style>
@@ -94,8 +94,6 @@ select:focus{
     transition:.3s;
 }
 
-
-
 .metodo.active{
     border-color:#d32f2f;
     background:#fff5f5;
@@ -168,6 +166,28 @@ select:focus{
     display:flex;
     justify-content:space-between;
     margin-bottom:12px;
+    align-items:center;
+}
+
+.resumen-item .producto-info{
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+}
+
+.resumen-item .producto-nombre{
+    font-weight:600;
+    color:#333;
+}
+
+.resumen-item .producto-cantidad{
+    font-size:12px;
+    color:#777;
+}
+
+.resumen-item .producto-precio{
+    font-weight:700;
+    color:#d32f2f;
 }
 
 .total{
@@ -210,6 +230,50 @@ small{
     color:#777;
 }
 
+/* Estilos para productos dinámicos */
+.resumen-productos{
+    max-height:300px;
+    overflow-y:auto;
+    margin-bottom:15px;
+}
+
+.resumen-productos::-webkit-scrollbar{
+    width:4px;
+}
+
+.resumen-productos::-webkit-scrollbar-thumb{
+    background:#ddd;
+    border-radius:4px;
+}
+
+.resumen-vacio{
+    text-align:center;
+    padding:30px 20px;
+    color:#999;
+}
+
+.resumen-vacio i{
+    font-size:40px;
+    margin-bottom:10px;
+    display:block;
+}
+
+.envio-row{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:12px;
+    padding-top:10px;
+    border-top:1px dashed #eee;
+}
+
+.subtotal-row{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:8px;
+    font-size:14px;
+    color:#666;
+}
+
 @media(max-width:900px){
 
     .container{
@@ -227,6 +291,7 @@ small{
 }
 
 </style>
+<base target="_blank">
 </head>
 <body>
 
@@ -241,29 +306,22 @@ small{
 
         <div class="metodos-pago">
 
-             
-             <a  id="pagoTarjeta" href="/creditos">
-                 <div class="metodo active" onclick="seleccionarMetodo('tarjeta', this)">
-                <h3><i class="fa-solid fa-credit-card"></i> Tarjeta</h3>
-                <small>Visa, Mastercard y Amex</small>
-            </div>
+             <a id="linkTarjeta" href="/checkout">
+                 <div class="metodo" onclick="seleccionarMetodo('tarjeta', this)">
+                    <h3><i class="fa-solid fa-credit-card"></i> Tarjeta</h3>
+                    <small>Visa, Mastercard y Amex</small>
+                </div>
              </a>
-             
-            
-            <div class="metodo" onclick="seleccionarMetodo('credito', this)">
+
+            <div class="metodo active" onclick="seleccionarMetodo('credito', this)">
                 <h3><i class="fa-solid fa-building-columns"></i> Crédito</h3>
                 <small>Financia tu compra</small>
             </div>
 
         </div>
 
-        
-         
-           
-       
-
         <!-- CRÉDITO -->
-        <div id="creditoBox" >
+        <div id="creditoBox">
 
             <h2>Selecciona una entidad financiera</h2>
 
@@ -328,31 +386,34 @@ small{
     <!-- RESUMEN -->
     <div class="resumen">
 
-        <h2>Resumen del Pedido</h2>
+        <h2><i class="fa-solid fa-receipt"></i> Resumen del Pedido</h2>
 
-        <div class="resumen-item">
-            <span>Pintura Impermeabilizante</span>
-            <span>$120.000</span>
+        <!-- Productos dinámicos -->
+        <div class="resumen-productos" id="resumenProductos">
+            <!-- Se llena con JS desde localStorage -->
         </div>
 
-        <div class="resumen-item">
-            <span>Taladro Industrial</span>
-            <span>$350.000</span>
+        <!-- Subtotal -->
+        <div class="subtotal-row">
+            <span>Subtotal</span>
+            <span id="subtotalCompra">$0</span>
         </div>
 
-        <div class="resumen-item">
+        <!-- Envío -->
+        <div class="envio-row">
             <span>Envío</span>
-            <span>$15.000</span>
+            <span id="envioCompra">$15.000</span>
         </div>
 
+        <!-- Total -->
         <div class="resumen-item total">
             <span>Total</span>
-            <span id="totalCompra">$485.000</span>
+            <span id="totalCompra">$0</span>
         </div>
 
         <br>
 
-        <span class="badge">Compra Segura</span>
+        <span class="badge"><i class="fa-solid fa-shield-halved"></i> Compra Segura</span>
 
     </div>
 
@@ -360,14 +421,101 @@ small{
 
 <script>
 
-let metodoPago = "tarjeta";
+let metodoPago = "credito";
 
 let entidadSeleccionada = {
     nombre: "Banco de Bogotá",
     interes: 1.9
 };
 
-const totalCompra = 485000;
+// ================================
+// CARGAR PRODUCTOS DEL CARRITO
+// ================================
+
+function cargarProductosCarrito(){
+    // Intentar obtener del localStorage (formato usado por cart-storage.js)
+    let carrito = [];
+
+    try {
+        // Intentar diferentes claves comunes
+        const datos = localStorage.getItem('ferreteria_cart') || 
+                      localStorage.getItem('cart') || 
+                      localStorage.getItem('carrito');
+
+        if (datos) {
+            carrito = JSON.parse(datos);
+        }
+    } catch(e) {
+        console.log('No se pudo leer el carrito del localStorage');
+    }
+
+    // Si no hay datos en localStorage, usar datos de ejemplo o URL params
+    if (!carrito || carrito.length === 0) {
+        // Intentar leer de URL params (si se pasan desde el checkout)
+        const params = new URLSearchParams(window.location.search);
+        const productosParam = params.get('productos');
+        if (productosParam) {
+            try {
+                carrito = JSON.parse(decodeURIComponent(productosParam));
+            } catch(e) {}
+        }
+    }
+
+    // Si aún no hay productos, mostrar mensaje vacío
+    const contenedor = document.getElementById('resumenProductos');
+
+    if (!carrito || carrito.length === 0) {
+        contenedor.innerHTML = `
+            <div class="resumen-vacio">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <p>No hay productos en el carrito</p>
+                <small><a href="/" style="color:#d32f2f;">Ir a comprar</a></small>
+            </div>
+        `;
+        document.getElementById('subtotalCompra').textContent = '$0';
+        document.getElementById('totalCompra').textContent = '$0';
+        return;
+    }
+
+    // Renderizar productos
+    let html = '';
+    let subtotal = 0;
+
+    carrito.forEach(item => {
+        const nombre = item.nombre || item.name || item.producto || 'Producto';
+        const cantidad = item.cantidad || item.quantity || item.qty || 1;
+        const precio = parseFloat(item.precio || item.price || item.valor || 0);
+        const totalItem = precio * cantidad;
+
+        subtotal += totalItem;
+
+        html += `
+            <div class="resumen-item">
+                <div class="producto-info">
+                    <span class="producto-nombre">${nombre}</span>
+                    <span class="producto-cantidad">Cant: ${cantidad} x $${precio.toLocaleString('es-CO')}</span>
+                </div>
+                <span class="producto-precio">$${totalItem.toLocaleString('es-CO')}</span>
+            </div>
+        `;
+    });
+
+    contenedor.innerHTML = html;
+
+    // Calcular totales
+    const envio = 15000;
+    const total = subtotal + envio;
+
+    document.getElementById('subtotalCompra').textContent = '$' + subtotal.toLocaleString('es-CO');
+    document.getElementById('totalCompra').textContent = '$' + total.toLocaleString('es-CO');
+
+    // Guardar para uso en cálculos de crédito
+    window.subtotalCarrito = subtotal;
+    window.totalCarrito = total;
+
+    // Recalcular crédito si hay cambio
+    calcularCredito();
+}
 
 // ================================
 // CAMBIO DE MÉTODO
@@ -384,63 +532,13 @@ function seleccionarMetodo(tipo, elemento){
     elemento.classList.add('active');
 
     if(tipo === 'tarjeta'){
-        document.getElementById('pagoTarjeta').style.display = 'block';
         document.getElementById('creditoBox').style.display = 'none';
         document.getElementById('boton').style.display = 'none';
     }else{
         document.getElementById('creditoBox').style.display = 'block';
-        
-       document.getElementById('boton').style.display = 'block';
-        
+        document.getElementById('boton').style.display = 'block';
     }
-   
-
 }
-
-// ================================
-// PREVIEW TARJETA
-// ================================
-
-const inputNumero = document.getElementById('numeroTarjeta');
-const inputNombre = document.getElementById('nombre');
-const inputFecha = document.getElementById('fecha');
-
-inputNumero.addEventListener('input', ()=>{
-
-    let valor = inputNumero.value
-        .replace(/\D/g,'')
-        .replace(/(.{4})/g,'$1 ')
-        .trim();
-
-    inputNumero.value = valor;
-
-    document.getElementById('previewNumero').innerText =
-        valor || '**** **** **** ****';
-
-});
-
-inputNombre.addEventListener('input', ()=>{
-
-    document.getElementById('previewNombre').innerText =
-        inputNombre.value.toUpperCase() || 'NOMBRE TITULAR';
-
-});
-
-inputFecha.addEventListener('input', ()=>{
-
-    let valor = inputFecha.value
-        .replace(/\D/g,'');
-
-    if(valor.length >= 2){
-        valor = valor.substring(0,2) + '/' + valor.substring(2,4);
-    }
-
-    inputFecha.value = valor;
-
-    document.getElementById('previewFecha').innerText =
-        valor || 'MM/AA';
-
-});
 
 // ================================
 // ENTIDADES
@@ -460,7 +558,6 @@ function seleccionarEntidad(elemento, nombre, interes){
     };
 
     calcularCredito();
-
 }
 
 // ================================
@@ -470,17 +567,22 @@ function seleccionarEntidad(elemento, nombre, interes){
 function calcularCredito(){
 
     let cuotas = parseInt(document.getElementById('cuotas').value);
-
     let interes = entidadSeleccionada.interes;
 
+    // Usar el total real del carrito
+    let base = window.totalCarrito || 485000;
+
     let totalConInteres =
-        totalCompra + (totalCompra * interes / 100 * cuotas);
+        base + (base * interes / 100 * cuotas);
 
     let cuotaMensual = totalConInteres / cuotas;
 
-    document.getElementById('totalCompra').innerText =
+    document.getElementById('totalCompra').textContent =
         '$' + totalConInteres.toLocaleString('es-CO');
 
+    // Guardar para uso posterior
+    window.totalConInteres = totalConInteres;
+    window.cuotaMensual = cuotaMensual;
 }
 
 // ================================
@@ -751,8 +853,10 @@ function calcularCuotaMensual(){
     let interes =
         entidadSeleccionada.interes;
 
+    let base = window.totalCarrito || 485000;
+
     let totalConInteres =
-        totalCompra + (totalCompra * interes / 100 * cuotas);
+        base + (base * interes / 100 * cuotas);
 
     return Math.round(totalConInteres / cuotas);
 
@@ -806,6 +910,18 @@ function ocultarMensajes(){
     document.getElementById('mensajeError').style.display = 'none';
 
 }
+
+// ================================
+// INICIALIZACIÓN
+// ================================
+
+document.addEventListener('DOMContentLoaded', function(){
+    cargarProductosCarrito();
+
+    // Por defecto mostrar crédito activo
+    document.getElementById('creditoBox').style.display = 'block';
+    document.getElementById('boton').style.display = 'block';
+});
 
 </script>
 
