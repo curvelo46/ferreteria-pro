@@ -255,7 +255,7 @@ small{
         </div>
 
         
-       <div id="pagoTarjeta" style="display:none;" >
+       <div id="pagoTarjeta"  >
            
        </div>
 
@@ -381,12 +381,10 @@ function seleccionarMetodo(tipo, elemento){
     elemento.classList.add('active');
 
     if(tipo === 'tarjeta'){
-        document.getElementById('pagoTarjeta').style.display = 'block';
-        document.getElementById('creditoBox').style.display = 'none';
-    }else{
         document.getElementById('pagoTarjeta').style.display = 'none';
         document.getElementById('creditoBox').style.display = 'block';
     }
+    document.getElementById('pagoTargeta').
 
 }
 
@@ -541,7 +539,44 @@ function procesarCompra(){
     // =========================
     // PAGO CON TARJETA
     // =========================
-   
+   if(metodoPago === 'tarjeta'){
+
+        if(!validarTarjeta()) return;
+
+        mostrarAnalisis(
+            'Validando tarjeta...',
+            [
+                'Verificando entidad bancaria...',
+                'Comprobando fondos disponibles...',
+                'Aplicando protocolo antifraude...',
+                'Autorizando transacción segura...'
+            ],
+            function(){
+
+                let aprobado = Math.random() > 0.15;
+
+                if(aprobado){
+
+                    mostrarAprobado(`
+                        <strong>Pago aprobado</strong><br><br>
+                        Tu compra en Ferretería Pro fue procesada correctamente.<br>
+                        Recibirás un correo con los detalles del pedido.
+                    `);
+
+                }else{
+
+                    mostrarError(`
+                        <strong>Transacción rechazada</strong><br><br>
+                        El banco emisor no autorizó el pago.<br>
+                        Intenta nuevamente con otra tarjeta.
+                    `);
+
+                }
+
+            }
+        );
+
+    }
     // =========================
     // CRÉDITO / PRÉSTAMO
     // =========================
