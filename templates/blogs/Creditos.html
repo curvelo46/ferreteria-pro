@@ -242,7 +242,10 @@ small{
 
              
              <a  id="pagoTarjeta" href="/">
-                <img href="https://static.vecteezy.com/system/resources/thumbnails/000/357/048/small/3__2821_29.jpg" ></img>
+                <div class="metodo active" onclick="seleccionarMetodo('tarjeta', this)">
+                <h3><i class="fa-solid fa-credit-card"></i> Tarjeta</h3>
+                <small>Visa, Mastercard y Amex</small>
+            </div>
              </a>
              
             
@@ -382,6 +385,11 @@ function seleccionarMetodo(tipo, elemento){
     if(tipo === 'tarjeta'){
         document.getElementById('pagoTarjeta').style.display = 'block';
         document.getElementById('creditoBox').style.display = 'none';
+    }else{
+
+        document.getElementById('pagoTarjeta').style.display = 'none';
+        document.getElementById('creditoBox').style.display = 'block';
+        
     }
    
 
