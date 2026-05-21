@@ -541,45 +541,7 @@ function procesarCompra(){
     // =========================
     // PAGO CON TARJETA
     // =========================
-    if(metodoPago === 'tarjeta'){
-
-        if(!validarTarjeta()) return;
-
-        mostrarAnalisis(
-            'Validando tarjeta...',
-            [
-                'Verificando entidad bancaria...',
-                'Comprobando fondos disponibles...',
-                'Aplicando protocolo antifraude...',
-                'Autorizando transacción segura...'
-            ],
-            function(){
-
-                let aprobado = Math.random() > 0.15;
-
-                if(aprobado){
-
-                    mostrarAprobado(`
-                        <strong>Pago aprobado</strong><br><br>
-                        Tu compra en Ferretería Pro fue procesada correctamente.<br>
-                        Recibirás un correo con los detalles del pedido.
-                    `);
-
-                }else{
-
-                    mostrarError(`
-                        <strong>Transacción rechazada</strong><br><br>
-                        El banco emisor no autorizó el pago.<br>
-                        Intenta nuevamente con otra tarjeta.
-                    `);
-
-                }
-
-            }
-        );
-
-    }
-
+   
     // =========================
     // CRÉDITO / PRÉSTAMO
     // =========================
