@@ -93,9 +93,7 @@ select:focus{
     transition:.3s;
 }
 
-.pagoTarjeta{
-    display: none
-}
+
 
 .metodo.active{
     border-color:#d32f2f;
@@ -382,8 +380,8 @@ function seleccionarMetodo(tipo, elemento){
     elemento.classList.add('active');
 
     if(tipo === 'tarjeta'){
-        document.getElementById('pagoTarjeta').style.display = 'none';
-        document.getElementById('creditoBox').style.display = 'block';
+        document.getElementById('pagoTarjeta').style.display = 'block';
+        document.getElementById('creditoBox').style.display = 'none';
     }
    
 
