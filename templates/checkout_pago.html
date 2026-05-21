@@ -519,9 +519,20 @@
                         
                     </div>
                     
-                    <button type="button" class="btn-pay2" id="btnPagar" href="/creditos" style >
+                    <a  id="pagoTarjeta" href="/creditos">
+                        <div class="metodo active" onclick="seleccionarMetodo('tarjeta', this)">
+                            <h3><i class="fa-solid fa-credit-card"></i> Tarjeta</h3>
+                            <small>Visa, Mastercard y Amex</small>
+                        </div>
+                     </a>
+
+
+                    <a  id="pagoTarjeta" href="/creditos">
+                        <button type="button" class="btn-pay2" id="btnPagar" href="/creditos" style >
                             <i class="fas fa-lock"></i> Creditos
-                    </button>
+                    </button>    
+                     </a>
+                    
                 </div>
             </div>
         </div>
