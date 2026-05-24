@@ -112,34 +112,35 @@
     // RENDERIZADO DE PRODUCTOS CON VARIANTES
     // ==========================================
 
-    function renderProducts() {
-        const grid = document.getElementById('productsGrid');
-        if (!grid) return;
+   function renderProducts() {
+    const grid = document.getElementById('productsGrid');
+    if (!grid) return;
 
-        if (allProducts.length === 0) {
-            grid.innerHTML = `
-                <div class="empty-state" style="grid-column: 1/-1; text-align: center; padding: 40px;">
-                    <i class="fas fa-search" style="font-size: 3rem; color: #ccc; margin-bottom: 15px;"></i>
-                    <h3>No se encontraron productos</h3>
-                    <p>Intenta ajustar los filtros o realizar una nueva búsqueda</p>
-                </div>
-            `;
-            return;
-        }
+    if (allProducts.length === 0) {
+        grid.innerHTML = `
+            <div class="empty-state" style="grid-column: 1/-1; text-align: center; padding: 40px;">
+                <i class="fas fa-search" style="font-size: 3rem; color: #ccc; margin-bottom: 15px;"></i>
+                <h3>No se encontraron productos</h3>
+                <p>Intenta ajustar los filtros o realizar una nueva búsqueda</p>
+            </div>
+        `;
+        return;
+    }
 
-        grid.innerHTML = allProducts.map(product => {
-            const isVariable = product.tipo === 'variable';
-            
-            
-            return `
+    grid.innerHTML = allProducts.map(product => {
+        return `
             <div class="product-card" data-id="${product.id}" data-slug="${product.slug}">
                 ${getBadge(product.tipo)}
                 <div class="product-image">
                     <img src="${product.imagen}" alt="${product.nombre}" loading="lazy"
                         onerror="this.src='https://via.placeholder.com/400x300?text=${encodeURIComponent(product.nombre)}'">
                     <div class="product-actions">
-                       
-                        
+                        <button class="action-btn" onclick="openDetailModal(${product.id})" title="Ver detalle">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="action-btn" onclick="addToWishlist(${product.id})" title="Favoritos">
+                            <i class="far fa-heart"></i>
+                        </button>
                     </div>
                 </div>
                 <div class="product-info">
@@ -156,22 +157,20 @@
                             <i class="fas fa-box"></i> ${getStockText(product.stock, product.tipo)}
                         </span>
                     </div>
-                    
-                    
-                    
                     <div class="product-footer">
                         <div class="product-price">
                             <span class="price-current">${formatPrice(product.precio)}</span>
                             ${product.precio_oferta ? `<span class="price-old">${formatPrice(product.precio_oferta)}</span>` : ''}
                         </div>
-                        <button class="btn-add-cart" onclick="handleAddToCart(${product.id})" title="Agregar al carrito">
-                            <i class="fas fa-cart-plus"></i>
+                        <button class="btn-add-cart" onclick="openDetailModal(${product.id})" title="Ver opciones">
+                            <i class="fas fa-eye"></i>
                         </button>
                     </div>
                 </div>
             </div>
-        `}).join('');
-    }
+        `;
+    }).join('');
+}
 
     // ==========================================
     // SELECTORES DE VARIANTES (SOLO PRODUCTOS VARIABLES)
@@ -288,150 +287,160 @@ function handleAddToCart(productId) {
     // ==========================================
 
     function openDetailModal(productId) {
-        const product = getProductById(productId);
-        if (!product) return;
+    const product = getProductById(productId);
+    if (!product) return;
 
-        // Crear modal si no existe
-        let modal = document.getElementById('productDetailModal');
-        if (!modal) {
-            modal = document.createElement('div');
-            modal.id = 'productDetailModal';
-            modal.className = 'modal-overlay';
-            modal.innerHTML = `
-                <div class="modal-content" style="max-width: 800px; max-height: 90vh; overflow-y: auto;">
-                    <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid #eee;">
-                        <h2 id="modalTitle">Detalle del Producto</h2>
-                        <button onclick="closeDetailModal()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                    <div class="modal-body" id="modalBody" style="padding: 20px;">
-                        <!-- Contenido dinámico -->
-                    </div>
-                </div>
-            `;
-            document.body.appendChild(modal);
-            
-            // Cerrar al hacer clic fuera
-            modal.addEventListener('click', function(e) {
-                if (e.target === modal) closeDetailModal();
-            });
-        }
-
-        // Generar contenido del modal
-        const isVariable = product.tipo === 'variable';
-        const variantSelectors = isVariable ? renderModalVariantSelectors(product) : '';
-        
-        const modalBody = document.getElementById('modalBody');
-        modalBody.innerHTML = `
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
-                <div>
-                    <img src="${product.imagen}" alt="${product.nombre}" 
-                        style="width: 100%; height: 300px; object-fit: cover; border-radius: 12px;"
-                        onerror="this.src='https://via.placeholder.com/400x300?text=${encodeURIComponent(product.nombre)}'">
-                    ${product.tags ? `
-                        <div style="margin-top: 15px; display: flex; flex-wrap: wrap; gap: 8px;">
-                            ${product.tags.map(tag => `<span style="background: #f0f0f0; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; color: #666;">${tag}</span>`).join('')}
-                        </div>
-                    ` : ''}
-                </div>
-                <div>
-                    <div style="margin-bottom: 10px;">
-                        <span style="background: ${product.categoria_color || '#666'}; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem;">
-                            ${product.categoria_nombre || 'General'}
-                        </span>
-                        <span style="background: #f0f0f0; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; margin-left: 8px;">
-                            ${product.subcategoria_nombre || 'General'}
-                        </span>
-                    </div>
-                    
-                    <h2 style="margin: 0 0 10px 0; font-size: 1.5rem;">${product.nombre}</h2>
-                    <p style="color: #666; margin-bottom: 20px; line-height: 1.6;">${product.descripcion || 'Sin descripción disponible.'}</p>
-                    
-                    <div style="margin-bottom: 20px;">
-                        <span style="font-size: 1.8rem; font-weight: 700; color: #e74c3c;">
-                            ${formatPrice(product.precio)}
-                        </span>
-                        ${product.precio_oferta ? `
-                            <span style="text-decoration: line-through; color: #999; margin-left: 10px; font-size: 1.2rem;">
-                                ${formatPrice(product.precio_oferta)}
-                            </span>
-                        ` : ''}
-                    </div>
-                    
-                    <div style="margin-bottom: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                            <span style="color: #666;">Marca:</span>
-                            <strong>${product.marca_nombre || 'Genérica'}</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                            <span style="color: #666;">Stock:</span>
-                            <strong class="${getStockClass(product.stock, product.tipo)}">${getStockText(product.stock, product.tipo)}</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span style="color: #666;">Tipo:</span>
-                            <strong>${product.tipo === 'variable' ? 'Producto Variable' : product.tipo === 'digital' ? 'Producto Digital' : 'Producto Simple'}</strong>
-                        </div>
-                    </div>
-                    
-                    ${isVariable ? `
-                        <div style="margin-bottom: 20px;">
-                            <h4 style="margin-bottom: 10px;">Selecciona tus opciones:</h4>
-                            ${variantSelectors}
-                        </div>
-                    ` : ''}
-                    
-                    <button onclick="addToCartFromModal(${product.id})" 
-                            style="width: 100%; padding: 15px; background: #e74c3c; color: white; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;">
-                        <i class="fas fa-cart-plus"></i> Agregar al Carrito
+    // Crear modal si no existe
+    let modal = document.getElementById('productDetailModal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'productDetailModal';
+        modal.className = 'modal-overlay';
+        modal.innerHTML = `
+            <div class="modal-content" style="max-width: 800px; max-height: 90vh; overflow-y: auto;">
+                <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid #eee;">
+                    <h2 id="modalTitle">Detalle del Producto</h2>
+                    <button onclick="closeDetailModal()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">
+                        <i class="fas fa-times"></i>
                     </button>
                 </div>
+                <div class="modal-body" id="modalBody" style="padding: 20px;">
+                    <!-- Contenido dinámico -->
+                </div>
             </div>
-            
-            ${product.atributos && !isVariable ? `
-                <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
-                    <h3 style="margin-bottom: 15px;">Especificaciones</h3>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
-                        ${Object.entries(product.atributos).map(([key, values]) => `
-                            <div style="padding: 10px; background: #f8f9fa; border-radius: 8px;">
-                                <strong style="display: block; margin-bottom: 5px; text-transform: capitalize;">${key}:</strong>
-                                <span style="color: #666;">${Array.isArray(values) ? values.join(', ') : values}</span>
-                            </div>
-                        `).join('')}
+        `;
+        document.body.appendChild(modal);
+        
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) closeDetailModal();
+        });
+    }
+
+    const isVariable = product.tipo === 'variable';
+    const variantSelectors = isVariable ? renderModalVariantSelectors(product) : '';
+    
+    // Guardar el producto actual en el modal para referencia
+    modal.dataset.currentProductId = productId;
+    
+    // Limpiar variantes previas al abrir
+    modalSelectedVariants = {};
+    if (product.tipo === 'variable') {
+        modalSelectedVariants[productId] = {};
+    }
+
+    const modalBody = document.getElementById('modalBody');
+    modalBody.innerHTML = `
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+            <div>
+                <img id="modal-product-img-${productId}" 
+                     src="${product.imagen}" 
+                     alt="${product.nombre}" 
+                     data-default-image="${product.imagen}"
+                     style="width: 100%; height: 300px; object-fit: cover; border-radius: 12px; transition: opacity 0.3s ease;"
+                     onerror="this.src='https://via.placeholder.com/400x300?text=${encodeURIComponent(product.nombre)}'">
+                ${product.tags ? `
+                    <div style="margin-top: 15px; display: flex; flex-wrap: wrap; gap: 8px;">
+                        ${product.tags.map(tag => `<span style="background: #f0f0f0; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; color: #666;">${tag}</span>`).join('')}
+                    </div>
+                ` : ''}
+            </div>
+            <div>
+                <div style="margin-bottom: 10px;">
+                    <span style="background: ${product.categoria_color || '#666'}; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem;">
+                        ${product.categoria_nombre || 'General'}
+                    </span>
+                    <span style="background: #f0f0f0; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; margin-left: 8px;">
+                        ${product.subcategoria_nombre || 'General'}
+                    </span>
+                </div>
+                
+                <h2 style="margin: 0 0 10px 0; font-size: 1.5rem;">${product.nombre}</h2>
+                <p style="color: #666; margin-bottom: 20px; line-height: 1.6;">${product.descripcion || 'Sin descripción disponible.'}</p>
+                
+                <div style="margin-bottom: 20px;">
+                    <span style="font-size: 1.8rem; font-weight: 700; color: #e74c3c;">
+                        ${formatPrice(product.precio)}
+                    </span>
+                    ${product.precio_oferta ? `
+                        <span style="text-decoration: line-through; color: #999; margin-left: 10px; font-size: 1.2rem;">
+                            ${formatPrice(product.precio_oferta)}
+                        </span>
+                    ` : ''}
+                </div>
+                
+                <div style="margin-bottom: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span style="color: #666;">Marca:</span>
+                        <strong>${product.marca_nombre || 'Genérica'}</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span style="color: #666;">Stock:</span>
+                        <strong class="${getStockClass(product.stock, product.tipo)}">${getStockText(product.stock, product.tipo)}</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="color: #666;">Tipo:</span>
+                        <strong>${product.tipo === 'variable' ? 'Producto Variable' : product.tipo === 'digital' ? 'Producto Digital' : 'Producto Simple'}</strong>
                     </div>
                 </div>
-            ` : ''}
-        `;
-
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-
-    function renderModalVariantSelectors(product) {
-        if (!product.atributos) return '';
+                
+                ${isVariable ? `
+                    <div style="margin-bottom: 20px;">
+                        <h4 style="margin-bottom: 10px;">Selecciona tus opciones:</h4>
+                        ${variantSelectors}
+                    </div>
+                ` : ''}
+                
+                <button onclick="addToCartFromModal(${product.id})" 
+                        style="width: 100%; padding: 15px; background: #e74c3c; color: white; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                    <i class="fas fa-cart-plus"></i> Agregar al Carrito
+                </button>
+            </div>
+        </div>
         
-        let html = '<div class="modal-variant-selectors">';
-        
-        for (const [attrName, attrValues] of Object.entries(product.atributos)) {
-            const selectId = `modal-variant-${product.id}-${attrName}`;
-            html += `
-                <div style="margin-bottom: 12px;">
-                    <label style="display: block; font-weight: 600; margin-bottom: 6px; text-transform: capitalize;">
-                        ${attrName} <span style="color: #e74c3c;">*</span>
-                    </label>
-                    <select id="${selectId}" 
-                            onchange="updateModalVariantSelection(${product.id}, '${attrName}', this.value)"
-                            style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 0.9rem;">
-                        <option value="">Seleccionar ${attrName}...</option>
-                        ${attrValues.map(val => `<option value="${val}">${val}</option>`).join('')}
-                    </select>
+        ${product.atributos && !isVariable ? `
+            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
+                <h3 style="margin-bottom: 15px;">Especificaciones</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                    ${Object.entries(product.atributos).map(([key, values]) => `
+                        <div style="padding: 10px; background: #f8f9fa; border-radius: 8px;">
+                            <strong style="display: block; margin-bottom: 5px; text-transform: capitalize;">${key}:</strong>
+                            <span style="color: #666;">${Array.isArray(values) ? values.join(', ') : values}</span>
+                        </div>
+                    `).join('')}
                 </div>
-            `;
-        }
-        
-        html += '</div>';
-        return html;
+            </div>
+        ` : ''}
+    `;
+
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function renderModalVariantSelectors(product) {
+    if (!product.atributos) return '';
+    
+    let html = '<div class="modal-variant-selectors">';
+    
+    for (const [attrName, attrValues] of Object.entries(product.atributos)) {
+        const selectId = `modal-variant-${product.id}-${attrName}`;
+        html += `
+            <div style="margin-bottom: 12px;">
+                <label style="display: block; font-weight: 600; margin-bottom: 6px; text-transform: capitalize;">
+                    ${attrName} <span style="color: #e74c3c;">*</span>
+                </label>
+                <select id="${selectId}" 
+                        onchange="updateModalVariantSelection(${product.id}, '${attrName}', this.value); updateModalImage(${product.id})"
+                        style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 0.9rem;">
+                    <option value="">Seleccionar ${attrName}...</option>
+                    ${attrValues.map(val => `<option value="${val}">${val}</option>`).join('')}
+                </select>
+            </div>
+        `;
     }
+    
+    html += '</div>';
+    return html;
+}
 
     // Estado para variantes seleccionadas en el modal
     let modalSelectedVariants = {};
@@ -447,7 +456,7 @@ function handleAddToCart(productId) {
         }
     }
 
-  function addToCartFromModal(productId) {
+function addToCartFromModal(productId) {
     const product = getProductById(productId);
     if (!product) return;
 
@@ -468,16 +477,16 @@ function handleAddToCart(productId) {
             return;
         }
 
+        // Transferir variantes del modal al estado global temporal
         selectedVariants[productId] = { ...modalSelectedVariants[productId] };
     }
 
     handleAddToCart(productId);
     closeDetailModal();
     
-    // 🆕 LIMPIAR TODO el estado relacionado con este producto
+    // Limpieza completa
     delete modalSelectedVariants[productId];
     delete selectedVariants[productId];
-    currentModalProductId = null;
 }
 
 function closeDetailModal() {
@@ -486,21 +495,13 @@ function closeDetailModal() {
         modal.classList.remove('active');
         document.body.style.overflow = '';
         
-        // 🆕 LIMPIAR variantes seleccionadas en el modal de detalle
-        // Necesitamos saber qué producto estaba abierto, así que lo obtenemos del DOM
-        const modalBody = document.getElementById('modalBody');
-        if (modalBody) {
-            // Buscar el botón de agregar al carrito para obtener el productId
-            const addBtn = modalBody.querySelector('button[onclick^="addToCartFromModal"]');
-            if (addBtn) {
-                const match = addBtn.onclick.toString().match(/addToCartFromModal\((\d+)\)/);
-                if (match) {
-                    const productId = parseInt(match[1]);
-                    delete modalSelectedVariants[productId];
-                    delete selectedVariants[productId];
-                }
-            }
+        // Limpiar variantes seleccionadas
+        const productId = modal.dataset.currentProductId;
+        if (productId) {
+            delete modalSelectedVariants[productId];
+            delete selectedVariants[productId];
         }
+        modal.dataset.currentProductId = '';
     }
 }
 
@@ -1079,6 +1080,104 @@ function closeWishlistVariantModal() {
 }
 
 
+function updateModalImage(productId) {
+    const product = getProductById(productId);
+    if (!product) return;
+    
+    const imgElement = document.getElementById(`modal-product-img-${productId}`);
+    if (!imgElement) return;
+    
+    const selected = modalSelectedVariants[productId] || {};
+    
+    // Estrategia 1: Buscar en imagenes_variantes (clave combinada de todas las variantes)
+    if (product.imagenes_variantes) {
+        // Ordenar atributos alfabéticamente para consistencia en la clave
+        const variantKeys = Object.keys(product.atributos).sort();
+        const selectedKey = variantKeys
+            .map(attr => selected[attr])
+            .filter(Boolean)
+            .join('_');
+        
+        if (selectedKey && product.imagenes_variantes[selectedKey]) {
+            // Transición suave
+            imgElement.style.opacity = '0.5';
+            setTimeout(() => {
+                imgElement.src = product.imagenes_variantes[selectedKey];
+                imgElement.style.opacity = '1';
+            }, 150);
+            return;
+        }
+    }
+    
+    // Estrategia 2: Buscar por color individual (si solo quieres cambiar por color)
+    if (product.imagenes_por_color && selected.color) {
+        const colorImg = product.imagenes_por_color[selected.color];
+        if (colorImg) {
+            imgElement.style.opacity = '0.5';
+            setTimeout(() => {
+                imgElement.src = colorImg;
+                imgElement.style.opacity = '1';
+            }, 150);
+            return;
+        }
+    }
+    
+    // Estrategia 3: Buscar por cualquier atributo individual
+    // Recorre todos los atributos seleccionados buscando coincidencia
+    for (const [attrName, attrValue] of Object.entries(selected)) {
+        const imagenesPorAttr = product[`imagenes_por_${attrName.toLowerCase()}`];
+        if (imagenesPorAttr && imagenesPorAttr[attrValue]) {
+            imgElement.style.opacity = '0.5';
+            setTimeout(() => {
+                imgElement.src = imagenesPorAttr[attrValue];
+                imgElement.style.opacity = '1';
+            }, 150);
+            return;
+        }
+    }
+    
+    // Si no hay coincidencia, volver a imagen por defecto
+    const defaultImg = imgElement.dataset.defaultImage || product.imagen;
+    if (imgElement.src !== defaultImg) {
+        imgElement.style.opacity = '0.5';
+        setTimeout(() => {
+            imgElement.src = defaultImg;
+            imgElement.style.opacity = '1';
+        }, 150);
+    }
+}
+
+// En tu productos.js o donde manejas el "Agregar al carrito"
+function addToCartWithVariant(productId, selectedVariants) {
+    const product = products.find(p => p.id === productId);
+    if (!product) return;
+    
+    // Determinar la imagen correcta según la variante seleccionada
+    let imagenFinal = product.imagen;
+    
+    // Si tiene imágenes por color y se seleccionó un color
+    if (product.imagenes_por_color && selectedVariants.color) {
+        const colorKey = selectedVariants.color;
+        if (product.imagenes_por_color[colorKey]) {
+            imagenFinal = product.imagenes_por_color[colorKey];
+        }
+    }
+    
+    const cartItem = {
+        id: product.id,
+        nombre: product.nombre,
+        precio: product.precio, // o precio de la variante si aplica
+        imagen: imagenFinal,     // ← IMAGEN DE LA VARIANTE
+        variantes: selectedVariants, // { color: 'Azul', voltaje: '18V' }
+        descripcion: product.descripcion,
+        categoria_nombre: product.categoria_nombre
+    };
+    
+    addToCart(cartItem); // tu función existente
+}
+
+
+
 
 
 
@@ -1107,6 +1206,8 @@ function normalizeSlug(text) {
     window.addToWishlist = addToWishlist;
     window.quickView = quickView;
     window.toggleCart = toggleCart;
+
+    
 
     window.openWishlistVariantModal = openWishlistVariantModal;
 window.closeWishlistVariantModal = closeWishlistVariantModal;

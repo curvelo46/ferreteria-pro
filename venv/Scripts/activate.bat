@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Users\PC\OneDrive\Escritorio\Ferreteria pro\Ferreteria pro\venv
+set VIRTUAL_ENV=C:\Users\PC\OneDrive\Escritorio\ferreteria-pro\venv
 
 if not defined PROMPT set PROMPT=$P$G
 

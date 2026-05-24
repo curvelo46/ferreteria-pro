@@ -32,32 +32,73 @@ function renderCart() {
     }
 
     // Generar filas de productos
-    const rows = cart.map(item => `
-        <tr>
-            <td class="cart-product" style="padding: 15px; display: flex; align-items: center; gap: 15px;">
-                <img src="${item.imagen}" alt="${item.nombre}" style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px; border: 1px solid #eee;"
-                     onerror="this.src='https://via.placeholder.com/80x80?text=${encodeURIComponent(item.nombre)}'">
-                <div>
-                    <strong style="display: block; margin-bottom: 5px;">${item.nombre}</strong>
-                    <p style="color: #666; font-size: 0.85rem; margin: 0;">${item.descripcion || item.categoria_nombre || ''}</p>
-                </div>
-            </td>
-            <td style="padding: 15px;">${formatPrice(item.precio)}</td>
-            <td style="padding: 15px; text-align: center;">
-                <div class="cart-qty-controls" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
-                    <button type="button" onclick="updateCartQuantity(${item.id}, -1)" style="width: 32px; height: 32px; border: 1px solid #ddd; background: white; border-radius: 6px; cursor: pointer; font-size: 1rem;">-</button>
-                    <span style="min-width: 30px; text-align: center; font-weight: 600;">${item.quantity || 1}</span>
-                    <button type="button" onclick="updateCartQuantity(${item.id}, 1)" style="width: 32px; height: 32px; border: 1px solid #ddd; background: white; border-radius: 6px; cursor: pointer; font-size: 1rem;">+</button>
-                </div>
-            </td>
-            <td style="padding: 15px;"><strong>${formatPrice((item.precio || 0) * (item.quantity || 1))}</strong></td>
-            <td style="padding: 15px;">
-                <button onclick="removeCartItem(${item.id})" style="background: #dc3545; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer;">
-                    <i class="fas fa-trash"></i> Eliminar
-                </button>
-            </td>
-        </tr>
-    `).join('');
+    const rows = cart.map((item, index) => {
+        // Verificar si tiene variantes
+        const hasVariants = item.variantes && Object.keys(item.variantes).length > 0;
+        const variantBadges = hasVariants ? renderVariantBadges(item.variantes) : '';
+        
+        return `
+            <tr>
+                <td class="cart-product" style="padding: 15px;">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <div style="position: relative;">
+                            <img src="${item.imagen}" 
+                                 alt="${item.nombre}" 
+                                 style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px; border: 1px solid #eee;"
+                                 onerror="this.src='https://via.placeholder.com/80x80?text=${encodeURIComponent(item.nombre)}'">
+                            ${hasVariants ? `
+                                <div style="position: absolute; bottom: -5px; right: -5px; 
+                                            background: white; border-radius: 50%; width: 24px; height: 24px;
+                                            display: flex; align-items: center; justify-content: center;
+                                            box-shadow: 0 2px 4px rgba(0,0,0,0.1); border: 1px solid #eee;">
+                                    <i class="fas fa-layer-group" style="font-size: 0.7rem; color: #e74c3c;"></i>
+                                </div>
+                            ` : ''}
+                        </div>
+                        <div style="flex: 1; min-width: 0;">
+                            <strong style="display: block; margin-bottom: 5px; font-size: 0.95rem;">${item.nombre}</strong>
+                            <p style="color: #666; font-size: 0.8rem; margin: 0 0 6px 0; line-height: 1.4;">${item.descripcion || item.categoria_nombre || ''}</p>
+                            <div style="display: flex; flex-wrap: wrap; gap: 2px;">
+                                ${variantBadges}
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td style="padding: 15px; white-space: nowrap;">
+                    <strong style="color: #e74c3c;">${formatPrice(item.precio)}</strong>
+                    ${item.precio_original && item.precio !== item.precio_original ? `
+                        <div style="font-size: 0.75rem; color: #999; text-decoration: line-through;">
+                            ${formatPrice(item.precio_original)}
+                        </div>
+                    ` : ''}
+                </td>
+                <td style="padding: 15px; text-align: center;">
+                    <div class="cart-qty-controls" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+                        <button type="button" onclick="updateCartQuantity(${index}, -1)" 
+                                style="width: 32px; height: 32px; border: 1px solid #ddd; background: white; border-radius: 6px; cursor: pointer; font-size: 1rem; transition: all 0.2s;"
+                                onmouseover="this.style.background='#f8f9fa'" 
+                                onmouseout="this.style.background='white'">-</button>
+                        <span style="min-width: 30px; text-align: center; font-weight: 600;">${item.quantity || 1}</span>
+                        <button type="button" onclick="updateCartQuantity(${index}, 1)" 
+                                style="width: 32px; height: 32px; border: 1px solid #ddd; background: white; border-radius: 6px; cursor: pointer; font-size: 1rem; transition: all 0.2s;"
+                                onmouseover="this.style.background='#f8f9fa'" 
+                                onmouseout="this.style.background='white'">+</button>
+                    </div>
+                </td>
+                <td style="padding: 15px; white-space: nowrap;">
+                    <strong>${formatPrice((item.precio || 0) * (item.quantity || 1))}</strong>
+                </td>
+                <td style="padding: 15px;">
+                    <button onclick="removeCartItem(${index})" 
+                            style="background: #dc3545; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; transition: all 0.2s;"
+                            onmouseover="this.style.background='#c82333'" 
+                            onmouseout="this.style.background='#dc3545'">
+                        <i class="fas fa-trash"></i> Eliminar
+                    </button>
+                </td>
+            </tr>
+        `;
+    }).join('');
 
     // Renderizar tabla completa
     container.innerHTML = `
@@ -93,14 +134,21 @@ function renderCart() {
                 </div>
 
                 <div class="cart-actions" style="display: flex; flex-direction: column; gap: 10px;">
-                    <!-- BOTÓN MODIFICADO: Ahora redirige al checkout -->
-                    <a href="/checkout" style="width: 100%; padding: 15px; font-size: 1rem; background: #e74c3c; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; text-decoration: none; text-align: center; display: block;">
+                    <a href="/checkout" style="width: 100%; padding: 15px; font-size: 1rem; background: #e74c3c; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; text-decoration: none; text-align: center; display: block; transition: all 0.2s;"
+                       onmouseover="this.style.background='#c0392b'" 
+                       onmouseout="this.style.background='#e74c3c'">
                         <i class="fas fa-credit-card"></i> Ir a pagar
                     </a>
-                    <button onclick="clearCart()" style="width: 100%; padding: 12px; border: 1px solid #ddd; background: white; border-radius: 8px; cursor: pointer; color: #666;">
+                    <button onclick="clearCart()" 
+                            style="width: 100%; padding: 12px; border: 1px solid #ddd; background: white; border-radius: 8px; cursor: pointer; color: #666; transition: all 0.2s;"
+                            onmouseover="this.style.background='#f8f9fa'" 
+                            onmouseout="this.style.background='white'">
                         <i class="fas fa-trash"></i> Vaciar carrito
                     </button>
-                    <a href="/productos" style="text-align: center; padding: 12px; border: 1px solid #ddd; text-decoration: none; color: #333; display: block; border-radius: 8px;">
+                    <a href="/productos" 
+                       style="text-align: center; padding: 12px; border: 1px solid #ddd; text-decoration: none; color: #333; display: block; border-radius: 8px; transition: all 0.2s;"
+                       onmouseover="this.style.background='#f8f9fa'" 
+                       onmouseout="this.style.background='white'">
                         <i class="fas fa-arrow-left"></i> Seguir comprando
                     </a>
                 </div>
@@ -132,6 +180,43 @@ function removeCartItem(productId) {
 function clearCart() {
     if (!confirm('¿Estás seguro de que deseas vaciar el carrito?')) return;
     saveCart([]);
+    renderCart();
+}
+
+function renderVariantBadges(variantes) {
+    if (!variantes || Object.keys(variantes).length === 0) return '';
+    
+    const colors = {
+        'Rojo': '#e74c3c', 'Azul': '#3498db', 'Amarillo': '#f1c40f',
+        'Verde': '#2ecc71', 'Negro': '#2c3e50', 'Blanco': '#ecf0f1',
+        'Gris': '#95a5a6', 'Naranja': '#e67e22', 'Rosa': '#fd79a8'
+    };
+    
+    return Object.entries(variantes).map(([attr, value]) => {
+        const bgColor = attr.toLowerCase() === 'color' ? (colors[value] || '#ddd') : '#f8f9fa';
+        const textColor = attr.toLowerCase() === 'color' && ['Amarillo', 'Blanco', 'Rosa'].includes(value) ? '#333' : 'white';
+        
+        return `
+            <span style="display: inline-flex; align-items: center; gap: 4px; 
+                         background: ${attr.toLowerCase() === 'color' ? bgColor : '#f0f0f0'}; 
+                         color: ${attr.toLowerCase() === 'color' ? textColor : '#666'};
+                         padding: 3px 10px; border-radius: 12px; font-size: 0.75rem; 
+                         font-weight: 500; margin-right: 6px; margin-top: 4px;
+                         border: ${attr.toLowerCase() === 'color' ? '1px solid rgba(0,0,0,0.1)' : 'none'};">
+                ${attr.toLowerCase() === 'color' ? `<span style="width: 10px; height: 10px; border-radius: 50%; background: ${bgColor}; display: inline-block; border: 1px solid rgba(0,0,0,0.2);"></span>` : ''}
+                ${value}
+            </span>
+        `;
+    }).join('');
+}
+
+function updateCartQuantity(index, delta) {
+    const cart = getStoredCart();
+    if (index < 0 || index >= cart.length) return;
+    
+    const item = cart[index];
+    item.quantity = Math.max(1, (item.quantity || 1) + delta);
+    saveCart(cart);
     renderCart();
 }
 
