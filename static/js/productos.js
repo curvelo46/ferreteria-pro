@@ -163,9 +163,7 @@
                             ${product.precio_oferta ? `<span class="price-old">${formatPrice(product.precio_oferta)}</span>` : ''}
                         </div>
                         <button class="btn-add-cart" onclick="openDetailModal(${product.id})" title="Ver opciones">
-                            <i class="fas fa-shopping">
-                                ::before
-                            </i>
+                        <i class="fas fa-shopping-cart"></i>
                         </button>
                     </div>
                 </div>
